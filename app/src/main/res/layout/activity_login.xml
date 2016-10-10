@@ -82,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Entrar"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="next2"/>
 
         <Button
             android:id="@+id/facebook_sign_in_button"
@@ -95,12 +96,19 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <Button
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Ainda não possue conta? cadastre-se"
             style="?android:attr/borderlessButtonStyle"/>
+
+    </LinearLayout>
+
 
 
 

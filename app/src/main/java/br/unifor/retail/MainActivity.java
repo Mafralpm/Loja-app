@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InforProduto.class);
         startActivity(intent);
     }
+
+    public void next2 (View v){
+        Intent intent = new Intent(this, Perfil.class);
+        startActivity(intent);
+    }
 }
