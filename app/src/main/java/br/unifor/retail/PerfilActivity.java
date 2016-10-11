@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-public class Perfil extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         //extraemos el drawable en un bitmap
-        Drawable originalDrawable = getResources().getDrawable(R.drawable.pandalambendo);
+        Drawable originalDrawable = getResources().getDrawable(R.drawable.animalpicturepandabearucumari);
         Bitmap originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
         //creamos el drawable redondeado
 
@@ -39,8 +39,8 @@ public class Perfil extends AppCompatActivity {
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
-        int targetWidth = 200;
-        int targetHeight = 200;
+        int targetWidth = 250;
+        int targetHeight = 250;
         Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
                 targetHeight,Bitmap.Config.ARGB_8888);
 

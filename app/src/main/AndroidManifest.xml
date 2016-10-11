@@ -20,8 +20,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name=".view.activity.MainActivity">
+        <activity android:name=".view.activity.MainActivity">
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,14 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity
-            android:name=".InforProduto"
+            android:name=".view.activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".InfoProdutoActivity"
             android:label="@string/title_activity_info_produto">
 
         </activity>
-        <activity android:name=".Perfil">
+        <activity android:name=".PerfilActivity">
 
         </activity>
     </application>

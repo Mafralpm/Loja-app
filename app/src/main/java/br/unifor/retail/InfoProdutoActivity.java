@@ -3,7 +3,7 @@ package br.unifor.retail;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class InforProduto extends AppCompatActivity {
+public class InfoProdutoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
