@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="5dp"
-            android:src="@android:color/holo_blue_bright"/>
+            android:src="@android:color/holo_blue_bright" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -83,25 +82,16 @@
             android:layout_marginTop="10dp"
             android:text="Entrar"
             android:textStyle="bold"
-            android:onClick="next2"/>
-
-        <Button
-            android:id="@+id/facebook_sign_in_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login com Facebook"
-            android:textStyle="bold"
-            android:onClick="next"/>
+            android:onClick="next2" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="3dp" />
 
     </LinearLayout>
 
@@ -114,11 +104,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Ainda não possue conta? cadastre-se"
-            style="?android:attr/borderlessButtonStyle"/>
+            style="?android:attr/borderlessButtonStyle" />
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>
