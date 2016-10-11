@@ -52,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void goMainScreen() {
@@ -65,4 +67,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }
+/*
+    public void next (View v){
+        Intent intent = new Intent(this, InforProduto.class);
+        startActivity(intent);
+    }
+
+    public void next2 (View v){
+        Intent intent = new Intent(this, Perfil.class);
+        startActivity(intent);
+    }
+ */
