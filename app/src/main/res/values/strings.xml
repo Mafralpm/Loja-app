@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Retail</string>
+    <string name="facebook_app_id">330665473951312</string>
+    <string name="cancel_login">Login Cancelado</string>
+    <string name="welcome">Bem vindo</string>
+    <string name="error_login">Ocorreu um erro ao entrar</string>
+    <string name="msg_aguarde">Aguarde</string>
 </resources>
