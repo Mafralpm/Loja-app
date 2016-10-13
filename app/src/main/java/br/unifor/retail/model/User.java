@@ -21,4 +21,6 @@ public class User {
     @DatabaseField(columnName = "passwordConfirmation", canBeNull = false)
     private String passwordConfirmation;
 
+
+
 }
