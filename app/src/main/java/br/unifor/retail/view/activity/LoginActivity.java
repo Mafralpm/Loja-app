@@ -78,14 +78,3 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
-/*
-    public void next (View v){
-        Intent intent = new Intent(this, ProductActivity.class);
-        startActivity(intent);
-    }
-
-    public void next2 (View v){
-        Intent intent = new Intent(this, ClientActivity.class);
-        startActivity(intent);
-    }
- */

@@ -38,7 +38,7 @@
         <activity android:name=".view.activity.ClientActivity" />
         <activity android:name=".view.activity.HistoryActivity" />
         <activity android:name=".view.activity.CartActivity" />
-        <activity android:name=".view.activity.InfoClientActivity"></activity>
+        <activity android:name=".view.activity.InfoClientActivity" />
     </application>
 
 </manifest>
