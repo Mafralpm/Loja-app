@@ -14,7 +14,6 @@ import com.facebook.login.widget.LoginButton;
 
 import java.util.Arrays;
 
-import br.unifor.retail.PerfilActivity;
 import br.unifor.retail.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void next2 (View v){
-        Intent intent = new Intent(this, PerfilActivity.class);
+        Intent intent = new Intent(this, ClientActivity.class);
         startActivity(intent);
     }
 
@@ -81,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
 }
 /*
     public void next (View v){
-        Intent intent = new Intent(this, InfoProdutoActivity.class);
+        Intent intent = new Intent(this, ProductActivity.class);
         startActivity(intent);
     }
 
     public void next2 (View v){
-        Intent intent = new Intent(this, PerfilActivity.class);
+        Intent intent = new Intent(this, ClientActivity.class);
         startActivity(intent);
     }
  */

@@ -33,13 +33,12 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".InfoProdutoActivity"
-            android:label="@string/title_activity_info_produto">
-
-        </activity>
-        <activity android:name=".PerfilActivity">
-
-        </activity>
+            android:name=".view.activity.ProductActivity"
+            android:label="@string/title_activity_info_produto" />
+        <activity android:name=".view.activity.ClientActivity" />
+        <activity android:name=".view.activity.HistoryActivity" />
+        <activity android:name=".view.activity.CartActivity" />
+        <activity android:name=".view.activity.InfoClientActivity"></activity>
     </application>
 
 </manifest>

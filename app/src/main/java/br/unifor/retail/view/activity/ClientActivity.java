@@ -1,4 +1,4 @@
-package br.unifor.retail;
+package br.unifor.retail.view.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,29 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-public class PerfilActivity extends AppCompatActivity {
+import br.unifor.retail.R;
+
+public class ClientActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_client);
 
-        //extraemos el drawable en un bitmap
         Drawable originalDrawable = getResources().getDrawable(R.drawable.animalpicturepandabearucumari);
         Bitmap originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
-        //creamos el drawable redondeado
-
-        getRoundedShape(originalBitmap);
         RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), getRoundedShape(originalBitmap));
-
-        //asignamos el CornerRadius
-        //roundedDrawable.setCornerRadius(originalBitmap.getWidth());
-        //roundedDrawable.setCircular(true);
-
-
-
         ImageView imageView = (ImageView) findViewById(R.id.imagem_perfil);
-
         imageView.setImageDrawable(roundedDrawable);
     }
 
