@@ -11,6 +11,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.j256.ormlite.stmt.query.In;
 
 import java.util.Arrays;
 
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void next2 (View v){
-        Intent intent = new Intent(this, ClientActivity.class);
+        Intent intent = new Intent(this, InfoClientActivity.class);
         startActivity(intent);
     }
 
