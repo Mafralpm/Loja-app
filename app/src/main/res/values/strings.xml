@@ -35,4 +35,12 @@
     <string name="list_review">lista com comentarios sobre o produto</string>
     <string name="chamar_atendente_info_produto">button chamar atendente info produto</string>
     <string name="adicionar_carrinho">button adicionar o produto no carirnho</string>
+
+    //Tela Info_Client
+    <string-array name="sexo">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
+
+    <string name="sexo_prompt">Sexo</string>
 </resources>

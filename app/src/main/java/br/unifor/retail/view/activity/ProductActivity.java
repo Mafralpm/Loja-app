@@ -1,13 +1,15 @@
-package br.unifor.retail;
+package br.unifor.retail.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class InforProduto extends AppCompatActivity {
+import br.unifor.retail.R;
+
+public class ProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_infor_produto);
+        setContentView(R.layout.activity_product);
     }
 }
