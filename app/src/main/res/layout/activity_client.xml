@@ -54,6 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/button_test"
+            android:text="Historico de itens"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_test"
             android:text="Minhas compras"
             android:textColor="#FFFFFF" />
 
