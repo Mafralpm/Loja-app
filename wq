@@ -1,0 +1,67 @@
+[33mcommit e4e5ac7bf4e10f79f49b73aab5aac1e00b500cb9[m
+Author: Vania Almeida <vanialadev@gmail.com>
+Date:   Tue Oct 18 05:04:50 2016 -0300
+
+    QrCode
+
+[33mcommit 8b3ed4eab31381a39d1aa619eae3df59df3f7170[m
+Merge: d531da9 7e6be7e
+Author: Vânia Almeida <vania.almeida28@hotmail.com>
+Date:   Fri Oct 14 18:18:10 2016 -0300
+
+    Splash
+
+[33mcommit 7e6be7eab4081e520a4cc8ecb5d5b7a6f5436436[m
+Merge: ee0c396 c602411
+Author: Mafra <matheuslpm@gmail.com>
+Date:   Fri Oct 14 17:09:40 2016 -0300
+
+    add do escopo do projeto
+
+[33mcommit ee0c396cecc7051706584a9fa41baa593b7e69f9[m
+Author: Mafra <matheuslpm@gmail.com>
+Date:   Fri Oct 14 15:33:02 2016 -0300
+
+    add todo escopo do projeto
+
+[33mcommit d531da9b51d25ee01ec98d4f72932e56b462ee67[m
+Author: Vânia Almeida <vania.almeida28@hotmail.com>
+Date:   Thu Oct 13 17:25:57 2016 -0300
+
+    Splash
+
+[33mcommit 9d517384c16433cebbf0e63076c109c0d5d023ba[m
+Author: Mafra <matheuslpm@gmail.com>
+Date:   Tue Oct 11 18:15:47 2016 -0300
+
+    Faltando organizar o fluxo das telas, e o metodo de rederizar a foto do PerfilActivity
+
+[33mcommit c6024114ca37022796787121ada4d343e47ec443[m
+Author: Mafra <matheuslpm@gmail.com>
+Date:   Tue Oct 11 18:15:47 2016 -0300
+
+    Faltando organizar o fluxo das telas e o pelo de rederizar a foto do PerfilActivity
+
+[33mcommit 1d43f0d5e03f220a8a0b5a8468e288f3727c2701[m
+Author: Vania Almeida <vanialadev@gmail.com>
+Date:   Tue Oct 11 16:58:19 2016 -0300
+
+    Developer Facebook do Bluelab
+
+[33mcommit 16bcea77470ec77dffaba5639b2e55ce92eacdfd[m
+Author: Mafra <matheuslpm@gmail.com>
+Date:   Tue Oct 11 15:24:18 2016 -0300
+
+    Merge login AND design.
+
+[33mcommit 0eef6e04663712cd5dd17eb1e0994d3f32f9edae[m
+Author: Vania Almeida <vanialadev@gmail.com>
+Date:   Tue Oct 11 14:33:46 2016 -0300
+
+    Ormlite, Annotations, Facebook
+
+[33mcommit 1853e0c3a03b4bf64c404f2719c0818572dea75c[m
+Author: Vania Almeida <vanialadev@gmail.com>
+Date:   Thu Oct 6 10:27:38 2016 -0300
+
+    Commit inicial

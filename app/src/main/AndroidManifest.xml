@@ -3,11 +3,14 @@
     package="br.unifor.retail">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".view.activity.RetailApp"
@@ -20,19 +23,28 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".view.activity.MainActivity">
+
+        <activity
+            android:name=".view.activity.MainActivity_"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.phonegap.plugins.barcodescanner.SCAN" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-
+            android:theme="@style/Theme.Design.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.activity.ProductActivity"
+            android:label="@string/title_activity_info_produto">
+        </activity>
         <activity
             android:name=".view.activity.SplashActivity_"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,14 +53,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.activity.ProductActivity"
-            android:label="@string/title_activity_info_produto" />
-
-        <activity android:name=".view.activity.ClientActivity" />
-        <activity android:name=".view.activity.HistoryActivity" />
-        <activity android:name=".view.activity.CartActivity" />
-        <activity android:name=".view.activity.InfoClientActivity" />
+        <activity android:name=".view.activity.ClientActivity"></activity>
+        <activity android:name=".view.activity.HistoryActivity"></activity>
+        <activity android:name=".view.activity.CartActivity"></activity>
+        <activity android:name=".view.activity.InfoClientActivity"></activity>
     </application>
 
 </manifest>
