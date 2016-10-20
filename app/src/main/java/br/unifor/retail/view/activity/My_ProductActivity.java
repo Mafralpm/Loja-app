@@ -1,6 +1,5 @@
 package br.unifor.retail.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -21,10 +20,11 @@ public class My_ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_prodcuct);
+        final int BUTTON_MYPRODCT = 0;
 
         ArrayList<Singleton_My_Product> singleton_my_products = todos_Os_Produtos();
 
-        Adapter_ListView_My_Product adapter = new Adapter_ListView_My_Product(singleton_my_products, getApplicationContext());
+        Adapter_ListView_My_Product adapter = new Adapter_ListView_My_Product(singleton_my_products, getApplicationContext(), BUTTON_MYPRODCT);
 
         ListView listView;
         listView = (ListView) findViewById(R.id.myproduct);

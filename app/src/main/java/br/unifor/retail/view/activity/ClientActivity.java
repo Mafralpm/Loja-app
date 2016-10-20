@@ -63,8 +63,13 @@ public class ClientActivity extends AppCompatActivity {
         return targetBitmap;
     }
 
-    public void entrar(View v){
+    public void entrar_Minhas_Compras(View v){
         Intent intent = new Intent(this, My_ProductActivity.class);
+        startActivity(intent);
+    }
+
+    public void entrar_Historico_Itens(View v){
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 }

@@ -29,10 +29,12 @@ public class Adapter_ListView_My_Product extends BaseAdapter{
     private List<Singleton_My_Product> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
+    int teste;
 
-    public Adapter_ListView_My_Product(List<Singleton_My_Product> singleton_my_productList, Context context) {
+    public Adapter_ListView_My_Product(List<Singleton_My_Product> singleton_my_productList, Context context, int teste) {
         this.singleton_my_productLists = singleton_my_productList;
         this.context = context;
+        this.teste = teste;
         inflater = LayoutInflater.from(context);
     }
 
@@ -53,35 +55,42 @@ public class Adapter_ListView_My_Product extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //View view =inflater.inflate(R.layout.iten_listview_my_product, parent, true);
+        if(teste == 0){
+            Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
 
-        Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
-
-        if(convertView == null){
-            convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
-        }
-
-        TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
-        TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
-        TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-        Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
-
-        loja.setText(singleton_my_product.getLoja());
-        produto.setText(singleton_my_product.getProduto());
-        data.setText(singleton_my_product.getData());
-        imageView.setImageResource(singleton_my_product.getImage());
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), LoginActivity.class);
-
-
-                v.getContext().startActivity(intent);
-
+            if(convertView == null){
+                convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
             }
-        });
+
+            TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
+            TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
+            TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
+            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+
+            loja.setText(singleton_my_product.getLoja());
+            produto.setText(singleton_my_product.getProduto());
+            data.setText(singleton_my_product.getData());
+            imageView.setImageResource(singleton_my_product.getImage());
+        }else{
+            Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
+
+            if(convertView == null){
+                convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
+            }
+
+            TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
+            TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
+            TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
+            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+
+            button.setVisibility(View.GONE);
+            loja.setText(singleton_my_product.getLoja());
+            produto.setText(singleton_my_product.getProduto());
+            data.setText(singleton_my_product.getData());
+            imageView.setImageResource(singleton_my_product.getImage());
+        }
 
 
 
