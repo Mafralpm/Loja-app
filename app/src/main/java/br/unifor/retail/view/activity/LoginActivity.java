@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void next2 (View v){
-        Intent intent = new Intent(this, InfoClientActivity.class);
+        Intent intent = new Intent(this, ClientActivity.class);
         startActivity(intent);
     }
 

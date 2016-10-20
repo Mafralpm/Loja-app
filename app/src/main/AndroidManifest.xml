@@ -29,9 +29,7 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.phonegap.plugins.barcodescanner.SCAN" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".view.activity.LoginActivity"
@@ -57,6 +55,7 @@
         <activity android:name=".view.activity.HistoryActivity"></activity>
         <activity android:name=".view.activity.CartActivity"></activity>
         <activity android:name=".view.activity.InfoClientActivity"></activity>
+        <activity android:name=".view.activity.My_ProductActivity"></activity>
     </application>
 
 </manifest>
