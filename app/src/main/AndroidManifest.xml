@@ -52,11 +52,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.ClientActivity"></activity>
-        <activity android:name=".view.activity.HistoryActivity"></activity>
+        <activity android:name=".view.activity.HistoryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.unifor.retail.view.activity.ClientActivity" />
+        </activity>
         <activity android:name=".view.activity.CartActivity"></activity>
         <activity android:name=".view.activity.InfoClientActivity"></activity>
-        <activity android:name=".view.activity.My_ProductActivity"></activity>
-        
+        <activity android:name=".view.activity.My_ProductActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.unifor.retail.view.activity.ClientActivity" />
+        </activity>
+
     </application>
 
 </manifest>
