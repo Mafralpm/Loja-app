@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void entrarMainActivity (View v){
-        Intent intent = new Intent(this, ClientActivity.class);
+        Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 
