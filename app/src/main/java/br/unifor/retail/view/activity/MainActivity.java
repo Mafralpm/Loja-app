@@ -115,4 +115,14 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+    public void entrar_CarActivity (View view){
+        Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
+    }
+
+    public void entrar_ClientActivity (View view){
+        Intent intent = new Intent(this, ClientActivity.class);
+        startActivity(intent);
+    }
 }

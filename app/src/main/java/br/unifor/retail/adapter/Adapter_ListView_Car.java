@@ -50,6 +50,7 @@ public class Adapter_ListView_Car extends BaseAdapter{
 
             Singleton_Car singleton_car = singleton_cars.get(position);
 
+
             if(convertView == null){
                 convertView = inflater.inflate(R.layout.iten_listview_car, parent, false);
             }

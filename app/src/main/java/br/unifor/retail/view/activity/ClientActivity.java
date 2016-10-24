@@ -24,44 +24,11 @@ public class ClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
 
-        Drawable originalDrawable = getResources().getDrawable(R.drawable.animalpicturepandabearucumari);
-        Bitmap originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
-        RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), getRoundedShape(originalBitmap));
-        ImageView imageView = (ImageView) findViewById(R.id.imagem_perfil);
-        imageView.setImageDrawable(roundedDrawable);
+        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
+        imageView.setImageResource(R.drawable.pandalambendo);
 
-//        Button button = (Button) findViewById(R.id.buttonmassa);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getApplicationContext(), My_ProductActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
-    public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
-        int targetWidth = 250;
-        int targetHeight = 250;
-        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
-                targetHeight,Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(targetBitmap);
-        Path path = new Path();
-        path.addCircle(((float) targetWidth - 1) / 2,
-                ((float) targetHeight - 1) / 2,
-                (Math.min(((float) targetWidth),
-                        ((float) targetHeight)) / 2),
-                Path.Direction.CCW);
-
-        canvas.clipPath(path);
-        Bitmap sourceBitmap = scaleBitmapImage;
-        canvas.drawBitmap(sourceBitmap,
-                new Rect(0, 0, sourceBitmap.getWidth(),
-                        sourceBitmap.getHeight()),
-                new Rect(0, 0, targetWidth, targetHeight), null);
-        return targetBitmap;
-    }
 
     public void entrar_Minhas_Compras(View v){
         Intent intent = new Intent(this, My_ProductActivity.class);
@@ -70,6 +37,11 @@ public class ClientActivity extends AppCompatActivity {
 
     public void entrar_Historico_Itens(View v){
         Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+
+    public void entrar_Meu_Perfil(View v){
+        Intent intent = new Intent(this, InfoClientActivity.class);
         startActivity(intent);
     }
 }

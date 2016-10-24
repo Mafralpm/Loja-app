@@ -53,6 +53,8 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:4.48'
     //ZXING
     compile 'me.sudar:zxing-orient:2.1.1@aar'
+    //CircleImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
 
 

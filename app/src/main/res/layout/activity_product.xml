@@ -79,7 +79,7 @@
                         android:id="@string/cor_produto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+
                         android:text="Cores"
                         android:textSize="15dp" />
 
