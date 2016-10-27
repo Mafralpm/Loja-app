@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#ffffff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/activity_car_ImageView_Image_Product"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/activity_car_TextView_Nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome"/>
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/activity_car_TextView_Descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descricao"/>
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/activity_car_TextView_Cor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cor"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/activity_car_ImageView_Image_Delete"
+        android:layout_width="20dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@mipmap/ic_launcher"/>
+
+</LinearLayout>

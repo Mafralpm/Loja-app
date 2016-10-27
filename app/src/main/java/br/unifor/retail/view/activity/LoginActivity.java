@@ -3,7 +3,9 @@ package br.unifor.retail.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -12,6 +14,8 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.j256.ormlite.stmt.query.In;
+
+import org.androidannotations.annotations.Click;
 
 import java.util.Arrays;
 
@@ -51,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
+                Log.i("Erro", error.toString());
             }
         });
 
@@ -70,9 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    public void entrarMainActivity (View v){
-        Intent intent = new Intent(this, ClientActivity.class);
+    public void entrarMainActivity (View view){
+        Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
 

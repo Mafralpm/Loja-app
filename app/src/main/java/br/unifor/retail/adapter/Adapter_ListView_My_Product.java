@@ -25,7 +25,7 @@ import br.unifor.retail.view.activity.LoginActivity;
  * Created by mafra on 19/10/16.
  */
 
-public class Adapter_ListView_My_Product extends BaseAdapter{
+public class Adapter_ListView_My_Product extends BaseAdapter {
     private List<Singleton_My_Product> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
@@ -55,27 +55,35 @@ public class Adapter_ListView_My_Product extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(teste == 0){
-            Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
+        Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
 
-            if(convertView == null){
+        if (teste == 0) {
+
+            if (singleton_my_product.getFlag() != 1) {
                 convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
+
+                TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
+                TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
+                TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
+                ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
+                Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+
+                loja.setText(singleton_my_product.getLoja());
+                produto.setText(singleton_my_product.getProduto());
+                data.setText(singleton_my_product.getData());
+                imageView.setImageResource(singleton_my_product.getImage());
+            } else {
+                convertView = inflater.inflate(R.layout.iten_listview_my_product_final, parent, false);
+                TextView subtotal = (TextView) convertView.findViewById(R.id.my_product_textView_subtotal);
+                TextView valor = (TextView) convertView.findViewById(R.id.my_product_textView_valor);
+
+                subtotal.setText("Subtotal:");
+                valor.setText("1000000,0");
             }
 
-            TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
-            TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
-            TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+        } else {
 
-            loja.setText(singleton_my_product.getLoja());
-            produto.setText(singleton_my_product.getProduto());
-            data.setText(singleton_my_product.getData());
-            imageView.setImageResource(singleton_my_product.getImage());
-        }else{
-            Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
-
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
             }
 
@@ -91,7 +99,6 @@ public class Adapter_ListView_My_Product extends BaseAdapter{
             data.setText(singleton_my_product.getData());
             imageView.setImageResource(singleton_my_product.getImage());
         }
-
 
 
         return convertView;

@@ -12,6 +12,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import br.unifor.retail.R;
 import br.unifor.retail.rest.ProductService;
@@ -40,10 +42,16 @@ public class ProductActivity extends AppCompatActivity {
     protected String contents;
     protected Long idDoQRCOde;
     protected Handler handler;
+    private Toolbar toolbar;
 
 
     @AfterViews
     public void begin() {
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarProduct);
+        toolbar.setTitle("Produtos");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
         contents = intent.getStringExtra("contents");
@@ -67,12 +75,12 @@ public class ProductActivity extends AppCompatActivity {
         try {
             responseProduct = productService.searchProduct(idQrCode);
             mostrarActivity(responseProduct);
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("Puta que Pariu", e.toString());
         }
-
-
     }
+
+
 
     @UiThread
     public void mostrarActivity(ResponseProduct responseProduct) {

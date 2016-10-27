@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="br.unifor.retail.view.activity.MainActivity"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    </android.support.v7.widget.Toolbar>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.unifor.retail.view.activity.MainActivity">
-
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,26 +39,52 @@
         android:textSize="20dp"/>
 
     <Button
+        android:onClick="entrar_CarActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Car"
+        />
+
+    <Button
+        android:onClick="entrar_ClientActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client" />
+
+
+    <Button
         android:onClick="logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:text="@string/com_facebook_loginview_log_out_button" />
 
-    <Button
-        android:id="@+id/scanQR"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:text="+"
-        android:textSize="25sp"
-        android:textColor="#00ff00"
-        android:elevation="10dp"
-        android:elegantTextHeight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/fundo"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/scanQR"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="+"
+            android:textSize="25sp"
+            android:textColor="#00ff00"
+            android:elevation="10dp"
+            android:elegantTextHeight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/fundo"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+
+
 
     <!-- sp é medida de acessibilidade, é redimensionada de acordo com o a configuraçõ do usuaário -->
 
-</RelativeLayout>
+</LinearLayout>

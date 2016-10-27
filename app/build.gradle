@@ -59,6 +59,8 @@ def SpringAndroidRestTemplateVersion = '1.0.1.RELEASE'
 def ZxingOrient =  '2.1.1@aar'
 def JacksonDatabindVersion = '2.6.3'
 def GooglePlayServicesVersion = '8.4.0'
+def CircleImage = '2.1.0'
+def MaterialDrawer = '2.8.2@aar'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -91,6 +93,14 @@ dependencies {
 
     //google play services
     compile "com.google.android.gms:play-services-appindexing:$GooglePlayServicesVersion"
+
+    //CircleImageView
+    compile "de.hdodenhof:circleimageview:$CircleImage"
+    
+    //MaterialDrawer
+    compile("com.mikepenz.materialdrawer:library:$MaterialDrawer") {
+        transitive = true
+    }
 
 
 
