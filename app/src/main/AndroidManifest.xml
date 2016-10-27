@@ -37,7 +37,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar">
         </activity>
         <activity
-            android:name=".view.activity.ProductActivity"
+            android:name=".view.activity.ProductActivity_"
             android:label="@string/title_activity_info_produto">
         </activity>
         <activity

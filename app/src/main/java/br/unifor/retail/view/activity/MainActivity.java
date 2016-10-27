@@ -16,6 +16,7 @@ import com.facebook.login.LoginManager;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 
 import br.unifor.retail.R;
 import br.unifor.retail.view.activity.common.BaseActivity;
@@ -23,12 +24,15 @@ import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
+import static android.R.attr.format;
+
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
+
 
     @AfterViews
     public void begin(){
@@ -83,7 +87,8 @@ public class MainActivity extends BaseActivity {
         goLoginScreen();
     }
 
-    private void scanBarcode() {
+    @UiThread
+    public void scanBarcode() {
         ZxingOrient integrator = new ZxingOrient(this);
         integrator
                 .setToolbarColor("#AA000000")
@@ -93,6 +98,7 @@ public class MainActivity extends BaseActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
@@ -100,14 +106,12 @@ public class MainActivity extends BaseActivity {
                 ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
         try {
             if (scanResult != null) {
-                String re = scanResult.getContents();
-                Log.d("code", re);
+              //  String leitura = scanResult.getContents();
                 String contents = intent.getStringExtra("SCAN_RESULT");
-                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                Log.d("code2", format);
-                Intent intentResult = new Intent(this, ProductActivity.class);
-                intentResult.putExtra("contents", contents);
-                intentResult.putExtra("format", format);
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                            .putExtra("contents", contents)
+                            .putExtra("format", format);
                 startActivity(intentResult);
             }
         } catch (RuntimeException e) {
@@ -115,4 +119,6 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+
 }

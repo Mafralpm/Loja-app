@@ -40,12 +40,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@string/nome_produto"
+                    android:id="@+id/nome_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="7dp"
                     android:gravity="center"
-                    android:text="Nome do produto"
+                    android:text=""
                     android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -92,24 +92,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@string/valor_preco_produto"
+                        android:id="@+id/valor_preco_produto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1000,00"
                         android:textSize="15dp" />
 
                     <TextView
-                        android:id="@string/valor_tamanho_produto"
+                        android:id="@+id/valor_tamanho_produto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="33 34 35"
                         android:textSize="15dp" />
 
                     <TextView
-                        android:id="@string/valor_cor_produto"
+                        android:id="@+id/valor_cor_produto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="vermelho, azul"
                         android:textSize="15dp" />
 
                 </LinearLayout>

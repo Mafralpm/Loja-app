@@ -3,7 +3,9 @@ apply plugin: 'android-apt'
 
 buildscript {
     repositories {
-        jcenter()    }
+        jcenter()
+        mavenCentral()
+    }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
@@ -19,6 +21,19 @@ apt {
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
     defaultConfig {
         applicationId "br.unifor.retail"
         minSdkVersion 19
@@ -35,24 +50,47 @@ android {
     }
 }
 
+def Junit = '4.12'
+def AndroidSupportVersion = '24.2.1'
+def FaceboobAndroidSDK = '[4,5)'
+def AndroidAnnotationsVersion = '3.3.1'
+def ORMLiteVersion = '4.48'
+def SpringAndroidRestTemplateVersion = '1.0.1.RELEASE'
+def ZxingOrient =  '2.1.1@aar'
+def JacksonDatabindVersion = '2.6.3'
+def GooglePlayServicesVersion = '8.4.0'
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    testCompile 'junit:junit:4.12'
-    //FACEBOOK
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    //ANNOTATIONS
-    apt "org.androidannotations:androidannotations:3.3.1"
-    compile "org.androidannotations:androidannotations-api:3.3.1"
-    // ORMLite
-    compile 'com.j256.ormlite:ormlite-android:4.48'
-    compile 'com.j256.ormlite:ormlite-core:4.48'
-    //ZXING
-    compile 'me.sudar:zxing-orient:2.1.1@aar'
+
+    testCompile "junit:junit:$Junit"
+    //android support
+    compile "com.android.support:appcompat-v7:$AndroidSupportVersion"
+    compile "com.android.support:design:$AndroidSupportVersion"
+
+    //facebook
+    compile "com.facebook.android:facebook-android-sdk:$FaceboobAndroidSDK"
+
+    //Aannotations
+    apt "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"
+    compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
+
+    // ormlite
+    compile "com.j256.ormlite:ormlite-android:$ORMLiteVersion"
+    compile "com.j256.ormlite:ormlite-core:$ORMLiteVersion"
+
+    //zxing oriente
+    compile "me.sudar:zxing-orient:$ZxingOrient"
+
+    //pring + jackson rest
+    compile "org.springframework.android:spring-android-rest-template:$SpringAndroidRestTemplateVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
+
+    //google play services
+    compile "com.google.android.gms:play-services-appindexing:$GooglePlayServicesVersion"
 
 
 
