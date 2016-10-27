@@ -1,75 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_perfil"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ebebeb"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="br.unifor.retail.view.activity.ClientActivity">
 
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="255dp"
-        android:background="#92B83E">
-
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp" />
-        <!--app:civ_border_width="2dp"-->
-        <!--app:civ_border_color="#FF000000"-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="Nome"
-            android:textSize="35dp" />
-
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarClientt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff">
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
 
-        <Button
-            android:id="@+id/entrar"
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="255dp"
+            android:background="#92B83E">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp" />
+            <!--app:civ_border_width="2dp"-->
+            <!--app:civ_border_color="#FF000000"-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Nome"
+                android:textSize="35dp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/style_board_button"
-            android:text="Minhas compras"
-            android:textColor="#FFFFFF"
-            android:onClick="entrar_Minhas_Compras" />
+            android:layout_marginTop="20dp"
+            android:background="#ffffff">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/button_test"
-            android:text="Historico de itens"
-            android:textColor="#FFFFFF"
-            android:onClick="entrar_Historico_Itens" />
+            <Button
+                android:id="@+id/entrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_board_button"
+                android:onClick="entrar_Minhas_Compras"
+                android:text="Minhas compras"
+                android:textColor="#FFFFFF" />
 
-        <Button
-            android:onClick="entrar_Meu_Perfil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/button_test"
-            android:text="Meu Perfil"
-            android:textColor="#FFFFFF" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button_test"
+                android:onClick="entrar_Historico_Itens"
+                android:text="Historico de itens"
+                android:textColor="#FFFFFF" />
 
-    </android.support.design.widget.TextInputLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button_test"
+                android:onClick="entrar_Meu_Perfil"
+                android:text="Meu Perfil"
+                android:textColor="#FFFFFF" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

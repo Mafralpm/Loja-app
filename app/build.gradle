@@ -18,11 +18,10 @@ apt {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
-    defaultConfig {
-        applicationId "br.unifor.retail"
+    buildToolsVersion "23.0.0"
+    defaultConfig { applicationId "br.unifor.retail"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -55,6 +54,10 @@ dependencies {
     compile 'me.sudar:zxing-orient:2.1.1@aar'
     //CircleImageView
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    //MaterialDrawer
+    compile('com.mikepenz.materialdrawer:library:2.8.2@aar') {
+        transitive = true
+    }
 
 
 

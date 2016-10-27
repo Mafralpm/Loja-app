@@ -2,6 +2,7 @@ package br.unifor.retail.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,11 +17,17 @@ import br.unifor.retail.singleton.Singleton_My_Product;
 
 public class My_ProductActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_prodcuct);
         final int BUTTON_MYPRODCT = 0;
+        toolbar = (Toolbar) findViewById(R.id.toolbarMyProduct);
+        toolbar.setTitle("Meus Produtos");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ArrayList<Singleton_My_Product> singleton_my_products = todos_Os_Produtos();
 

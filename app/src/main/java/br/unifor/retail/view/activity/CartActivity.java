@@ -2,6 +2,7 @@ package br.unifor.retail.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -15,10 +16,16 @@ import br.unifor.retail.singleton.Singleton_Car;
 
 public class CartActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        toolbar = (Toolbar) findViewById(R.id.toolbarCart);
+        toolbar.setTitle("Carrinho");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<Singleton_Car> singleton_cars;
         singleton_cars = todos_os_produtos();

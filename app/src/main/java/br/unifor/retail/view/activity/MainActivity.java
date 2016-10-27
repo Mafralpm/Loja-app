@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
@@ -27,6 +28,8 @@ import me.sudar.zxingorient.ZxingOrientResult;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
+    private Toolbar toolbar;
+
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
 
@@ -39,6 +42,10 @@ public class MainActivity extends BaseActivity {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
         }
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarMain);
+        toolbar.setTitle("Retail");
+        setSupportActionBar(toolbar);
     }
 
     @Click
