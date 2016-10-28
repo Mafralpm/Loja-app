@@ -12,7 +12,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import br.unifor.retail.R;
