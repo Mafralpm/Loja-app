@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="5dp"
-            android:src="@android:color/holo_blue_bright" />
+            android:src="@drawable/logo" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
+                style="@style/Theme.MyTheme.Login"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
 
@@ -52,24 +54,18 @@
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:gravity="center"
-                android:text="Problemas para fazer login?"
-                android:textSize="17dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Clique aqui"
+                android:gravity="right"
+                android:text="Recuperar senha"
                 android:textSize="17dp"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -81,6 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="entrarMainActivity"
+            android:background="@color/colorAccent"
             android:text="Entrar"
             android:textStyle="bold" />
 
@@ -104,6 +101,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="@android:color/white"
             android:text="Ainda não possue conta? cadastre-se" />
 
     </LinearLayout>

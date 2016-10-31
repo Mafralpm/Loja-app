@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
 
         if (teste == 0) {
@@ -72,28 +73,35 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
                 produto.setText(singleton_my_product.getProduto());
                 data.setText(singleton_my_product.getData());
                 imageView.setImageResource(singleton_my_product.getImage());
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, "Clique no botão: "+ position, Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
                 convertView = inflater.inflate(R.layout.iten_listview_my_product_final, parent, false);
                 TextView subtotal = (TextView) convertView.findViewById(R.id.my_product_textView_subtotal);
-                TextView valor = (TextView) convertView.findViewById(R.id.my_product_textView_valor);
+//                TextView valor = (TextView) convertView.findViewById(R.id.my_product_textView_valor);
 
-                subtotal.setText("Subtotal:");
-                valor.setText("1000000,0");
+                subtotal.setText("Total: R$ 1000,00");
+//                valor.setText("1000000,0");
             }
 
         } else {
 
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
+                convertView = inflater.inflate(R.layout.iten_listview_history, parent, false);
             }
 
             TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
             TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
             TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
             ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
-
-            button.setVisibility(View.GONE);
+//            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+//
+//            button.setVisibility(View.GONE);
             loja.setText(singleton_my_product.getLoja());
             produto.setText(singleton_my_product.getProduto());
             data.setText(singleton_my_product.getData());

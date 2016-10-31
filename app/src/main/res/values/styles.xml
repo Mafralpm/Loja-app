@@ -14,7 +14,12 @@
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight, and colorSwitchThumbNormal. -->
 
-        <item name="colorControlNormal">@android:color/holo_red_dark</item>
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="Theme.MyTheme.Login"  parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#ffffff</item>
     </style>
 
 

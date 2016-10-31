@@ -1,16 +1,15 @@
 package br.unifor.retail.view.activity;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,11 +20,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.SwitchDrawerItem;
-import com.mikepenz.materialdrawer.model.ToggleDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.OnCheckedChangeListener;
 
 import java.util.ArrayList;
@@ -60,6 +55,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_info_client);
         toolbar = (Toolbar) findViewById(R.id.toolbarInfo_Client);
         toolbar.setTitle("Minhas informações");
+        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -80,7 +76,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalçado = (Spinner) findViewById(R.id.tamanhoCalçadoSpinner);
         tamanhoCalçadoSpinner();
 
-        createNavigationDrawer(savedInstanceState);
+        createNavigationDrawer();
     }
 
     public void onStart() {
@@ -101,9 +97,11 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_navigation_drawer_drawer, menu);
+        getMenuInflater().inflate(R.menu.menu_info_client, menu);
         return true;
     }
+
+
 
     public void sexoSpinner() {
         spinnerSexo.setOnItemSelectedListener(this);
@@ -180,26 +178,34 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         startActivity(intent);
     }
 
-    private void createNavigationDrawer(Bundle savedInstanceState) {
+
+    private void createNavigationDrawer() {
         //NAVIGATION DRAWER
         headerNavigationLeft = new AccountHeader()
                 .withActivity(this)
                 .withCompactStyle(false)
-                .withSavedInstance(savedInstanceState)
+//                .withSavedInstance(savedInstanceState)
                 .withThreeSmallProfileImages(true)
-                .withHeaderBackground(R.drawable.pandalambendo)
-                .addProfiles(
-                        new ProfileDrawerItem().withName("Person One").withEmail("person1@gmail.com").withIcon(getResources().getDrawable(R.drawable.pandalambendo))
-                )
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
-                        Toast.makeText(InfoClientActivity.this, "onProfileChanged: " + iProfile.getName(), Toast.LENGTH_SHORT).show();
-                        headerNavigationLeft.setBackgroundRes(R.drawable.camisa3);
-                        return false;
-                    }
-                })
+                .withHeaderBackground(R.drawable.menu)
+
+
+
+
+//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+//                    @Override
+//                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
+//                        Toast.makeText(HistoryActivity.this, "onProfileChanged: " + iProfile.getName(), Toast.LENGTH_SHORT).show();
+//                        headerNavigationLeft.setBackgroundRes(R.drawable.camisa3);
+//                        return false;
+//                    }
+//                })
                 .build();
+
+
+//        headerNavigationLeft.addProfile(), 0);
+        headerNavigationLeft.addProfiles(new ProfileDrawerItem().withName("Person One").withEmail("person1@gmail.com").withIcon(getResources().getDrawable(R.drawable.pandalambendo)));
+
+
 
 
         navigationDrawerLeft = new Drawer()
@@ -208,22 +214,22 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
                 .withDisplayBelowToolbar(false)
                 .withActionBarDrawerToggleAnimated(true)
                 .withDrawerGravity(Gravity.LEFT)
-                .withSavedInstance(savedInstanceState)
+//                .withSavedInstance(savedInstanceState)
                 .withSelectedItem(-2)
                 .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerNavigationLeft)
-                    /*.withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
-                        @Override
-                        public boolean onNavigationClickListener(View view) {
-                            return false;
-                        }
-                    })*/
+                   /*.withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+                       @Override
+                       public boolean onNavigationClickListener(View view) {
+                           return false;
+                       }
+                   })*/
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         switch (i){
                             case 0:
-                                Intent intent = new Intent(InfoClientActivity.this, MainActivity_.class);
+                                Intent intent = new Intent(InfoClientActivity.this, InfoClientActivity.class);
                                 startActivity(intent);
                                 break;
                             case 1:
@@ -243,8 +249,9 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
                                 goLoginScreen();
                                 break;
 
+
                         }
-                        Toast.makeText(InfoClientActivity.this, "Item: " + i, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(InfoClientActivity.this, "Item: " + i, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
@@ -256,11 +263,12 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
                 })
                 .build();
 
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Carrinho").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Meus pedidos").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Historico de itens").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Sair").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
+
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(getResources().getDrawable(R.drawable.perfil)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Carrinho").withIcon(getResources().getDrawable(R.drawable.carrinho)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Meus pedidos").withIcon(getResources().getDrawable(R.drawable.pedidos)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Historico de itens").withIcon(getResources().getDrawable(R.drawable.visualizacao)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Sair").withIcon(getResources().getDrawable(R.drawable.sair)));
     }
 
 }

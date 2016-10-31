@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,9 +31,19 @@
                 android:paddingLeft="7dp">
 
                 <TextView
+                    android:id="@+id/my_product_textView_Data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="26/10/2016"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
                     android:layout_marginTop="10dp"
                     android:text="Produto"
                     android:textColor="#000000"
@@ -65,40 +76,11 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginTop="45dp"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Quant."
-                        android:textColor="#000000"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="99 itens"
-                        android:textColor="#000000" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,38 +95,11 @@
                         android:layout_height="wrap_content"
                         android:text="1000,00"
                         android:textColor="#000000" />
-                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/my_product_button_avaliar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:text="Avaliar" />
-
-            </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/my_product_textView_Data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:text="26/10/2016"
-            android:textColor="#000000"
-            android:textSize="16dp"
-            android:textStyle="bold" />
 
 
     </LinearLayout>

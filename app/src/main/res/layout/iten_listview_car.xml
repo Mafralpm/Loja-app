@@ -1,51 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="#ffffff"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/activity_car_ImageView_Image_Product"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="horizontal">
 
-        <TextView
-            android:textColor="#000000"
-            android:id="@+id/activity_car_TextView_Nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nome"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:textColor="#000000"
-            android:id="@+id/activity_car_TextView_Descricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descricao"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Produto"
+                android:textColor="#000000"
+                android:textSize="18dp" />
 
-        <TextView
-            android:textColor="#000000"
-            android:id="@+id/activity_car_TextView_Cor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cor"/>
+            <TextView
+                android:id="@+id/activity_car_TextView_Nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/activity_car_TextView_Descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descricao"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/activity_car_TextView_Cor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cor"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Qtd."
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:text="1" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:gravity="center_horizontal"
+
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Preço"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/activity_car_ImageView_Image_Delete"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/lixeira"/>
+
+        </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/activity_car_ImageView_Image_Delete"
-        android:layout_width="20dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher"/>
 
 </LinearLayout>
