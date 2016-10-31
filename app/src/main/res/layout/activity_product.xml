@@ -128,9 +128,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -144,33 +143,21 @@
         <ListView
             android:id="@string/list_review"
             android:layout_width="match_parent"
-            android:layout_height="310dp"
-            android:layout_marginTop="5dp"></ListView>
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="3">
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        </ListView>
 
         <Button
-            android:id="@string/chamar_atendente_info_produto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="Atendente" />
-
-        <Button
-            android:id="@string/adicionar_carrinho"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="Carrinho" />
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@color/colorAccent"
+            android:text="Adicionar ao carrinho" />
     </LinearLayout>
+
 
 </LinearLayout>

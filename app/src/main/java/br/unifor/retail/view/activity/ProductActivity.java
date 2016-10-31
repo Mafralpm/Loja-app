@@ -79,6 +79,7 @@ public class ProductActivity extends AppCompatActivity {
         toolbar.setTitle("Produtos");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
+        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
