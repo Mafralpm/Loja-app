@@ -5,7 +5,7 @@ package br.unifor.retail.singleton;
  */
 
 public class Singleton_Car {
-    private int imageProduct;
+    private int imageProduct, flag;
     private String nome, decricao, cor;
 
     public Singleton_Car() {
@@ -16,6 +16,11 @@ public class Singleton_Car {
         this.nome = nome;
         this.decricao = decricao;
         this.cor = cor;
+        this.flag = 0;
+    }
+
+    public Singleton_Car(int flag) {
+        this.flag = flag;
     }
 
     public int getImageProduct() {
@@ -48,5 +53,13 @@ public class Singleton_Car {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

@@ -1,6 +1,7 @@
 package br.unifor.retail.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import br.unifor.retail.singleton.Singleton_My_Product;
  * Created by mafra on 19/10/16.
  */
 
-public class Adapter_ListView_Car extends BaseAdapter{
+public class Adapter_ListView_Car extends BaseAdapter {
     private List<Singleton_Car> singleton_cars;
     LayoutInflater inflater;
     Context context;
@@ -48,10 +49,12 @@ public class Adapter_ListView_Car extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-            Singleton_Car singleton_car = singleton_cars.get(position);
+        Singleton_Car singleton_car = singleton_cars.get(position);
 
+        Log.d("HUAGDUAGSUODYGSAUYOGDYUGSAUDGUAS", singleton_car.getFlag() + "");
 
-            if(convertView == null){
+        if (singleton_car.getFlag() != 1) {
+            if (convertView == null) {
                 convertView = inflater.inflate(R.layout.iten_listview_car, parent, false);
             }
 
@@ -66,10 +69,7 @@ public class Adapter_ListView_Car extends BaseAdapter{
             cor.setText(singleton_car.getCor());
             imageProduct.setImageResource(singleton_car.getImageProduct());
             imageDelete.setImageResource(R.mipmap.ic_launcher);
-
-
-
-
+        }
         return convertView;
     }
 }

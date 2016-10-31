@@ -106,22 +106,22 @@ public class CartActivity extends AppCompatActivity {
         List<Singleton_Car> singleton_cars = new ArrayList<>();
 
 //        //Travando
-//        singleton_cars.add(new Singleton_Car(R.drawable.bermuda_1, "Bermuda_1", "Bermuda muito legal", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.bermuda_2, "Bermuda_2", "Bermuda muito massa", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.camisa3, "Camisa_1", "Camisa social muito legal", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.camisa_1, "Camisa_2", "Camisa social muito massa", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.camisa_2, "Camisa_3", "Camisa social muito irada", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.regata_1, "Camisa_Regata_1", "Camisa regata muito legal", "essa ai"));
-//        singleton_cars.add(new Singleton_Car(R.drawable.regata_1, "Camisa_Regata_2", "Camisa regata muito massa", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Bermuda_1", "Bermuda muito legal", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.animalpicturepandabearucumari, "Bermuda_2", "Bermuda muito massa", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.felipemassapilotof1, "Camisa_1", "Camisa social muito legal", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Camisa_2", "Camisa social muito massa", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.animalpicturepandabearucumari, "Camisa_3", "Camisa social muito irada", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.felipemassapilotof1, "Camisa_Regata_1", "Camisa regata muito legal", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Camisa_Regata_2", "Camisa regata muito massa", "essa ai"));
 
 //        ok
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Bermuda_1", "Bermuda muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Bermuda_2", "Bermuda muito massa", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_1", "Camisa social muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_2", "Camisa social muito massa", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_3", "Camisa social muito irada", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_Regata_1", "Camisa regata muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_Regata_2", "Camisa regata muito massa", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Bermuda_1", "Bermuda muito legal", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Bermuda_2", "Bermuda muito massa", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_1", "Camisa social muito legal", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_2", "Camisa social muito massa", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_3", "Camisa social muito irada", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_Regata_1", "Camisa regata muito legal", "essa ai"));
+//        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Camisa_Regata_2", "Camisa regata muito massa", "essa ai"));
 
         return singleton_cars;
     }
