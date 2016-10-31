@@ -1,37 +1,41 @@
 package br.unifor.retail.view.activity;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.SwitchDrawerItem;
-import com.mikepenz.materialdrawer.model.ToggleDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.OnCheckedChangeListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.view.activity.dialog.DateDialog;
+
+import static com.facebook.AccessToken.getCurrentAccessToken;
 
 public class InfoClientActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -46,26 +50,63 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     private Drawer.Result navigationDrawerLeft;
     private AccountHeader.Result headerNavigationLeft;
 
+    private String userId;
+    private String name;
+    private String profileImgUrl;
+
     private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(IDrawerItem iDrawerItem, CompoundButton compoundButton, boolean b) {
             Toast.makeText(InfoClientActivity.this, "onCheckedChanged: " + (b ? "true" : "false"), Toast.LENGTH_SHORT).show();
         }
     };
+    private String email_id;
+    private String grafiUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Profile profile = Profile.getCurrentProfile();
+        if (getCurrentAccessToken() != null) {
+            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+
+
+            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
+            profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            grafiUrl = "https://graph.facebook.com/me?access_token="+ AccessToken.getCurrentAccessToken().getToken();
+            name = profile.getName();
+         //   email =
+            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+
+                            Log.d("dqwdqqd", object.toString());
+                            Log.d("dqwdqqd", grafiUrl);
+
+
+
+
+                        }
+
+                    });
+
+            request.executeAsync();
+
+            Log.d("xs", userId);
+
+
+        }
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_client);
         toolbar = (Toolbar) findViewById(R.id.toolbarInfo_Client);
         toolbar.setTitle("Minhas informações");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        EditText nome = (EditText) findViewById(R.id.nome);
-
-        EditText email = (EditText) findViewById(R.id.email);
 
         spinnerSexo = (Spinner) findViewById(R.id.sexoSpinner);
         sexoSpinner();
@@ -80,6 +121,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         tamanhoCalçadoSpinner();
 
 
+
         //NAVIGATION DRAWER
         headerNavigationLeft = new AccountHeader()
                 .withActivity(this)
@@ -88,9 +130,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.pandalambendo)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Person One").withEmail("person1@gmail.com").withIcon(getResources().getDrawable(R.drawable.pandalambendo)),
-                        new ProfileDrawerItem().withName("Person Two").withEmail("person2@gmail.com").withIcon(getResources().getDrawable(R.drawable.animalpicturepandabearucumari)),
-                        new ProfileDrawerItem().withName("Person Three").withEmail("person3@gmail.com").withIcon(getResources().getDrawable(R.drawable.felipemassapilotof1))
+                        new ProfileDrawerItem().withName(name).withEmail("vvrv").withIcon(profileImgUrl)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -169,7 +209,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     public void sexoSpinner() {
         spinnerSexo.setOnItemSelectedListener(this);
 
-        List<String> sexos = new ArrayList<String>();
+        List<String> sexos = new ArrayList<>();
         sexos.add("Masculino");
         sexos.add("Femenino");
 
@@ -234,4 +274,6 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

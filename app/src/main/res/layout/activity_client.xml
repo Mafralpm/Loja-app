@@ -45,11 +45,12 @@
             <!--app:civ_border_width="2dp"-->
             <!--app:civ_border_color="#FF000000"-->
             <TextView
+                android:id="@+id/cliente_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Nome"
+                android:text=""
                 android:textSize="35dp" />
 
 
