@@ -194,10 +194,6 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public void entrar_ClientActivity (View view){
-        Intent intent = new Intent(this, ClientActivity.class);
-        startActivity(intent);
-    }
 
 
     private void createNavigationDrawer() {
