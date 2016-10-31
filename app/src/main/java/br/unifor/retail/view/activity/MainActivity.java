@@ -91,9 +91,6 @@ public class MainActivity extends BaseActivity {
                             Log.d("dqwdqqd", object.toString());
                             Log.d("dqwdqqd", grafiUrl);
 
-
-
-
                         }
 
                     });

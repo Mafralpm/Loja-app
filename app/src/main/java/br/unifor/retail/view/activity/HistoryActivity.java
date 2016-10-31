@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import br.unifor.retail.R;
+import br.unifor.retail.adapter.Adapter_ListView_History;
 import br.unifor.retail.adapter.Adapter_ListView_My_Product;
 import br.unifor.retail.singleton.Singleton_My_Product;
 
@@ -54,12 +55,10 @@ public class HistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final int BUTTON_HITORY = 1;
-
         ArrayList<Singleton_My_Product> singleton_my_products;
         singleton_my_products = todos_Os_Produtos();
 
-        Adapter_ListView_My_Product adapter_listView_my_product = new Adapter_ListView_My_Product(singleton_my_products, getApplicationContext(), BUTTON_HITORY);
+        Adapter_ListView_History adapter_listView_my_product = new Adapter_ListView_History(singleton_my_products, getApplicationContext());
 
         ListView listView = (ListView) findViewById(R.id.action_history_ListView);
         listView.setAdapter(adapter_listView_my_product);
@@ -110,6 +109,24 @@ public class HistoryActivity extends AppCompatActivity {
     public ArrayList<Singleton_My_Product> todos_Os_Produtos(){
         ArrayList<Singleton_My_Product> singleton_my_products = new ArrayList<>();
 
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
         singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
         singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
         singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));

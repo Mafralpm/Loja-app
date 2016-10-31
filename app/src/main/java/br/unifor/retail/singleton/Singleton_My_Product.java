@@ -10,7 +10,7 @@ import android.widget.TextView;
  */
 
 public class Singleton_My_Product {
-    private int image, flag;
+    private int image;
     private String loja, produto, data;
 
     public Singleton_My_Product() {}
@@ -22,9 +22,6 @@ public class Singleton_My_Product {
         this.data = data;
     }
 
-    public Singleton_My_Product(int flag) {
-        this.flag = flag;
-    }
 
     public int getImage() {
         return image;
@@ -58,11 +55,4 @@ public class Singleton_My_Product {
         this.data = data;
     }
 
-    public int getFlag() {
-        return flag;
-    }
-
-    public void setFlag(int flag) {
-        this.flag = flag;
-    }
 }
