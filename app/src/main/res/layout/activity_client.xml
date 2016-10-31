@@ -23,13 +23,13 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -70,28 +70,28 @@
                 android:background="@drawable/style_board_button"
                 android:onClick="entrar_Minhas_Compras"
                 android:text="Minhas compras"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
+            <!-- android:background="@drawable/style_board_button" -->
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/button_test"
+                android:background="@drawable/style_board_button"
                 android:onClick="entrar_Historico_Itens"
                 android:text="Historico de itens"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/button_test"
+                android:background="@drawable/style_board_button"
                 android:onClick="entrar_Meu_Perfil"
                 android:text="Meu Perfil"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package br.unifor.retail.view.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -12,8 +13,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import br.unifor.retail.R;
 import br.unifor.retail.rest.ProductService;
