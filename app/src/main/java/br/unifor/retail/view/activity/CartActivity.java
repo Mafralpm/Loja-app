@@ -1,9 +1,10 @@
 package br.unifor.retail.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -11,12 +12,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +32,19 @@ import br.unifor.retail.R;
 import br.unifor.retail.adapter.Adapter_ListView_Car;
 import br.unifor.retail.singleton.Singleton_Car;
 
+import static com.facebook.AccessToken.getCurrentAccessToken;
+
 
 public class CartActivity extends AppCompatActivity {
 
     private Drawer.Result navigationDrawerLeft;
     private AccountHeader.Result headerNavigationLeft;
     private Toolbar toolbar;
+    private String userId;
+    private String name;
+    private String grafiUrl;
+    private String profileImgUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +64,45 @@ public class CartActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.car_activity_listView);
         listView.setAdapter(adapter_listView_car);
 
+        Profile profile = Profile.getCurrentProfile();
+        if (getCurrentAccessToken() != null) {
+            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+
+
+            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
+            profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
+            name = profile.getName();
+            //   email =
+            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+
+                            Log.d("dqwdqqd", object.toString());
+                            Log.d("dqwdqqd", grafiUrl);
+
+
+                        }
+
+                    });
+
+            request.executeAsync();
+
+            Log.d("xs", userId);
+
+
+        }
         createNavigationDrawer();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_geral, menu);
         return true;
+
     }
 
-    public List<Singleton_Car> todos_os_produtos(){
+    public List<Singleton_Car> todos_os_produtos() {
         List<Singleton_Car> singleton_cars = new ArrayList<>();
 
 //        //Travando
@@ -83,7 +127,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-
     private void goLoginScreen() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -98,26 +141,9 @@ public class CartActivity extends AppCompatActivity {
 //                .withSavedInstance(savedInstanceState)
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
-
-
-
-
-//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-//                    @Override
-//                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
-//                        Toast.makeText(HistoryActivity.this, "onProfileChanged: " + iProfile.getName(), Toast.LENGTH_SHORT).show();
-//                        headerNavigationLeft.setBackgroundRes(R.drawable.camisa3);
-//                        return false;
-//                    }
-//                })
+                .addProfiles(
+                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com").withIcon(profileImgUrl))
                 .build();
-
-
-//        headerNavigationLeft.addProfile(), 0);
-        headerNavigationLeft.addProfiles(new ProfileDrawerItem().withName("Person One").withEmail("person1@gmail.com").withIcon(getResources().getDrawable(R.drawable.pandalambendo)));
-
-
-
 
         navigationDrawerLeft = new Drawer()
                 .withActivity(this)
@@ -138,7 +164,7 @@ public class CartActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-                        switch (i){
+                        switch (i) {
                             case 0:
                                 Intent intent = new Intent(CartActivity.this, InfoClientActivity.class);
                                 startActivity(intent);
@@ -181,7 +207,6 @@ public class CartActivity extends AppCompatActivity {
         navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Historico de itens").withIcon(getResources().getDrawable(R.drawable.visualizacao)));
         navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Sair").withIcon(getResources().getDrawable(R.drawable.sair)));
     }
-
 
 
 }

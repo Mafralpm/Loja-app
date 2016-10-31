@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
@@ -61,6 +61,7 @@ def JacksonDatabindVersion = '2.6.3'
 def GooglePlayServicesVersion = '8.4.0'
 def CircleImage = '2.1.0'
 def MaterialDrawer = '2.8.2@aar'
+def Picasso = '2.5.2'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -74,7 +75,7 @@ dependencies {
     compile "com.android.support:design:$AndroidSupportVersion"
 
     //facebook
-    compile "com.facebook.android:facebook-android-sdk:$FaceboobAndroidSDK"
+    compile "com.facebook.android:facebook-android-sdk:[4,5)"
 
     //Aannotations
     apt "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"
@@ -102,6 +103,6 @@ dependencies {
         transitive = true
     }
 
-
+    compile "com.squareup.picasso:picasso:$Picasso"
 
 }

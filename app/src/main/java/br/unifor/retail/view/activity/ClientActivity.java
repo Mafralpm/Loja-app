@@ -1,16 +1,23 @@
 package br.unifor.retail.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
@@ -18,12 +25,22 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import org.json.JSONObject;
+
 import br.unifor.retail.R;
+
+import static com.facebook.AccessToken.getCurrentAccessToken;
 
 public class ClientActivity extends AppCompatActivity {
     private Drawer.Result navigationDrawerLeft;
     private AccountHeader.Result headerNavigationLeft;
     private Toolbar toolbar;
+    private String userId;
+    private String name;
+    private String grafiUrl;
+    private String profileImgUrl;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +52,39 @@ public class ClientActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        TextView nameView = (TextView) findViewById(R.id.cliente_nome);
+
         ImageView imageView = (ImageView) findViewById(R.id.profile_image);
         imageView.setImageResource(R.drawable.pandalambendo);
+
+
+        Profile profile = Profile.getCurrentProfile();
+        if (getCurrentAccessToken() != null) {
+            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+
+
+            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
+            profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
+            name = profile.getName();
+            //   email =
+            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+
+                            Log.d("dqwdqqd", object.toString());
+                            Log.d("dqwdqqd", grafiUrl);
+                        }
+
+                    });
+            request.executeAsync();
+            Log.d("xs", userId);
+        }
 
         createNavigationDrawer();
 
     }
-
 
     public void entrar_Minhas_Compras(View v){
         Intent intent = new Intent(this, My_ProductActivity.class);
@@ -78,24 +121,9 @@ public class ClientActivity extends AppCompatActivity {
 //                .withSavedInstance(savedInstanceState)
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
-
-
-
-
-//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-//                    @Override
-//                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
-//                        Toast.makeText(HistoryActivity.this, "onProfileChanged: " + iProfile.getName(), Toast.LENGTH_SHORT).show();
-//                        headerNavigationLeft.setBackgroundRes(R.drawable.camisa3);
-//                        return false;
-//                    }
-//                })
+                .addProfiles(
+                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com").withIcon(profileImgUrl))
                 .build();
-
-
-//        headerNavigationLeft.addProfile(), 0);
-        headerNavigationLeft.addProfiles(new ProfileDrawerItem().withName("Person One").withEmail("person1@gmail.com").withIcon(getResources().getDrawable(R.drawable.pandalambendo)));
-
 
 
 
