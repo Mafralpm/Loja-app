@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="oval">
+            <solid
+                android:color="#162937"/>
+            <padding
+                android:bottom="13dp"
+                android:top="13dp"
+                android:left="13dp"
+                android:right="13dp"/>
 
-    <solid
-        android:color="@color/cardview_dark_background">
-    </solid>
-
-</shape>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/qr_code_menu"/>
+</layer-list>
