@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.Adapter_ListView_Main;
 import br.unifor.retail.adapter.Adapter_ListView_My_Product;
+import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.Singleton_Main;
 import br.unifor.retail.singleton.Singleton_My_Product;
 import br.unifor.retail.view.activity.common.BaseActivity;
@@ -52,15 +53,9 @@ import static com.facebook.AccessToken.getCurrentAccessToken;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
-    private Drawer.Result navigationDrawerLeft;
-    private AccountHeader.Result headerNavigationLeft;
 
     private Toolbar toolbar;
-
-    private String userId;
-    private String name;
-    private String grafiUrl;
-    private String profileImgUrl;
+    NavegationDrawer navegationDrawer;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
@@ -90,37 +85,9 @@ public class MainActivity extends BaseActivity {
 
         listView.setAdapter(adapter);
 
-        Profile profile = Profile.getCurrentProfile();
-        if (getCurrentAccessToken() != null) {
-            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
-
-
-            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
-            profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            grafiUrl = "https://graph.facebook.com/me?access_token="+ AccessToken.getCurrentAccessToken().getToken();
-            name = profile.getName();
-            //   email =
-            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-                    new GraphRequest.GraphJSONObjectCallback() {
-                        @Override
-                        public void onCompleted(JSONObject object, GraphResponse response) {
-
-                            Log.d("dqwdqqd", object.toString());
-                            Log.d("dqwdqqd", grafiUrl);
-
-                        }
-
-                    });
-
-            request.executeAsync();
-
-            Log.d("xs", userId);
-
-
-        }
-
-
-        createNavigationDrawer();
+        navegationDrawer = new NavegationDrawer(toolbar, this);
+        navegationDrawer.getProfile();
+        navegationDrawer.createNavigationDrawer();
     }
 
     @Click
@@ -177,10 +144,6 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public void logout(View view) {
-        LoginManager.getInstance().logOut();
-        goLoginScreen();
-    }
 
     @UiThread
     public void scanBarcode() {
@@ -251,83 +214,5 @@ public class MainActivity extends BaseActivity {
         return singleton_mains;
     }
 
-
-
-    private void createNavigationDrawer() {
-        //NAVIGATION DRAWER
-        headerNavigationLeft = new AccountHeader()
-                .withActivity(this)
-                .withCompactStyle(false)
-//                .withSavedInstance(savedInstanceState)
-                .withThreeSmallProfileImages(true)
-                .withHeaderBackground(R.drawable.menu)
-                .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com").withIcon(profileImgUrl))
-                .build();
-
-
-
-        navigationDrawerLeft = new Drawer()
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withDisplayBelowToolbar(false)
-                .withActionBarDrawerToggleAnimated(true)
-                .withDrawerGravity(Gravity.LEFT)
-//                .withSavedInstance(savedInstanceState)
-                .withSelectedItem(-2)
-                .withActionBarDrawerToggle(true)
-                .withAccountHeader(headerNavigationLeft)
-                   /*.withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
-                       @Override
-                       public boolean onNavigationClickListener(View view) {
-                           return false;
-                       }
-                   })*/
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-                        switch (i){
-                            case 0:
-                                Intent intent = new Intent(MainActivity.this, InfoClientActivity.class);
-                                startActivity(intent);
-                                break;
-                            case 1:
-                                Intent intent1 = new Intent(MainActivity.this, CartActivity.class);
-                                startActivity(intent1);
-                                break;
-                            case 2:
-                                Intent intent2 = new Intent(MainActivity.this, My_ProductActivity.class);
-                                startActivity(intent2);
-                                break;
-                            case 3:
-                                Intent intent3 = new Intent(MainActivity.this, HistoryActivity.class);
-                                startActivity(intent3);
-                                break;
-                            case 4:
-                                LoginManager.getInstance().logOut();
-                                goLoginScreen();
-                                break;
-
-
-                        }
-//                        Toast.makeText(MainActivity.this, "Item: " + i, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-                        Toast.makeText(MainActivity.this, "onItemLongClick: " + i, Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                })
-                .build();
-
-
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(getResources().getDrawable(R.drawable.perfil)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Carrinho").withIcon(getResources().getDrawable(R.drawable.carrinho)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Meus pedidos").withIcon(getResources().getDrawable(R.drawable.pedidos)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Historico de itens").withIcon(getResources().getDrawable(R.drawable.visualizacao)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Sair").withIcon(getResources().getDrawable(R.drawable.sair)));
-    }
 
 }
