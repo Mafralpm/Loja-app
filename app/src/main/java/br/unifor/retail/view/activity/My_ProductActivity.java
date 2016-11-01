@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -102,58 +103,38 @@ public class My_ProductActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
+        if (menuItem.getItemId() == R.id.menu_carinho) {
+            startActivity(intent);
+        } else {
+            startActivity(intent2);
+        }
+
+        return true;
+    }
+
     public ArrayList<Singleton_My_Product> todos_Os_Produtos() {
         ArrayList<Singleton_My_Product> singleton_my_products = new ArrayList<>();
 
 
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "1", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "2", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "4", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "5", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "7", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "8", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "10", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "11", "Blusa branca", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
+
+
 
 
         return singleton_my_products;

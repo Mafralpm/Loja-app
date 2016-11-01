@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -70,7 +71,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             userId = AccessToken.getCurrentAccessToken().getUserId().toString();
             profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            grafiUrl = "https://graph.facebook.com/me?access_token="+ AccessToken.getCurrentAccessToken().getToken();
+            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
             name = profile.getName();
             //   email =
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
@@ -80,8 +81,6 @@ public class HistoryActivity extends AppCompatActivity {
 
                             Log.d("dqwdqqd", object.toString());
                             Log.d("dqwdqqd", grafiUrl);
-
-
 
 
                         }
@@ -98,7 +97,6 @@ public class HistoryActivity extends AppCompatActivity {
         createNavigationDrawer();
 
 
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,38 +104,41 @@ public class HistoryActivity extends AppCompatActivity {
         return true;
     }
 
-    public ArrayList<Singleton_My_Product> todos_Os_Produtos(){
+    public ArrayList<Singleton_My_Product> todos_Os_Produtos() {
         ArrayList<Singleton_My_Product> singleton_my_products = new ArrayList<>();
 
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa preta", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Americanas", "Blusa branca", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Submarino", "Camisa", "30/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.felipemassapilotof1, "Teste", "Bermuda", "05/05/2015"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.pandalambendo, "Americanas", "Blusa laranja", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
 
         return singleton_my_products;
     }
 
 
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
+        if (menuItem.getItemId() == R.id.menu_carinho) {
+            startActivity(intent);
+        } else {
+            startActivity(intent2);
+        }
+
+        return true;
+    }
 
 
     private void goLoginScreen() {
@@ -160,7 +161,6 @@ public class HistoryActivity extends AppCompatActivity {
                 .build();
 
 
-
         navigationDrawerLeft = new Drawer()
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -180,7 +180,7 @@ public class HistoryActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-                        switch (i){
+                        switch (i) {
                             case 0:
                                 Intent intent = new Intent(HistoryActivity.this, InfoClientActivity.class);
                                 startActivity(intent);

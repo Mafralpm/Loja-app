@@ -209,6 +209,18 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
     }
 
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
+        if (menuItem.getItemId() == R.id.carinho_cliente) {
+            startActivity(intent);
+        } else {
+            startActivity(intent2);
+        }
+
+        return true;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 

@@ -3,16 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item
-            android:id="@+id/carinho"
-            android:icon="@drawable/carrinho_menu"
+            android:id="@+id/carinho_cliente"
             android:title="Carinho"
             app:showAsAction="never" />
 
         <item
-            android:id="@+id/qr_code"
-            android:icon="@drawable/qr_code_menu"
+            android:id="@+id/qr_code_cliete"
             android:title="QR Code"
             app:showAsAction="never" />
-
-
 </menu>

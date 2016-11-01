@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -102,17 +103,37 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
+        if (menuItem.getItemId() == R.id.menu_carinho) {
+            startActivity(intent);
+        } else {
+            startActivity(intent2);
+        }
+
+        return true;
+    }
+
     public List<Singleton_Car> todos_os_produtos() {
         List<Singleton_Car> singleton_cars = new ArrayList<>();
 
 //        //Travando
-        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Bermuda_1", "Bermuda muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.animalpicturepandabearucumari, "Bermuda_2", "Bermuda muito massa", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.felipemassapilotof1, "Camisa_1", "Camisa social muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Camisa_2", "Camisa social muito massa", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.animalpicturepandabearucumari, "Camisa_3", "Camisa social muito irada", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.felipemassapilotof1, "Camisa_Regata_1", "Camisa regata muito legal", "essa ai"));
-        singleton_cars.add(new Singleton_Car(R.drawable.pandalambendo, "Camisa_Regata_2", "Camisa regata muito massa", "essa ai"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+
 
 //        ok
 //        singleton_cars.add(new Singleton_Car(R.mipmap.ic_launcher, "Bermuda_1", "Bermuda muito legal", "essa ai"));

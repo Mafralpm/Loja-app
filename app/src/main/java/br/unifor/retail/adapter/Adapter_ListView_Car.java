@@ -16,9 +16,7 @@ import br.unifor.retail.R;
 import br.unifor.retail.singleton.Singleton_Car;
 import br.unifor.retail.singleton.Singleton_My_Product;
 
-/**
- * Created by mafra on 19/10/16.
- */
+
 
 public class Adapter_ListView_Car extends BaseAdapter {
     private List<Singleton_Car> singleton_cars;
@@ -68,7 +66,6 @@ public class Adapter_ListView_Car extends BaseAdapter {
             decricao.setText(singleton_car.getDecricao());
             cor.setText(singleton_car.getCor());
             imageProduct.setImageResource(singleton_car.getImageProduct());
-            imageDelete.setImageResource(R.mipmap.ic_launcher);
         }
         return convertView;
     }
