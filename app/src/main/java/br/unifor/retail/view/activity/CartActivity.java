@@ -31,6 +31,7 @@ import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.Adapter_ListView_Car;
+import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.Singleton_Car;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
@@ -45,6 +46,7 @@ public class CartActivity extends AppCompatActivity {
     private String name;
     private String grafiUrl;
     private String profileImgUrl;
+    NavegationDrawer navegationDrawer;
 
 
     @Override
@@ -67,15 +69,15 @@ public class CartActivity extends AppCompatActivity {
 
         Profile profile = Profile.getCurrentProfile();
         if (getCurrentAccessToken() != null) {
-            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+            Log.d("Teste", getCurrentAccessToken().getUserId().toString());
 
 
-            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
+            userId = getCurrentAccessToken().getUserId().toString();
             profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
+            grafiUrl = "https://graph.facebook.com/me?access_token=" + getCurrentAccessToken().getToken();
             name = profile.getName();
             //   email =
-            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+            GraphRequest request = GraphRequest.newMeRequest(getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject object, GraphResponse response) {
@@ -94,6 +96,9 @@ public class CartActivity extends AppCompatActivity {
 
 
         }
+//        navegationDrawer = new NavegationDrawer(toolbar, this);
+//        navegationDrawer.getProfile();
+//        navegationDrawer.createNavigationDrawer();
         createNavigationDrawer();
     }
 

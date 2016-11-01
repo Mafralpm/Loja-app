@@ -37,11 +37,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import br.unifor.retail.R;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.response.ResponseProduct;
+import br.unifor.retail.view.activity.common.BaseActivity;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
 @EActivity(R.layout.activity_product)
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends BaseActivity {
 
     @RestService
     protected ProductService productService;
@@ -93,6 +94,7 @@ public class ProductActivity extends AppCompatActivity {
                 if (!contents.isEmpty()) {
                     Log.d("sc", contents);
                     idDoQRCOde = Long.parseLong(contents);
+                    showProgressDialogCancel("Buscando os dados", null);
                     busca(idDoQRCOde);
                 }
             }
