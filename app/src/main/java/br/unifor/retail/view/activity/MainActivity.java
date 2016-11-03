@@ -9,46 +9,29 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.Adapter_ListView_Main;
-import br.unifor.retail.adapter.Adapter_ListView_My_Product;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.Singleton_Main;
-import br.unifor.retail.singleton.Singleton_My_Product;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
 import static android.R.attr.format;
-import static com.facebook.AccessToken.getCurrentAccessToken;
 
 
 @EActivity(R.layout.activity_main)
@@ -85,9 +68,14 @@ public class MainActivity extends BaseActivity {
 
         listView.setAdapter(adapter);
 
-        navegationDrawer = new NavegationDrawer(toolbar, this);
-        navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
+                navegationDrawer.getProfile();
+                navegationDrawer.createNavigationDrawer();
+            }
+        });
     }
 
     @Click
