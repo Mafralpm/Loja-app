@@ -49,16 +49,16 @@ public class ProductActivity extends BaseActivity {
     protected ProductService productService;
 
     @ViewById
-    protected TextView nome_produto;
-
+    protected TextView descrica_ActivityProducty;
+//
     @ViewById
-    protected TextView valor_preco_produto;
-
-    @ViewById
-    protected TextView valor_tamanho_produto;
-
-    @ViewById
-    protected TextView valor_cor_produto;
+    protected TextView preco_ActivityProduct;
+//
+//    @ViewById
+//    protected TextView valor_tamanho_produto;
+//
+//    @ViewById
+//    protected TextView valor_cor_produto;
 
     protected ResponseProduct responseProduct;
     protected Intent intent;
@@ -69,7 +69,6 @@ public class ProductActivity extends BaseActivity {
     NavegationDrawer navegationDrawer;
 
 
-
     @AfterViews
     public void begin() {
 
@@ -77,7 +76,6 @@ public class ProductActivity extends BaseActivity {
         toolbar.setTitle("Produtos");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
-        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
@@ -115,17 +113,16 @@ public class ProductActivity extends BaseActivity {
     }
 
 
-
     @UiThread
     public void mostrarActivity(ResponseProduct responseProduct) {
-        try{
+        try {
 
-            nome_produto.setText(responseProduct.getNome().toString());
-            valor_cor_produto.setText(responseProduct.getCor().toString());
-            valor_preco_produto.setText(responseProduct.getPreco().toString());
-            valor_tamanho_produto.setText(responseProduct.getTamanho().toString());
+            descrica_ActivityProducty.setText(responseProduct.getNome().toString());
+//            valor_cor_produto.setText(responseProduct.getCor().toString());
+            preco_ActivityProduct.setText(responseProduct.getPreco().toString());
+//            valor_tamanho_produto.setText(responseProduct.getTamanho().toString());
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("Erro do caralho", e.toString());
 
         }
@@ -147,8 +144,5 @@ public class ProductActivity extends BaseActivity {
 
         return true;
     }
-
-
-
 
 }

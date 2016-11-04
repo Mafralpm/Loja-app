@@ -68,7 +68,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.unifor.retail.view.activity.ClientActivity" />
         </activity>
-        <activity android:name=".view.activity.My_ProductActivity">
+        <activity android:name=".view.activity.MyProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.unifor.retail.view.activity.ClientActivity" />

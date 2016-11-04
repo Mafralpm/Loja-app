@@ -36,7 +36,7 @@ import br.unifor.retail.singleton.Singleton_My_Product;
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
 
-public class My_ProductActivity extends AppCompatActivity {
+public class MyProductActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;

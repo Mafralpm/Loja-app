@@ -28,108 +28,111 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@string/image_info_produto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@color/colorPrimaryDark" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView_ActivityProducty"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/semimagem" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/nome_produto"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
-                    android:gravity="center"
-                    android:text=""
-                    android:textSize="20dp"
+                    android:text="Produto"
+                    android:textColor="#000000"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/descrica_ActivityProducty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="Produto"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cor"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/cor_ActivityProduct"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:color/holo_red_dark"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
+                    android:text="Preço"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@string/preco_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Preço R$"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@string/tamanho_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Tamanho"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@string/cor_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Cores"
-                        android:textSize="15dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/preco_ActivityProduct"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="15dp"
+                    android:text="preco"
+                    android:textColor="#000000" />
 
-                    <TextView
-                        android:id="@+id/valor_preco_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tamanho"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/valor_tamanho_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                <ImageView
+                    android:id="@+id/tamanho_ActivityProduct"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:color/holo_red_dark"/>
 
-                    <TextView
-                        android:id="@+id/valor_cor_produto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
-
-                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colorAccent"
+        android:text="Adicionar ao carrinho" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
         android:orientation="vertical">
 
         <TextView
@@ -148,15 +151,6 @@
             android:layout_weight="3">
 
         </ListView>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@color/colorAccent"
-            android:text="Adicionar ao carrinho" />
     </LinearLayout>
 
 

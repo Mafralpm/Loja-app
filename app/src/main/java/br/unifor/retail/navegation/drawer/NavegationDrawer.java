@@ -2,7 +2,6 @@ package br.unifor.retail.navegation.drawer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,7 +27,8 @@ import br.unifor.retail.view.activity.CartActivity;
 import br.unifor.retail.view.activity.HistoryActivity;
 import br.unifor.retail.view.activity.InfoClientActivity;
 import br.unifor.retail.view.activity.LoginActivity;
-import br.unifor.retail.view.activity.My_ProductActivity;
+import br.unifor.retail.view.activity.MainActivity_;
+import br.unifor.retail.view.activity.MyProductActivity;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
@@ -46,6 +46,13 @@ public class NavegationDrawer {
     private String name;
     private String grafiUrl;
     private String profileImgUrl;
+
+//    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
+//        @Override
+//        public void onCheckedChanged(IDrawerItem iDrawerItem, CompoundButton compoundButton, boolean b) {
+//            Toast.makeText(activity, "onCheckedChanged: "+( b ? "true" : "false" ), Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
     public NavegationDrawer(Toolbar toolbar, Activity activity) {
         this.toolbar = toolbar;
@@ -75,40 +82,62 @@ public class NavegationDrawer {
                 .withSelectedItem(-2)
                 .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerNavigationLeft)
-                   /*.withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
-                       @Override
-                       public boolean onNavigationClickListener(View view) {
-                           return false;
-                       }
-                   })*/
+                .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+                    @Override
+                    public boolean onNavigationClickListener(View view) {
+                        return false;
+                    }
+                })
+
+
+//                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
+//                    @Override
+//                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
+//                        Toast.makeText(activity, "onItemLongClick: " + i, Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                })
+
+
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName("Inicio"),
+                        new PrimaryDrawerItem().withName("Perfil").withIcon(activity.getResources().getDrawable(R.drawable.perfil)),
+                        new PrimaryDrawerItem().withName("Carrinho").withIcon(activity.getResources().getDrawable(R.drawable.carrinho)),
+                        new PrimaryDrawerItem().withName("Meus pedidos").withIcon(activity.getResources().getDrawable(R.drawable.pedidos)),
+                        new PrimaryDrawerItem().withName("Historico de itens").withIcon(activity.getResources().getDrawable(R.drawable.visualizacao)),
+                        new PrimaryDrawerItem().withName("Sair").withIcon(activity.getResources().getDrawable(R.drawable.sair))
+                )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         switch (i) {
                             case 0:
-                                Intent intent = new Intent(activity, InfoClientActivity.class);
+                                Intent intent = new Intent(activity, MainActivity_.class);
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, CartActivity.class);
+                                Intent intent1 = new Intent(activity, InfoClientActivity.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
-                                Intent intent2 = new Intent(activity, My_ProductActivity.class);
+                                Intent intent2 = new Intent(activity, CartActivity.class);
                                 activity.startActivity(intent2);
                                 break;
                             case 3:
-                                Intent intent3 = new Intent(activity, HistoryActivity.class);
+                                Intent intent3 = new Intent(activity, MyProductActivity.class);
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
+                                Intent intent4 = new Intent(activity, HistoryActivity.class);
+                                activity.startActivity(intent4);
+                                break;
+                            case 5:
                                 LoginManager.getInstance().logOut();
                                 goLoginScreen();
                                 break;
 
 
                         }
-//                        Toast.makeText(CartActivity.this, "Item: " + i, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
@@ -120,12 +149,6 @@ public class NavegationDrawer {
                 })
                 .build();
 
-
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(activity.getResources().getDrawable(R.drawable.perfil)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Carrinho").withIcon(activity.getResources().getDrawable(R.drawable.carrinho)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Meus pedidos").withIcon(activity.getResources().getDrawable(R.drawable.pedidos)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Historico de itens").withIcon(activity.getResources().getDrawable(R.drawable.visualizacao)));
-        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Sair").withIcon(activity.getResources().getDrawable(R.drawable.sair)));
     }
 
     private void goLoginScreen() {
