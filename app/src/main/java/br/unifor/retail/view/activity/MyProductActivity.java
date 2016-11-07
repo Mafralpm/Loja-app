@@ -1,11 +1,14 @@
 package br.unifor.retail.view.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +56,7 @@ public class MyProductActivity extends AppCompatActivity {
 
         ArrayList<Singleton_My_Product> singleton_my_products = todos_Os_Produtos();
 
-        Adapter_ListView_My_Product adapter = new Adapter_ListView_My_Product(singleton_my_products, getApplicationContext());
+        Adapter_ListView_My_Product adapter = new Adapter_ListView_My_Product(singleton_my_products, getApplicationContext(),this);
 
         ListView listView;
         listView = (ListView) findViewById(R.id.myproduct);
@@ -109,6 +112,38 @@ public class MyProductActivity extends AppCompatActivity {
         return singleton_my_products;
     }
 
+
+    public void alert(View v){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_dialog_product, null);
+
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Login");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(getBaseContext(), "VRAAAAA ", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
 
 
 }

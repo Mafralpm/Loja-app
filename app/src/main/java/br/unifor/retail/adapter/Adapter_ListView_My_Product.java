@@ -2,9 +2,13 @@ package br.unifor.retail.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import br.unifor.retail.R;
 import br.unifor.retail.singleton.Singleton_My_Product;
@@ -30,11 +35,12 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
     private List<Singleton_My_Product> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
-    int teste;
+    Activity activity;
 
-    public Adapter_ListView_My_Product(List<Singleton_My_Product> singleton_my_productList, Context context) {
+    public Adapter_ListView_My_Product(List<Singleton_My_Product> singleton_my_productList, Context context, Activity activity) {
         this.singleton_my_productLists = singleton_my_productList;
         this.context = context;
+        this.activity = activity;
         inflater = LayoutInflater.from(context);
     }
 
@@ -62,23 +68,52 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
             convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
         }
 
-            TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
-            TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
-            TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+        TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
+        TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
+        TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
+        Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
 
-            loja.setText(singleton_my_product.getLoja());
-            produto.setText(singleton_my_product.getProduto());
-            data.setText(singleton_my_product.getData());
-            imageView.setImageResource(singleton_my_product.getImage());
+        loja.setText(singleton_my_product.getLoja());
+        produto.setText(singleton_my_product.getProduto());
+        data.setText(singleton_my_product.getData());
+        imageView.setImageResource(singleton_my_product.getImage());
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "Clique no botão: " + position, Toast.LENGTH_SHORT).show();
-                }
-            });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflate = inflater;
+                View alertLayout = inflate.inflate(R.layout.custom_dialog_product, null);
+
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+                alert.setTitle("Login");
+                // this is set the view from XML inside AlertDialog
+                alert.setView(alertLayout);
+                // disallow cancel of AlertDialog on click of back button and outside touch
+                alert.setCancelable(false);
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alert.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(context, "VRAAAAA ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
+            }
+        });
+
 
         return convertView;
     }

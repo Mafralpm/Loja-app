@@ -49,11 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.HistoryActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.unifor.retail.view.activity.ClientActivity" />
-        </activity>
+        <activity android:name=".view.activity.HistoryActivity"></activity>
         <activity
             android:name=".view.activity.CartActivity"
             android:label="Carrinho">
@@ -62,17 +58,13 @@
                 android:value="br.unifor.retail.view.activity.MainActivity_" />
         </activity>
         <activity
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:name=".view.activity.InfoClientActivity"
             android:label="Editar seu Perfil">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.unifor.retail.view.activity.ClientActivity" />
         </activity>
         <activity android:name=".view.activity.MyProductActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.unifor.retail.view.activity.ClientActivity" />
         </activity>
+
     </application>
 
 </manifest>
