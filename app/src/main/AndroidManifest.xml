@@ -58,7 +58,6 @@
                 android:value="br.unifor.retail.view.activity.MainActivity_" />
         </activity>
         <activity
-            android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:name=".view.activity.InfoClientActivity"
             android:label="Editar seu Perfil">
         </activity>

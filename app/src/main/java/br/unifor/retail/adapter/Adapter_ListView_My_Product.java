@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
@@ -15,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +65,7 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
+        final Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
 
 
         if (convertView == null) {
@@ -84,32 +88,39 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 LayoutInflater inflate = inflater;
-                View alertLayout = inflate.inflate(R.layout.custom_dialog_product, null);
+                View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_product, null);
+                final RatingBar ratingbar = (RatingBar) alertDialogLayout.findViewById(R.id.ratingBar_Dialog_Product);
+                final EditText boxText = (EditText) alertDialogLayout.findViewById(R.id.boxText_Dialog_Product);
 
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-                alert.setTitle("Login");
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+                alertDialogBuilder.setTitle("Avaliçao " + singleton_my_product.getLoja());
                 // this is set the view from XML inside AlertDialog
-                alert.setView(alertLayout);
+                alertDialogBuilder.setView(alertDialogLayout);
+
                 // disallow cancel of AlertDialog on click of back button and outside touch
-                alert.setCancelable(false);
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Log.d("Valor AQUIII", Double.valueOf(ratingbar.getRating()).toString());
+                        Log.d("Valor AQUIII", boxText.toString());
                         Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
+//                        System.out.print(ratingbar.getRating());
                     }
                 });
 
-                alert.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(context, "VRAAAAA ", Toast.LENGTH_SHORT).show();
+                        Log.d("Valor AQUIII", Double.valueOf(ratingbar.getRating()).toString());
+                        Log.d("Valor AQUIII", boxText.getText().toString());
+                        Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
                     }
                 });
-                AlertDialog dialog = alert.create();
+                AlertDialog dialog = alertDialogBuilder.create();
                 dialog.show();
             }
         });
