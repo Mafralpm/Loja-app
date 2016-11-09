@@ -6,24 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_Car;
-import br.unifor.retail.singleton.Singleton_My_Product;
+import br.unifor.retail.singleton.SingletonCar;
 
 
-
-public class Adapter_ListView_Car extends BaseAdapter {
-    private List<Singleton_Car> singleton_cars;
+public class AdapterListViewCar extends BaseAdapter {
+    private List<SingletonCar> singleton_cars;
     LayoutInflater inflater;
     Context context;
 
-    public Adapter_ListView_Car(List<Singleton_Car> singleton_cars, Context context) {
+    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context) {
         this.singleton_cars = singleton_cars;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -47,7 +44,7 @@ public class Adapter_ListView_Car extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Singleton_Car singleton_car = singleton_cars.get(position);
+        SingletonCar singleton_car = singleton_cars.get(position);
 
         Log.d("HUAGDUAGSUODYGSAUYOGDYUGSAUDGUAS", singleton_car.getFlag() + "");
 

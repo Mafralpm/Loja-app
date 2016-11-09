@@ -166,7 +166,9 @@ public class NavegationDrawer {
             userId = AccessToken.getCurrentAccessToken().getUserId().toString();
             profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
             grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
-            name = profile.getName();
+
+            if (profile != null)
+                name = profile.getName();
             //   email =
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {

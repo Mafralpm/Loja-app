@@ -4,12 +4,12 @@ package br.unifor.retail.singleton;
  * Created by mafra on 31/10/16.
  */
 
-public class Singleton_Main {
+public class SingletonMain {
     private int imagemEsquerda, imagemDireita;
     private String precoEsquerda, produtoEsquerda;
     private String precoDireita, produtoDireita;
 
-    public Singleton_Main(int imagemEsquerda, int imagemDireita, String precoEsquerda, String produtoEsquerda, String precoDireita, String produtoDireita) {
+    public SingletonMain(int imagemEsquerda, int imagemDireita, String precoEsquerda, String produtoEsquerda, String precoDireita, String produtoDireita) {
         this.imagemEsquerda = imagemEsquerda;
         this.imagemDireita = imagemDireita;
         this.precoEsquerda = precoEsquerda;

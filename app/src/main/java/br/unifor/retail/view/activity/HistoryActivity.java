@@ -4,37 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import br.unifor.retail.R;
-import br.unifor.retail.adapter.Adapter_ListView_History;
-import br.unifor.retail.adapter.Adapter_ListView_My_Product;
+import br.unifor.retail.adapter.AdapterListViewHistory;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
-import br.unifor.retail.singleton.Singleton_My_Product;
-
-import static com.facebook.AccessToken.getCurrentAccessToken;
+import br.unifor.retail.singleton.SingletonMyProduct;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -53,10 +32,10 @@ public class HistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayList<Singleton_My_Product> singleton_my_products;
+        ArrayList<SingletonMyProduct> singleton_my_products;
         singleton_my_products = todos_Os_Produtos();
 
-        Adapter_ListView_History adapter_listView_my_product = new Adapter_ListView_History(singleton_my_products, getApplicationContext());
+        AdapterListViewHistory adapter_listView_my_product = new AdapterListViewHistory(singleton_my_products, getApplicationContext());
 
         ListView listView = (ListView) findViewById(R.id.action_history_ListView);
         listView.setAdapter(adapter_listView_my_product);
@@ -73,25 +52,25 @@ public class HistoryActivity extends AppCompatActivity {
         return true;
     }
 
-    public ArrayList<Singleton_My_Product> todos_Os_Produtos() {
-        ArrayList<Singleton_My_Product> singleton_my_products = new ArrayList<>();
+    public ArrayList<SingletonMyProduct> todos_Os_Produtos() {
+        ArrayList<SingletonMyProduct> singleton_my_products = new ArrayList<>();
 
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
-        singleton_my_products.add(new Singleton_My_Product(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "10/04/2016"));
+        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "15/04/2016"));
 
         return singleton_my_products;
     }

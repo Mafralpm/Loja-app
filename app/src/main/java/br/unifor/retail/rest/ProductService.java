@@ -1,7 +1,11 @@
 package br.unifor.retail.rest;
 
-import org.androidannotations.annotations.rest.Get;
-import org.androidannotations.annotations.rest.Rest;
+
+import org.androidannotations.rest.spring.annotations.Get;
+import org.androidannotations.rest.spring.annotations.Header;
+import org.androidannotations.rest.spring.annotations.Headers;
+import org.androidannotations.rest.spring.annotations.Path;
+import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import br.unifor.retail.rest.response.ResponseProduct;
@@ -16,5 +20,9 @@ import br.unifor.retail.rest.response.ResponseProduct;
 public interface ProductService{
 
     @Get("/{idProduct}.json")
-    ResponseProduct searchProduct (Long idProduct);
+    //@RequiresHeader({("X-Admin-Email"),("X-Admin-Token")})
+    @Headers({
+            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
+            @Header(name = "X-Admin-Token", value = "-oWy-CtyS6socyY5tZgE")})
+    ResponseProduct searchProduct (@Path Long idProduct);
 }

@@ -23,9 +23,9 @@ import org.androidannotations.annotations.UiThread;
 import java.util.ArrayList;
 
 import br.unifor.retail.R;
-import br.unifor.retail.adapter.Adapter_ListView_Main;
+import br.unifor.retail.adapter.AdapterListViewMain;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
-import br.unifor.retail.singleton.Singleton_Main;
+import br.unifor.retail.singleton.SingletonMain;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
@@ -59,9 +59,9 @@ public class MainActivity extends BaseActivity {
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
 
-        ArrayList<Singleton_Main> singleton_mains = todos_Os_Produtos();
+        ArrayList<SingletonMain> singleton_mains = todos_Os_Produtos();
 
-        Adapter_ListView_Main adapter = new Adapter_ListView_Main(singleton_mains, getApplicationContext());
+        AdapterListViewMain adapter = new AdapterListViewMain(singleton_mains, getApplicationContext());
 
         ListView listView;
         listView = (ListView) findViewById(R.id.listVire_Main);
@@ -167,32 +167,32 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    public ArrayList<Singleton_Main> todos_Os_Produtos() {
-        ArrayList<Singleton_Main> singleton_mains = new ArrayList<>();
+    public ArrayList<SingletonMain> todos_Os_Produtos() {
+        ArrayList<SingletonMain> singleton_mains = new ArrayList<>();
 
 
 
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new Singleton_Main(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
 
 
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,19 +13,18 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_Main;
-import br.unifor.retail.singleton.Singleton_My_Product;
+import br.unifor.retail.singleton.SingletonMain;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
-public class Adapter_ListView_Main extends BaseAdapter {
-    private List<Singleton_Main> singleton_mainList;
+public class AdapterListViewMain extends BaseAdapter {
+    private List<SingletonMain> singleton_mainList;
     LayoutInflater inflater;
     Context context;
 
-    public Adapter_ListView_Main(List<Singleton_Main> singleton_mainList, Context context) {
+    public AdapterListViewMain(List<SingletonMain> singleton_mainList, Context context) {
         this.singleton_mainList = singleton_mainList;
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -49,7 +47,7 @@ public class Adapter_ListView_Main extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Singleton_Main singleton_main = singleton_mainList.get(position);
+        SingletonMain singleton_main = singleton_mainList.get(position);
 
 
         if (convertView == null) {
