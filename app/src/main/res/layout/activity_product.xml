@@ -37,7 +37,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -63,17 +64,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cor"
+                    android:text="Tamanho"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/cor_ActivityProduct"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="7dp"
+                <TextView
+                    android:id="@+id/tamanho_ActivityProduct"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@android:color/holo_red_dark"/>
+                    android:layout_marginTop="5dp"
+                    android:text="PP"
+                    android:textSize="13dp"
+                    android:textColor="#000000"/>
+
 
             </LinearLayout>
 
@@ -101,17 +104,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tamanho"
+                    android:text="Cor"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/tamanho_ActivityProduct"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="15dp"
+                    android:id="@+id/cor_ActivityProduct"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@android:color/holo_red_dark"/>
+                    android:layout_marginTop="5dp"
+                    android:src="@android:color/holo_red_dark" />
 
             </LinearLayout>
 
@@ -126,6 +128,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:elevation="5dp"
         android:background="@color/colorAccent"
         android:text="Adicionar ao carrinho" />
 
@@ -133,18 +136,19 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="Comentarios:"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
         <ListView
-            android:id="@string/list_review"
+            android:id="@+id/list_review"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"

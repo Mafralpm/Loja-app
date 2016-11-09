@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,10 +35,17 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.unifor.retail.R;
+import br.unifor.retail.adapter.Adapter_ListView_My_Product;
+import br.unifor.retail.adapter.Adapter_ListView_Product;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.response.ResponseProduct;
+import br.unifor.retail.singleton.Singleton_My_Product;
+import br.unifor.retail.singleton.Singleton_Product;
 import br.unifor.retail.view.activity.common.BaseActivity;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
@@ -48,17 +56,6 @@ public class ProductActivity extends BaseActivity {
     @RestService
     protected ProductService productService;
 
-    @ViewById
-    protected TextView descrica_ActivityProducty;
-//
-    @ViewById
-    protected TextView preco_ActivityProduct;
-//
-//    @ViewById
-//    protected TextView valor_tamanho_produto;
-//
-//    @ViewById
-//    protected TextView valor_cor_produto;
 
     protected ResponseProduct responseProduct;
     protected Intent intent;
@@ -67,7 +64,6 @@ public class ProductActivity extends BaseActivity {
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
-
 
     @AfterViews
     public void begin() {
@@ -98,6 +94,15 @@ public class ProductActivity extends BaseActivity {
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
+        ArrayList<Singleton_Product> singletonProductArrayList = todosComentarios();
+
+        Adapter_ListView_Product adapter = new Adapter_ListView_Product(singletonProductArrayList, getApplicationContext());
+
+        ListView listView;
+        listView = (ListView) findViewById(R.id.list_review);
+
+        listView.setAdapter(adapter);
+
 
     }
 
@@ -117,9 +122,9 @@ public class ProductActivity extends BaseActivity {
     public void mostrarActivity(ResponseProduct responseProduct) {
         try {
 
-            descrica_ActivityProducty.setText(responseProduct.getNome().toString());
+//            descrica_ActivityProducty.setText(responseProduct.getNome().toString());
 //            valor_cor_produto.setText(responseProduct.getCor().toString());
-            preco_ActivityProduct.setText(responseProduct.getPreco().toString());
+//            preco_ActivityProduct.setText(responseProduct.getPreco().toString());
 //            valor_tamanho_produto.setText(responseProduct.getTamanho().toString());
 
         } catch (Exception e) {
@@ -143,6 +148,19 @@ public class ProductActivity extends BaseActivity {
         }
 
         return true;
+    }
+
+    public ArrayList<Singleton_Product> todosComentarios() {
+        ArrayList<Singleton_Product> singletonProductArrayList = new ArrayList<>();
+
+        singletonProductArrayList.add(new Singleton_Product("Usuario 87", 3.5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+
+        for (int i = 0; i < 15; i++) {
+            singletonProductArrayList.add(new Singleton_Product("Usuario " + (i + 1), 5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+        }
+
+        return singletonProductArrayList;
+
     }
 
 }
