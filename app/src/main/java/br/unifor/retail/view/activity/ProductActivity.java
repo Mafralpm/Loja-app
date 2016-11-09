@@ -7,7 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.ImageView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,12 +23,17 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.unifor.retail.R;
+import br.unifor.retail.adapter.Adapter_ListView_Product;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.rest.response.ResponseProduct;
 import br.unifor.retail.rest.response.ResponseReview;
+import br.unifor.retail.singleton.Singleton_Product;
 import br.unifor.retail.view.activity.common.BaseActivity;
 
 
@@ -40,9 +49,12 @@ public class ProductActivity extends BaseActivity {
     @ViewById
     protected TextView produto_preco;
     @ViewById
+    protected TextView produto_tamanho;
+    @ViewById
     protected ImageView produto_foto;
     @ViewById
     protected ImageView produto_cor;
+
 
     protected ResponseProduct responseProduct;
     protected ResponseReview responseReview;
@@ -53,7 +65,6 @@ public class ProductActivity extends BaseActivity {
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
-
 
     @AfterViews
     public void begin() {
@@ -84,6 +95,15 @@ public class ProductActivity extends BaseActivity {
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
+        ArrayList<Singleton_Product> singletonProductArrayList = todosComentarios();
+
+        Adapter_ListView_Product adapter = new Adapter_ListView_Product(singletonProductArrayList, getApplicationContext());
+
+        ListView listView;
+        listView = (ListView) findViewById(R.id.list_review);
+
+        listView.setAdapter(adapter);
+
 
 
     }
@@ -111,11 +131,13 @@ public class ProductActivity extends BaseActivity {
 
             produto_nome.setText(responseProduct.getNome().toString());
             produto_preco.setText(responseProduct.getPreco().toString());
+            produto_tamanho.setText(responseProduct.getTamanho().toString().toUpperCase());
             int color = Color.parseColor(responseProduct.getCor());
             produto_cor.setColorFilter(color);
             String uri ="http://bluelab.herokuapp.com"+ responseProduct.getFoto().toString();
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
+
 
         } catch (Exception e) {
             Log.d("Erro do caralho", e.toString());
@@ -138,6 +160,19 @@ public class ProductActivity extends BaseActivity {
         }
 
         return true;
+    }
+
+    public ArrayList<Singleton_Product> todosComentarios() {
+        ArrayList<Singleton_Product> singletonProductArrayList = new ArrayList<>();
+
+        singletonProductArrayList.add(new Singleton_Product("Usuario 87", 3.5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+
+        for (int i = 0; i < 15; i++) {
+            singletonProductArrayList.add(new Singleton_Product("Usuario " + (i + 1), 5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+        }
+
+        return singletonProductArrayList;
+
     }
 
 }
