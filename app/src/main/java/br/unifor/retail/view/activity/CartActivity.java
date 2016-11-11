@@ -1,13 +1,11 @@
 package br.unifor.retail.view.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -27,7 +25,7 @@ import br.unifor.retail.singleton.SingletonCar;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 
-@OptionsMenu(R.menu.menu_geral)
+@OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
 public class CartActivity extends AppCompatActivity {
 
@@ -62,13 +60,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-    @OptionsItem(R.id.menu_carinho)
-    public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
-        startActivity(intent);
-    }
-
-    @OptionsItem(R.id.menu_qr_code)
+    @OptionsItem(R.id.carrinho_qr_code)
     public void qrCode() {
         if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED)) {
@@ -92,7 +84,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-
     public List<SingletonCar> todos_os_produtos() {
         List<SingletonCar> singleton_cars = new ArrayList<>();
 
@@ -113,8 +104,6 @@ public class CartActivity extends AppCompatActivity {
 
         return singleton_cars;
     }
-
-
 
 
 }
