@@ -4,7 +4,7 @@ package br.unifor.retail.model;
  * Created by vania on 10/10/16.
  */
 
-public class Product {
+public class Product { //nome como eu quiser
 
     private Long idProduct;
     private String descricaoProduct;

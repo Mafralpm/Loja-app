@@ -5,25 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_Product;
+import br.unifor.retail.singleton.SingletonProduct;
 
 /**
  * Created by mafra on 09/11/16.
  */
 
-public class Adapter_ListView_Product extends BaseAdapter{
-    List<Singleton_Product> singletonProductList;
+
+public class AdapterListViewProduct extends BaseAdapter{
+    List<SingletonProduct> singletonProductList;
     Context context;
     LayoutInflater layoutInflater;
 
-    public Adapter_ListView_Product(List<Singleton_Product> singletonProductList, Context context) {
+    public AdapterListViewProduct(List<SingletonProduct> singletonProductList, Context context) {
         this.singletonProductList = singletonProductList;
         this.context = context;
         layoutInflater = layoutInflater.from(context);
@@ -46,15 +46,15 @@ public class Adapter_ListView_Product extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Singleton_Product singletonProduct = singletonProductList.get(position);
+        SingletonProduct singletonProduct = singletonProductList.get(position);
 
         if (convertView == null){
             convertView = layoutInflater.inflate(R.layout.iten_listview_product, parent, false);
         }
 
-        TextView nomeUsuario = (TextView) convertView.findViewById(R.id.usuario_Comentario);
-        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar_Product);
-        TextView comentario = (TextView) convertView.findViewById(R.id.boxText_Comentario);
+        TextView nomeUsuario = (TextView) convertView.findViewById(R.id.adapter_review_usuario);
+        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.adapter_review_ratingBar);
+        TextView comentario = (TextView) convertView.findViewById(R.id.adapter_review_descricao);
 
         nomeUsuario.setText(singletonProduct.getNomeUsuario());
         ratingBar.setRating((float) singletonProduct.getNota());

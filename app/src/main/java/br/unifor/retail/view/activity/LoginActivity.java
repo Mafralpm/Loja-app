@@ -1,5 +1,6 @@
 package br.unifor.retail.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private ProgressDialog progressDialog;
+    private Bundle bundlex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (LoginButton) findViewById(R.id.loginButton);
 
         loginButton.setReadPermissions(Arrays.asList("email", "user_friends", "user_birthday"));
-//
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -52,9 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Erro", error.toString());
             }
         });
-
-
-
     }
 
     private void goMainScreen() {
