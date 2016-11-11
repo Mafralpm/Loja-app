@@ -52,6 +52,14 @@ public class MainActivity extends BaseActivity {
         }else{
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
+
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMain);
@@ -68,14 +76,14 @@ public class MainActivity extends BaseActivity {
 
         listView.setAdapter(adapter);
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
-                navegationDrawer.getProfile();
-                navegationDrawer.createNavigationDrawer();
-            }
-        });
+
+        navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
+        navegationDrawer.getProfile();
+        navegationDrawer.createNavigationDrawer();
+
+
+
+
     }
 
     @Click

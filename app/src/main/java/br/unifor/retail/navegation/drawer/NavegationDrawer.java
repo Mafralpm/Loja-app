@@ -176,11 +176,9 @@ public class NavegationDrawer {
                             Log.d("dqwdqqd", object.toString());
                             Log.d("dqwdqqd", grafiUrl);
 
-
                         }
 
                     });
-
             request.executeAsync();
 
             Log.d("xs", userId);
@@ -188,7 +186,6 @@ public class NavegationDrawer {
 
         }
     }
-
 
 }
 

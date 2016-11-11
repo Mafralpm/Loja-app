@@ -49,7 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.HistoryActivity"></activity>
+        <activity android:name=".view.activity.HistoryActivity" />
         <activity
             android:name=".view.activity.CartActivity"
             android:label="Carrinho">
@@ -59,11 +59,10 @@
         </activity>
         <activity
             android:name=".view.activity.InfoClientActivity"
-            android:label="Editar seu Perfil">
+            android:label="Editar seu Perfil"></activity>
+        <activity android:name=".view.activity.MyProductActivity"></activity>
+        <activity android:name=".view.activity.RegisterUser">
         </activity>
-        <activity android:name=".view.activity.MyProductActivity">
-        </activity>
-
     </application>
 
 </manifest>
