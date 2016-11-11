@@ -15,14 +15,12 @@ import br.unifor.retail.rest.response.ResponseProduct;
  */
 
 @Rest(rootUrl = "http://bluelab.heroku.com/produtos", converters = MappingJackson2HttpMessageConverter.class)
-//@Rest(rootUrl = "http://10.50.158.91:3000/produtos", converters = {FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
-
 public interface ProductService{
 
     @Get("/{idProduct}.json")
     //@RequiresHeader({("X-Admin-Email"),("X-Admin-Token")})
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "-oWy-CtyS6socyY5tZgE")})
-    ResponseProduct searchProduct (@Path Long idProduct);
+            @Header(name = "X-Admin-Token", value = "JwnBVn6fwMZmv7HPgs88")})
+    ResponseProduct searchProduct (@Path int idProduct);
 }

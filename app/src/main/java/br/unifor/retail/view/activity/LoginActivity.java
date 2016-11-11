@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -38,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (LoginButton) findViewById(R.id.loginButton);
 
         loginButton.setReadPermissions(Arrays.asList("email", "user_friends", "user_birthday"));
-//
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -57,9 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Erro", error.toString());
             }
         });
-
-
-
     }
 
     private void goMainScreen() {

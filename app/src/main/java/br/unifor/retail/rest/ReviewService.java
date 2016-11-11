@@ -13,13 +13,15 @@ import br.unifor.retail.rest.response.ResponseReview;
  * Created by vania on 27/10/16.
  */
 
-@Rest(rootUrl = "http://bluelab.heroku.com/reviews_produto/", converters = MappingJackson2HttpMessageConverter.class)
+@Rest(rootUrl = "http://bluelab.heroku.com/reviews_produto", converters = MappingJackson2HttpMessageConverter.class)
 public interface ReviewService {
 
     @Get("/{produto_id}.json")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "-oWy-CtyS6socyY5tZgE")})
-    ResponseReview searchProductReview(@Path Long produto_id);
+            @Header(name = "X-Admin-Token", value = "JwnBVn6fwMZmv7HPgs88")})
+    ResponseReview searchProductReview(@Path int produto_id);
 
 }
+
+

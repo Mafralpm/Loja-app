@@ -11,9 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -47,6 +47,7 @@ public class ProductActivity extends BaseActivity {
 
     @RestService
     protected ProductService productService;
+    @RestService
     protected ReviewService reviewService;
 
     @ViewById
@@ -59,6 +60,18 @@ public class ProductActivity extends BaseActivity {
     protected ImageView produto_foto;
     @ViewById
     protected ImageView produto_cor;
+    @ViewById
+    protected ListView produto_list_view;
+    @ViewById
+    protected RatingBar adapter_review_ratingBar;
+    @ViewById
+    protected TextView adapter_review_descricao;
+    @ViewById
+    protected TextView adapter_review_usuario;
+
+    private static final String KEY_DESCR = "review_descric";
+    private static final String KEY_NOTA = "nota";
+    private static final String KEY_CLLIENT = "cliente_id";
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
@@ -67,7 +80,7 @@ public class ProductActivity extends BaseActivity {
 
     protected Intent intent;
     protected String contents;
-    protected Long idDoQRCOde;
+    protected int idDoQRCOde;
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
@@ -90,7 +103,7 @@ public class ProductActivity extends BaseActivity {
             public void run() {
                 if (!contents.isEmpty()) {
                     Log.d("sc", contents);
-                    idDoQRCOde = Long.parseLong(contents);
+                    idDoQRCOde = Integer.parseInt(contents);
                     showProgressDialogCancel("Buscando os dados", null);
                     busca(idDoQRCOde);
                 }
@@ -106,7 +119,7 @@ public class ProductActivity extends BaseActivity {
         AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
 
         ListView listView;
-        listView = (ListView) findViewById(R.id.list_review);
+        listView = (ListView) findViewById(R.id.produto_list_view);
 
         listView.setAdapter(adapter);
 
@@ -114,14 +127,15 @@ public class ProductActivity extends BaseActivity {
     }
 
     @Background
-    public void busca(Long idQrCode) {
+    public void busca(int idQrCode) {
 
         try {
             responseProduct = productService.searchProduct(idQrCode);
-            //           responseReview = reviewService.searchProductReview(idQrCode);
+            //responseReview = reviewService.searchProductReview(idQrCode);
+            responseReview = reviewService.searchProductReview(idQrCode);
 //            mostrarActivity(responseProduct, responseReview);
             mostrarActivity(responseProduct);
-
+//
         } catch (Exception e) {
             Log.d("Puta que Pariu", e.toString());
         }
@@ -131,6 +145,7 @@ public class ProductActivity extends BaseActivity {
     @UiThread
     public void mostrarActivity(ResponseProduct responseProduct) {
         //public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
+
 
         try {
 

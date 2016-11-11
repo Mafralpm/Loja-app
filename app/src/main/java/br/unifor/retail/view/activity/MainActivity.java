@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     public void begin() {
+
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
             goLoginScreen();

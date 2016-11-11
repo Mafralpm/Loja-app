@@ -51,9 +51,9 @@ public class AdapterListViewProduct extends BaseAdapter{
             convertView = layoutInflater.inflate(R.layout.iten_listview_product, parent, false);
         }
 
-        TextView nomeUsuario = (TextView) convertView.findViewById(R.id.usuario_Comentario);
-        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar_Product);
-        TextView comentario = (TextView) convertView.findViewById(R.id.boxText_Comentario);
+        TextView nomeUsuario = (TextView) convertView.findViewById(R.id.adapter_review_usuario);
+        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.adapter_review_ratingBar);
+        TextView comentario = (TextView) convertView.findViewById(R.id.adapter_review_descricao);
 
         nomeUsuario.setText(singletonProduct.getNomeUsuario());
         ratingBar.setRating((float) singletonProduct.getNota());
