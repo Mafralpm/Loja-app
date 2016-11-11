@@ -5,27 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_My_Product;
+import br.unifor.retail.singleton.SingletonMyProduct;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
-public class Adapter_ListView_History extends BaseAdapter {
-    private List<Singleton_My_Product> singleton_my_productLists;
+public class AdapterListViewHistory extends BaseAdapter {
+    private List<SingletonMyProduct> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
     int teste;
 
-    public Adapter_ListView_History(List<Singleton_My_Product> singleton_my_productList, Context context) {
+    public AdapterListViewHistory(List<SingletonMyProduct> singleton_my_productList, Context context) {
         this.singleton_my_productLists = singleton_my_productList;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -48,7 +46,7 @@ public class Adapter_ListView_History extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
+        SingletonMyProduct singleton_my_product = singleton_my_productLists.get(position);
 
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.iten_listview_history, parent, false);

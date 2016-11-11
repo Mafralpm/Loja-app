@@ -20,17 +20,16 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_Car;
-import br.unifor.retail.singleton.Singleton_My_Product;
+import br.unifor.retail.singleton.SingletonCar;
 
 
-public class Adapter_ListView_Car extends BaseAdapter {
-    private List<Singleton_Car> singleton_cars;
+public class AdapterListViewCar extends BaseAdapter {
+    private List<SingletonCar> singleton_cars;
     LayoutInflater inflater;
     Context context;
     Activity activity;
 
-    public Adapter_ListView_Car(List<Singleton_Car> singleton_cars, Context context, Activity activity) {
+    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity) {
         this.singleton_cars = singleton_cars;
         this.context = context;
         this.activity = activity;
@@ -55,7 +54,7 @@ public class Adapter_ListView_Car extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        Singleton_Car singleton_car = singleton_cars.get(position);
+        SingletonCar singleton_car = singleton_cars.get(position);
 
 
         if (convertView == null) {
@@ -82,7 +81,7 @@ public class Adapter_ListView_Car extends BaseAdapter {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         singleton_cars.remove(position);
-                        Adapter_ListView_Car.this.notifyDataSetChanged();
+                        AdapterListViewCar.this.notifyDataSetChanged();
                     }
                 });
 

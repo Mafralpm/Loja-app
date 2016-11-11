@@ -9,13 +9,13 @@ import android.widget.TextView;
  * Created by mafra on 19/10/16.
  */
 
-public class Singleton_My_Product {
+public class SingletonMyProduct {
     private int image;
     private String loja, produto, data;
 
-    public Singleton_My_Product() {}
+    public SingletonMyProduct() {}
 
-    public Singleton_My_Product(int image, String loja, String produto, String data) {
+    public SingletonMyProduct(int image, String loja, String produto, String data) {
         this.image = image;
         this.loja = loja;
         this.produto = produto;

@@ -3,18 +3,11 @@ package br.unifor.retail.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.Image;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,25 +16,22 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.Singleton_My_Product;
-import br.unifor.retail.view.activity.LoginActivity;
+import br.unifor.retail.singleton.SingletonMyProduct;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
-public class Adapter_ListView_My_Product extends BaseAdapter {
-    private List<Singleton_My_Product> singleton_my_productLists;
+public class AdapterListViewMyProduct extends BaseAdapter {
+    private List<SingletonMyProduct> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
     Activity activity;
 
-    public Adapter_ListView_My_Product(List<Singleton_My_Product> singleton_my_productList, Context context, Activity activity) {
+    public AdapterListViewMyProduct(List<SingletonMyProduct> singleton_my_productList, Context context, Activity activity) {
         this.singleton_my_productLists = singleton_my_productList;
         this.context = context;
         this.activity = activity;
@@ -65,7 +55,7 @@ public class Adapter_ListView_My_Product extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final Singleton_My_Product singleton_my_product = singleton_my_productLists.get(position);
+        final SingletonMyProduct singleton_my_product = singleton_my_productLists.get(position);
 
 
         if (convertView == null) {

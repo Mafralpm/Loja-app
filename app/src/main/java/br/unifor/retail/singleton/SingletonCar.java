@@ -4,14 +4,14 @@ package br.unifor.retail.singleton;
  * Created by mafra on 19/10/16.
  */
 
-public class Singleton_Car {
+public class SingletonCar {
     private int imageProduct, flag;
     private String nome, decricao, cor;
 
-    public Singleton_Car() {
+    public SingletonCar() {
     }
 
-    public Singleton_Car(int image, String nome, String decricao, String cor) {
+    public SingletonCar(int image, String nome, String decricao, String cor) {
         this.imageProduct = image;
         this.nome = nome;
         this.decricao = decricao;
@@ -19,7 +19,7 @@ public class Singleton_Car {
         this.flag = 0;
     }
 
-    public Singleton_Car(int flag) {
+    public SingletonCar(int flag) {
         this.flag = flag;
     }
 

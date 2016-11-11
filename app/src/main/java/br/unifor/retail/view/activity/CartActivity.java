@@ -11,16 +11,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.adapter.Adapter_ListView_Car;
+import br.unifor.retail.adapter.AdapterListViewCar;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
-import br.unifor.retail.singleton.Singleton_Car;
+import br.unifor.retail.singleton.SingletonCar;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -39,10 +36,11 @@ public class CartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<Singleton_Car> singleton_cars;
+        List<SingletonCar> singleton_cars;
         singleton_cars = todos_os_produtos();
 
-        Adapter_ListView_Car adapter_listView_car = new Adapter_ListView_Car(singleton_cars, getApplicationContext(), this);
+        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
+
 
         ListView listView = (ListView) findViewById(R.id.car_activity_listView);
         listView.setAdapter(adapter_listView_car);
@@ -71,23 +69,23 @@ public class CartActivity extends AppCompatActivity {
         return true;
     }
 
-    public List<Singleton_Car> todos_os_produtos() {
-        List<Singleton_Car> singleton_cars = new ArrayList<>();
+    public List<SingletonCar> todos_os_produtos() {
+        List<SingletonCar> singleton_cars = new ArrayList<>();
 
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new Singleton_Car(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
 
         return singleton_cars;
     }

@@ -53,9 +53,9 @@ android {
 def Junit = '4.12'
 def AndroidSupportVersion = '24.2.1'
 def FaceboobAndroidSDK = '[4,5)'
-def AndroidAnnotationsVersion = '3.3.1'
+def AndroidAnnotationsVersion = '4.0.+'
 def ORMLiteVersion = '4.48'
-def SpringAndroidRestTemplateVersion = '1.0.1.RELEASE'
+def SpringAndroidRestTemplateVersion = '2.0.+'
 def ZxingOrient =  '2.1.1@aar'
 def JacksonDatabindVersion = '2.6.3'
 def GooglePlayServicesVersion = '8.4.0'
@@ -75,7 +75,7 @@ dependencies {
     compile "com.android.support:design:$AndroidSupportVersion"
 
     //facebook
-    compile "com.facebook.android:facebook-android-sdk:[4,5)"
+    compile "com.facebook.android:facebook-android-sdk:$FaceboobAndroidSDK"
 
     //Aannotations
     apt "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"
@@ -89,8 +89,10 @@ dependencies {
     compile "me.sudar:zxing-orient:$ZxingOrient"
 
     //pring + jackson rest
+    apt "org.androidannotations:rest-spring:4.0.0"
     compile "org.springframework.android:spring-android-rest-template:$SpringAndroidRestTemplateVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
+    compile "org.androidannotations:rest-spring-api:4.0.0"
 
     //google play services
     compile "com.google.android.gms:play-services-appindexing:$GooglePlayServicesVersion"
@@ -103,6 +105,9 @@ dependencies {
         transitive = true
     }
 
+    //image download and caching
     compile "com.squareup.picasso:picasso:$Picasso"
+
+
 
 }
