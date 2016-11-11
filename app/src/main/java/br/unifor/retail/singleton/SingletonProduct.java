@@ -4,16 +4,16 @@ package br.unifor.retail.singleton;
  * Created by mafra on 09/11/16.
  */
 
-public class Singleton_Product {
+public class SingletonProduct {
     private String nomeUsuario;
     private double nota;
     private String comentario;
 
-    public Singleton_Product() {
+    public SingletonProduct() {
     }
 
 
-    public Singleton_Product(String nomeUsuario, double nota, String comentario) {
+    public SingletonProduct(String nomeUsuario, double nota, String comentario) {
         this.nomeUsuario = nomeUsuario;
         this.nota = nota;
         this.comentario = comentario;

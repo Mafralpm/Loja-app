@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.ImageView;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,16 +22,15 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.adapter.Adapter_ListView_Product;
+import br.unifor.retail.adapter.AdapterListViewProduct;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.rest.response.ResponseProduct;
 import br.unifor.retail.rest.response.ResponseReview;
-import br.unifor.retail.singleton.Singleton_Product;
+import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 
 
@@ -95,9 +92,9 @@ public class ProductActivity extends BaseActivity {
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
-        ArrayList<Singleton_Product> singletonProductArrayList = todosComentarios();
+        ArrayList<SingletonProduct> singletonProductArrayList = todosComentarios();
 
-        Adapter_ListView_Product adapter = new Adapter_ListView_Product(singletonProductArrayList, getApplicationContext());
+        AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
 
         ListView listView;
         listView = (ListView) findViewById(R.id.list_review);
@@ -162,13 +159,13 @@ public class ProductActivity extends BaseActivity {
         return true;
     }
 
-    public ArrayList<Singleton_Product> todosComentarios() {
-        ArrayList<Singleton_Product> singletonProductArrayList = new ArrayList<>();
+    public ArrayList<SingletonProduct> todosComentarios() {
+        ArrayList<SingletonProduct> singletonProductArrayList = new ArrayList<>();
 
-        singletonProductArrayList.add(new Singleton_Product("Usuario 87", 3.5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+        singletonProductArrayList.add(new SingletonProduct("Usuario 87", 3.5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
 
         for (int i = 0; i < 15; i++) {
-            singletonProductArrayList.add(new Singleton_Product("Usuario " + (i + 1), 5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
+            singletonProductArrayList.add(new SingletonProduct("Usuario " + (i + 1), 5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
         }
 
         return singletonProductArrayList;
