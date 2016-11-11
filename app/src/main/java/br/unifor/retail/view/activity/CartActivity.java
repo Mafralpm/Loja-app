@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class CartActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    ImageView imageViewDelete;
 
 
     @Override
@@ -35,10 +39,12 @@ public class CartActivity extends AppCompatActivity {
         List<SingletonCar> singleton_cars;
         singleton_cars = todos_os_produtos();
 
-        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext());
+        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
+
 
         ListView listView = (ListView) findViewById(R.id.car_activity_listView);
         listView.setAdapter(adapter_listView_car);
+
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();

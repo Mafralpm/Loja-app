@@ -182,7 +182,7 @@ public class NavegationDrawer {
 
             if (profile != null)
                 name = profile.getName();
-            //   email =
+
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
@@ -195,9 +195,7 @@ public class NavegationDrawer {
                             Log.i("NOME", bFacebookData.getString("first_name"));
                             Log.i("EMAIL", bFacebookData.getString("email"));
 
-                            // = bFacebookData.getString("first_name").toString();
                             String emailaqui = bFacebookData.getString("email");
-
 
                         }
 
@@ -206,7 +204,6 @@ public class NavegationDrawer {
             parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
             request.setParameters(parameters);
             request.executeAsync();
-            //Log.d("wjvwdjkfkjdhlkdhbkjw", first_name);
 
         }
     }

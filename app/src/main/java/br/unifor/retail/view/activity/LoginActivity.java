@@ -1,11 +1,14 @@
 package br.unifor.retail.view.activity;
 
-import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -23,8 +26,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private ProgressDialog progressDialog;
-    private Bundle bundlex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,47 @@ public class LoginActivity extends AppCompatActivity {
 
     public void entrarMainActivity (View v){
         Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
+    public void esqueciSenha(View v){
+        LayoutInflater inflate = getLayoutInflater();
+        View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_esquecisenha, null);
+        final EditText esquecisenha = (EditText) alertDialogLayout.findViewById(R.id.boxText_Dialog_EsqueciSenha);
+
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Esqueci minha senha");
+        alertDialogBuilder.setMessage("Digite o endereço de email cadastrado: ");
+        // this is set the view from XML inside AlertDialog
+        alertDialogBuilder.setView(alertDialogLayout);
+
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(getApplicationContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+//                        System.out.print(ratingbar.getRating());
+            }
+        });
+
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(getApplicationContext(), "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
+
+    public void cadastrarUsuario (View v){
+        Intent intent = new Intent(this, RegisterUser.class);
         startActivity(intent);
     }
 

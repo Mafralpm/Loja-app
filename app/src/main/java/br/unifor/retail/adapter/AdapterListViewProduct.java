@@ -17,7 +17,6 @@ import br.unifor.retail.singleton.SingletonProduct;
  * Created by mafra on 09/11/16.
  */
 
-
 public class AdapterListViewProduct extends BaseAdapter{
     List<SingletonProduct> singletonProductList;
     Context context;
