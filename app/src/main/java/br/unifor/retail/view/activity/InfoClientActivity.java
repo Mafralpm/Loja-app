@@ -1,8 +1,12 @@
 package br.unifor.retail.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +36,11 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.OnCheckedChangeListener;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -40,9 +49,14 @@ import java.util.List;
 import br.unifor.retail.R;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.view.activity.dialog.DateDialog;
+import me.sudar.zxingorient.Barcode;
+import me.sudar.zxingorient.ZxingOrient;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
+
+@OptionsMenu(R.menu.menu_info_client)
+@EActivity(R.layout.activity_info_client)
 public class InfoClientActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText nome;
@@ -56,19 +70,12 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     NavegationDrawer navegationDrawer;
 
-    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(IDrawerItem iDrawerItem, CompoundButton compoundButton, boolean b) {
-            Toast.makeText(InfoClientActivity.this, "onCheckedChanged: " + (b ? "true" : "false"), Toast.LENGTH_SHORT).show();
-        }
-    };
-    private String email_id;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_client);
+
+    @AfterViews
+    public void begin() {
         toolbar = (Toolbar) findViewById(R.id.toolbarInfo_Client);
         toolbar.setTitle("Minhas informações");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -108,12 +115,34 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_info_client, menu);
-        return true;
+    @OptionsItem(R.id.carinho_cliente)
+    public void carrinho() {
+        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        startActivity(intent);
     }
 
+    @OptionsItem(R.id.qr_code_cliete)
+    public void qrCode() {
+        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            scanBarcode();
+        }
+    }
+
+    @UiThread
+    public void scanBarcode() {
+        ZxingOrient integrator = new ZxingOrient(this);
+        integrator
+                .setToolbarColor("#AA000000")
+                .showInfoBox(false)
+                .setBeep(false)
+                .setVibration(true)
+                .initiateScan(Barcode.QR_CODE);
+    }
 
     public void sexoSpinner() {
         spinnerSexo.setOnItemSelectedListener(this);
@@ -174,17 +203,6 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.carinho_cliente) {
-            startActivity(intent);
-        } else {
-            startActivity(intent2);
-        }
-
-        return true;
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -193,10 +211,6 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void alerteDialog() {
 
     }
 

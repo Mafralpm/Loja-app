@@ -45,11 +45,11 @@ public class MainActivity extends BaseActivity {
 
 
     @AfterViews
-    public void begin(){
+    public void begin() {
         handler = new Handler();
-        if (AccessToken.getCurrentAccessToken() == null){
+        if (AccessToken.getCurrentAccessToken() == null) {
             goLoginScreen();
-        }else{
+        } else {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
 
@@ -82,12 +82,10 @@ public class MainActivity extends BaseActivity {
         navegationDrawer.createNavigationDrawer();
 
 
-
-
     }
 
     @Click
-    public void scanQR(){
+    public void scanQR() {
         if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this,
@@ -160,12 +158,12 @@ public class MainActivity extends BaseActivity {
                 ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
         try {
             if (scanResult != null) {
-              //  String leitura = scanResult.getContents();
+                //  String leitura = scanResult.getContents();
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 Intent intentResult = new Intent(this, ProductActivity_.class);
                 intentResult
-                            .putExtra("contents", contents)
-                            .putExtra("format", format);
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
                 startActivity(intentResult);
             }
         } catch (RuntimeException e) {
@@ -179,7 +177,6 @@ public class MainActivity extends BaseActivity {
         ArrayList<SingletonMain> singleton_mains = new ArrayList<>();
 
 
-
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
@@ -201,10 +198,6 @@ public class MainActivity extends BaseActivity {
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
         singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-
-
-
-
 
 
         return singleton_mains;

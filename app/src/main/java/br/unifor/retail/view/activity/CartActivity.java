@@ -1,15 +1,21 @@
 package br.unifor.retail.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +24,22 @@ import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.SingletonCar;
+import me.sudar.zxingorient.Barcode;
+import me.sudar.zxingorient.ZxingOrient;
 
+@OptionsMenu(R.menu.menu_geral)
+@EActivity(R.layout.activity_cart)
 public class CartActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
     ImageView imageViewDelete;
 
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+
+    @AfterViews
+    public void begin() {
         toolbar = (Toolbar) findViewById(R.id.toolbarCart);
         toolbar.setTitle("Carrinho");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -51,23 +61,37 @@ public class CartActivity extends AppCompatActivity {
         navegationDrawer.createNavigationDrawer();
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_geral, menu);
-        return true;
 
+    @OptionsItem(R.id.menu_carinho)
+    public void carrinho() {
+        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        startActivity(intent);
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.menu_carinho) {
-            startActivity(intent);
+    @OptionsItem(R.id.menu_qr_code)
+    public void qrCode() {
+        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
-            startActivity(intent2);
+            scanBarcode();
         }
-
-        return true;
     }
+
+    @UiThread
+    public void scanBarcode() {
+        ZxingOrient integrator = new ZxingOrient(this);
+        integrator
+                .setToolbarColor("#AA000000")
+                .showInfoBox(false)
+                .setBeep(false)
+                .setVibration(true)
+                .initiateScan(Barcode.QR_CODE);
+    }
+
+
 
     public List<SingletonCar> todos_os_produtos() {
         List<SingletonCar> singleton_cars = new ArrayList<>();
@@ -89,5 +113,8 @@ public class CartActivity extends AppCompatActivity {
 
         return singleton_cars;
     }
+
+
+
 
 }

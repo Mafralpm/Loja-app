@@ -1,8 +1,12 @@
 package br.unifor.retail.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +21,8 @@ import com.squareup.picasso.Picasso;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -32,8 +38,10 @@ import br.unifor.retail.rest.response.ResponseProduct;
 import br.unifor.retail.rest.response.ResponseReview;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
+import me.sudar.zxingorient.Barcode;
+import me.sudar.zxingorient.ZxingOrient;
 
-
+@OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_product)
 public class ProductActivity extends BaseActivity {
 
@@ -52,6 +60,7 @@ public class ProductActivity extends BaseActivity {
     @ViewById
     protected ImageView produto_cor;
 
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected ResponseProduct responseProduct;
     protected ResponseReview responseReview;
@@ -102,7 +111,6 @@ public class ProductActivity extends BaseActivity {
         listView.setAdapter(adapter);
 
 
-
     }
 
     @Background
@@ -110,7 +118,7 @@ public class ProductActivity extends BaseActivity {
 
         try {
             responseProduct = productService.searchProduct(idQrCode);
- //           responseReview = reviewService.searchProductReview(idQrCode);
+            //           responseReview = reviewService.searchProductReview(idQrCode);
 //            mostrarActivity(responseProduct, responseReview);
             mostrarActivity(responseProduct);
 
@@ -122,7 +130,7 @@ public class ProductActivity extends BaseActivity {
 
     @UiThread
     public void mostrarActivity(ResponseProduct responseProduct) {
-    //public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
+        //public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
 
         try {
 
@@ -131,7 +139,7 @@ public class ProductActivity extends BaseActivity {
             produto_tamanho.setText(responseProduct.getTamanho().toString().toUpperCase());
             int color = Color.parseColor(responseProduct.getCor());
             produto_cor.setColorFilter(color);
-            String uri ="http://bluelab.herokuapp.com"+ responseProduct.getFoto().toString();
+            String uri = "http://bluelab.herokuapp.com" + responseProduct.getFoto().toString();
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
@@ -142,21 +150,33 @@ public class ProductActivity extends BaseActivity {
         }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_geral, menu);
-        return true;
+    @OptionsItem(R.id.menu_carinho)
+    public void carrinho() {
+        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        startActivity(intent);
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.menu_carinho) {
-            startActivity(intent);
+    @OptionsItem(R.id.menu_qr_code)
+    public void qrCode() {
+        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
-            startActivity(intent2);
+            scanBarcode();
         }
+    }
 
-        return true;
+    @UiThread
+    public void scanBarcode() {
+        ZxingOrient integrator = new ZxingOrient(this);
+        integrator
+                .setToolbarColor("#AA000000")
+                .showInfoBox(false)
+                .setBeep(false)
+                .setVibration(true)
+                .initiateScan(Barcode.QR_CODE);
     }
 
     public ArrayList<SingletonProduct> todosComentarios() {

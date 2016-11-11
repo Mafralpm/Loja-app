@@ -23,12 +23,13 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import org.json.JSONObject;
 
 import br.unifor.retail.R;
-import br.unifor.retail.view.activity.CartActivity;
-import br.unifor.retail.view.activity.HistoryActivity;
-import br.unifor.retail.view.activity.InfoClientActivity;
+import br.unifor.retail.view.activity.CartActivity_;
+import br.unifor.retail.view.activity.HistoryActivity_;
+import br.unifor.retail.view.activity.InfoClientActivity_;
 import br.unifor.retail.view.activity.LoginActivity;
 import br.unifor.retail.view.activity.MainActivity_;
 import br.unifor.retail.view.activity.MyProductActivity;
+import br.unifor.retail.view.activity.MyProductActivity_;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
@@ -116,19 +117,19 @@ public class NavegationDrawer {
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, InfoClientActivity.class);
+                                Intent intent1 = new Intent(activity, InfoClientActivity_.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
-                                Intent intent2 = new Intent(activity, CartActivity.class);
+                                Intent intent2 = new Intent(activity, CartActivity_.class);
                                 activity.startActivity(intent2);
                                 break;
                             case 3:
-                                Intent intent3 = new Intent(activity, MyProductActivity.class);
+                                Intent intent3 = new Intent(activity, MyProductActivity_.class);
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
-                                Intent intent4 = new Intent(activity, HistoryActivity.class);
+                                Intent intent4 = new Intent(activity, HistoryActivity_.class);
                                 activity.startActivity(intent4);
                                 break;
                             case 5:
