@@ -88,6 +88,11 @@ public class HistoryActivity extends AppCompatActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
     public ArrayList<SingletonMyProduct> todos_Os_Produtos() {
         ArrayList<SingletonMyProduct> singleton_my_products = new ArrayList<>();
 

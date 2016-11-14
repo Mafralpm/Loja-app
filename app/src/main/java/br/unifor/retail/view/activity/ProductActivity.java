@@ -194,6 +194,11 @@ public class ProductActivity extends BaseActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
     public ArrayList<SingletonProduct> todosComentarios() {
         ArrayList<SingletonProduct> singletonProductArrayList = new ArrayList<>();
 

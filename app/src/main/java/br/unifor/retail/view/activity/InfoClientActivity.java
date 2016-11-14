@@ -203,6 +203,11 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

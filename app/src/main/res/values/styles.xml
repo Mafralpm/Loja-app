@@ -15,6 +15,7 @@
              colorControlHighlight, and colorSwitchThumbNormal. -->
 
         <item name="colorControlNormal">@android:color/white</item>
+
     </style>
 
     <style name="Theme.MyTheme.Login"  parent="Widget.AppCompat.AutoCompleteTextView">
@@ -30,8 +31,4 @@
     <style name="RatingBarTheme_MyTheme_Product" parent="android:Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/theme_mytheme_ratingbar_full_holo_light</item>
     </style>
-
-
-
-
 </resources>

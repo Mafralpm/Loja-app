@@ -1,6 +1,7 @@
 package br.unifor.retail.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -81,6 +82,11 @@ public class CartActivity extends AppCompatActivity {
                 .setBeep(false)
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
     }
 
 

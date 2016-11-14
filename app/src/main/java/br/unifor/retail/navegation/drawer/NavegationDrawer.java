@@ -241,9 +241,8 @@ public class NavegationDrawer {
                 bundle.putString("location", object.getJSONObject("location").getString("name"));
 
             return bundle;
-        }
-        catch(JSONException e) {
-            Log.d("xxxx","Error parsing JSON");
+        } catch (JSONException e) {
+            Log.d("xxxx", "Error parsing JSON");
         }
         return bundlex;
     }
