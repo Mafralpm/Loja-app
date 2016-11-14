@@ -43,26 +43,13 @@ import br.unifor.retail.view.activity.dialog.DateDialog;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
-public class RegisterUser extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RegisterUser extends AppCompatActivity {
 
     EditText nome;
     EditText email;
     EditText txtDate;
-    Spinner spinnerSexo;
-    Spinner spinnerTamanhoBlusa;
-    Spinner spinnerTamanhoCalça;
-    Spinner spinnerTamanhoCalçado;
+
     private Toolbar toolbar;
-
-    NavegationDrawer navegationDrawer;
-
-    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(IDrawerItem iDrawerItem, CompoundButton compoundButton, boolean b) {
-            Toast.makeText(RegisterUser.this, "onCheckedChanged: " + (b ? "true" : "false"), Toast.LENGTH_SHORT).show();
-        }
-    };
-    private String email_id;
 
 
     @Override
@@ -73,127 +60,7 @@ public class RegisterUser extends AppCompatActivity implements AdapterView.OnIte
         toolbar.setTitle("Cadastro");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled();
 
-        spinnerSexo = (Spinner) findViewById(R.id.sexoSpinner);
-        sexoSpinner();
-
-        spinnerTamanhoBlusa = (Spinner) findViewById(R.id.tamanhoBlusaSpinner);
-        tamanhoBlusaSpinner();
-
-        spinnerTamanhoCalça = (Spinner) findViewById(R.id.tamanhoCalçaSpinner);
-        tamanhoCalçaSpinner();
-
-        spinnerTamanhoCalçado = (Spinner) findViewById(R.id.tamanhoCalçadoSpinner);
-        tamanhoCalçadoSpinner();
-
-    }
-
-    public void onStart() {
-        super.onStart();
-        txtDate = (EditText) findViewById(R.id.textDate);
-        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft, "DatePicker");
-                }
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_info_client, menu);
-        return true;
-    }
-
-
-    public void sexoSpinner() {
-        spinnerSexo.setOnItemSelectedListener(this);
-
-        List<String> sexos = new ArrayList<>();
-        sexos.add("Masculino");
-        sexos.add("Femenino");
-
-        ArrayAdapter<String> adapterSexos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexos);
-        adapterSexos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSexo.setAdapter(adapterSexos);
-    }
-
-    public void tamanhoBlusaSpinner() {
-        spinnerTamanhoBlusa.setOnItemSelectedListener(this);
-
-        List<String> tamanhdoBlusas = new ArrayList<String>();
-        tamanhdoBlusas.add(" ");
-        tamanhdoBlusas.add("GG");
-        tamanhdoBlusas.add("G");
-        tamanhdoBlusas.add("M");
-        tamanhdoBlusas.add("P");
-        tamanhdoBlusas.add("PP");
-
-        ArrayAdapter<String> adapterTamanhoBlusa = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoBlusas);
-        adapterTamanhoBlusa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoBlusa.setAdapter(adapterTamanhoBlusa);
-    }
-
-    public void tamanhoCalçaSpinner() {
-        spinnerTamanhoCalça.setOnItemSelectedListener(this);
-
-        List<String> tamanhdoCalças = new ArrayList<String>();
-        tamanhdoCalças.add(" ");
-        tamanhdoCalças.add("GG");
-        tamanhdoCalças.add("G");
-        tamanhdoCalças.add("M");
-        tamanhdoCalças.add("P");
-        tamanhdoCalças.add("PP");
-
-        ArrayAdapter<String> adapterTamanhoCalça = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoCalças);
-        adapterTamanhoCalça.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoCalça.setAdapter(adapterTamanhoCalça);
-    }
-
-    public void tamanhoCalçadoSpinner() {
-        spinnerTamanhoCalçado.setOnItemSelectedListener(this);
-
-        List<String> tamanhdoCalçados = new ArrayList<String>();
-        tamanhdoCalçados.add(" ");
-        for (int i = 30; i < 49; i += 2) {
-            tamanhdoCalçados.add("" + i);
-        }
-
-
-        ArrayAdapter<String> adapterTamanhoCalçado = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoCalçados);
-        adapterTamanhoCalçado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.carinho_cliente) {
-            startActivity(intent);
-        } else {
-            startActivity(intent2);
-        }
-
-        return true;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void alerteDialog() {
 
     }
 

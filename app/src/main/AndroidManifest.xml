@@ -31,7 +31,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activity.ProductActivity_"
             android:label="@string/title_activity_info_produto">
@@ -59,10 +60,12 @@
         </activity>
         <activity
             android:name=".view.activity.InfoClientActivity_"
-            android:label="Editar seu Perfil"></activity>
+            android:label="Editar seu Perfil"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".view.activity.MyProductActivity_"></activity>
-        <activity android:name=".view.activity.RegisterUser">
-        </activity>
+        <activity
+            android:name=".view.activity.RegisterUser"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

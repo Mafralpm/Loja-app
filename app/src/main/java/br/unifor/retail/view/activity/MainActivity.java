@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class MainActivity extends BaseActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    boolean doubleBackToExitPressedOnce = false;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
@@ -102,16 +105,10 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.menu_carinho) {
-            startActivity(intent);
-        } else {
-            startActivity(intent2);
-        }
-
-        return true;
+    @OptionsItem(R.id.menu_carinho)
+    public void carrinho() {
+        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        startActivity(intent);
     }
 
 
@@ -171,6 +168,25 @@ public class MainActivity extends BaseActivity {
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 

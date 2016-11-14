@@ -112,7 +112,6 @@ public class NavegationDrawer {
 
 
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Inicio"),
                         new PrimaryDrawerItem().withName("Perfil").withIcon(activity.getResources().getDrawable(R.drawable.perfil)),
                         new PrimaryDrawerItem().withName("Carrinho").withIcon(activity.getResources().getDrawable(R.drawable.carrinho)),
                         new PrimaryDrawerItem().withName("Meus pedidos").withIcon(activity.getResources().getDrawable(R.drawable.pedidos)),
@@ -124,26 +123,22 @@ public class NavegationDrawer {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         switch (i) {
                             case 0:
-                                Intent intent = new Intent(activity, MainActivity_.class);
+                                Intent intent = new Intent(activity, InfoClientActivity_.class);
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, InfoClientActivity_.class);
+                                Intent intent1 = new Intent(activity, CartActivity_.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
-                                Intent intent2 = new Intent(activity, CartActivity_.class);
+                                Intent intent2 = new Intent(activity, MyProductActivity_.class);
                                 activity.startActivity(intent2);
                                 break;
                             case 3:
-                                Intent intent3 = new Intent(activity, MyProductActivity_.class);
+                                Intent intent3 = new Intent(activity, HistoryActivity_.class);
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
-                                Intent intent4 = new Intent(activity, HistoryActivity_.class);
-                                activity.startActivity(intent4);
-                                break;
-                            case 5:
                                 LoginManager.getInstance().logOut();
                                 goLoginScreen();
                                 break;

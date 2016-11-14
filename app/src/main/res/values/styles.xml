@@ -14,7 +14,7 @@
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight, and colorSwitchThumbNormal. -->
 
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
 
     </style>
 
