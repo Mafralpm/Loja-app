@@ -66,24 +66,7 @@ public class MainActivity extends BaseActivity {
             });
         }
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarMain);
-        toolbar.setTitle("Retail");
-        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
-        setSupportActionBar(toolbar);
 
-        ArrayList<SingletonMain> singleton_mains = todos_Os_Produtos();
-
-        AdapterListViewMain adapter = new AdapterListViewMain(singleton_mains, getApplicationContext());
-
-        ListView listView;
-        listView = (ListView) findViewById(R.id.listVire_Main);
-
-        listView.setAdapter(adapter);
-
-
-        navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
-        navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
 
 
     }
@@ -131,7 +114,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void goLoginScreen() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

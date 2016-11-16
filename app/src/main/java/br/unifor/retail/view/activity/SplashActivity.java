@@ -25,7 +25,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
     @Override
     public void run() {
         if (AccessToken.getCurrentAccessToken() == null) {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity_.class));
         }else{
             startActivity(new Intent(this, MainActivity_.class));
         }

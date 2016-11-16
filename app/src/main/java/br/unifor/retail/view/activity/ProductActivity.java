@@ -131,10 +131,10 @@ public class ProductActivity extends BaseActivity {
 
         try {
             responseProduct = productService.searchProduct(idQrCode);
-            //responseReview = reviewService.searchProductReview(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
-//            mostrarActivity(responseProduct, responseReview);
-            mostrarActivity(responseProduct);
+            responseReview = reviewService.searchProductReview(idQrCode);
+           mostrarActivity(responseProduct, responseReview);
+//            mostrarActivity(responseProduct);
 //
         } catch (Exception e) {
             Log.d("Puta que Pariu", e.toString());
@@ -143,8 +143,8 @@ public class ProductActivity extends BaseActivity {
 
 
     @UiThread
-    public void mostrarActivity(ResponseProduct responseProduct) {
-        //public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
+    //public void mostrarActivity(ResponseProduct responseProduct) {
+        public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
 
 
         try {

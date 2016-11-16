@@ -17,20 +17,39 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import java.util.Arrays;
 
 import br.unifor.retail.R;
+import br.unifor.retail.rest.LoginService;
+import br.unifor.retail.rest.response.UserLogin;
 
+@EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
+
+
+    @RestService
+    LoginService loginService;
+
+    @ViewById(R.id.email)
+    EditText email;
+
+    @ViewById(R.id.password)
+    EditText password;
 
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    @AfterViews
+    protected void begin() {
+
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -70,7 +89,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void entrarMainActivity (View v){
+    @Background
+    @Click
+    public void email_sign_in_button (){
+
+
+
+        loginService.login(new UserLogin(email.getText().toString(),password.getText().toString()));
+        Log.i("email", email.getText().toString());
+        Log.i("password", password.getText().toString());
+
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }

@@ -32,9 +32,8 @@ import br.unifor.retail.view.activity.CartActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
 import br.unifor.retail.view.activity.LoginActivity;
-import br.unifor.retail.view.activity.MainActivity_;
-import br.unifor.retail.view.activity.MyProductActivity;
 import br.unifor.retail.view.activity.MyProductActivity_;
+
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
