@@ -9,8 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -28,14 +26,15 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewProduct;
+import br.unifor.retail.model.Review;
+import br.unifor.retail.model.response.ResponseProduct;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
-import br.unifor.retail.rest.response.ResponseProduct;
-import br.unifor.retail.rest.response.ResponseReview;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
@@ -66,17 +65,12 @@ public class ProductActivity extends BaseActivity {
     protected RatingBar adapter_review_ratingBar;
     @ViewById
     protected TextView adapter_review_descricao;
-    @ViewById
-    protected TextView adapter_review_usuario;
 
-    private static final String KEY_DESCR = "review_descric";
-    private static final String KEY_NOTA = "nota";
-    private static final String KEY_CLLIENT = "cliente_id";
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected ResponseProduct responseProduct;
-    protected ResponseReview responseReview;
+    protected Collection<Review>  responseReview;
 
     protected Intent intent;
     protected String contents;
@@ -84,6 +78,8 @@ public class ProductActivity extends BaseActivity {
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+
+    ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
 
     @AfterViews
     public void begin() {
@@ -114,16 +110,6 @@ public class ProductActivity extends BaseActivity {
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
-        ArrayList<SingletonProduct> singletonProductArrayList = todosComentarios();
-
-        AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
-
-        ListView listView;
-        listView = (ListView) findViewById(R.id.produto_list_view);
-
-        listView.setAdapter(adapter);
-
-
     }
 
     @Background
@@ -131,24 +117,20 @@ public class ProductActivity extends BaseActivity {
 
         try {
             responseProduct = productService.searchProduct(idQrCode);
-            //responseReview = reviewService.searchProductReview(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
-//            mostrarActivity(responseProduct, responseReview);
-            mostrarActivity(responseProduct);
-//
+
+            mostrarActivity(responseProduct, responseReview);
+
         } catch (Exception e) {
-            Log.d("Puta que Pariu", e.toString());
+            Log.d("Erro", e.toString());
         }
     }
 
 
     @UiThread
-    public void mostrarActivity(ResponseProduct responseProduct) {
-        //public void mostrarActivity(ResponseProduct responseProduct, ResponseReview responseReview) {
-
+    public void mostrarActivity(ResponseProduct responseProduct, Collection<Review> responseReview) {
 
         try {
-
             produto_nome.setText(responseProduct.getNome().toString());
             produto_preco.setText(responseProduct.getPreco().toString());
             produto_tamanho.setText(responseProduct.getTamanho().toString().toUpperCase());
@@ -157,6 +139,25 @@ public class ProductActivity extends BaseActivity {
             String uri = "http://bluelab.herokuapp.com" + responseProduct.getFoto().toString();
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
+
+
+            for (Review review : responseReview){
+
+                Log.d("sdvdvsd", review.getNota().toString());
+                Log.d("sdvdvsd", review.getReview_descric().toString());
+
+                Double nota = Double.valueOf(review.getNota());
+
+                singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
+
+            }
+
+            AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
+
+            ListView listView;
+            listView = (ListView) findViewById(R.id.produto_list_view);
+
+            listView.setAdapter(adapter);
 
 
         } catch (Exception e) {
@@ -192,19 +193,6 @@ public class ProductActivity extends BaseActivity {
                 .setBeep(false)
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
-    }
-
-    public ArrayList<SingletonProduct> todosComentarios() {
-        ArrayList<SingletonProduct> singletonProductArrayList = new ArrayList<>();
-
-        singletonProductArrayList.add(new SingletonProduct("Usuario 87", 3.5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
-
-        for (int i = 0; i < 15; i++) {
-            singletonProductArrayList.add(new SingletonProduct("Usuario " + (i + 1), 5, "jhdfldhfpiuhdspifuhidafiabsfipbpadisbf;dhfk;hadsflkhdskljfhlkdjshflkjdhsflkjhdskljfhdskljhflkdjshflkjdhsflkjhdlkhflkdshflkhdklfhdslkhfdskjhfhdgs,bc,bvzxmnbeuygroewgroyigeifgdlhjgfjhdgfljhgdslhfgldshg"));
-        }
-
-        return singletonProductArrayList;
-
     }
 
 }

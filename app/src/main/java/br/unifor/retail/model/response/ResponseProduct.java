@@ -1,4 +1,4 @@
-package br.unifor.retail.rest.response;
+package br.unifor.retail.model.response;
 
 /**
  * Created by vania on 24/10/16.

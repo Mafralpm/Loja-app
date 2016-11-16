@@ -1,10 +1,10 @@
-package br.unifor.retail.model;
+package br.unifor.retail.model.response;
 
 /**
- * Created by vania on 10/10/16.
+ * Created by vania on 27/10/16.
  */
 
-public class Client{
+public class ResponseClient{
 
     private Long id;
     private String foto;

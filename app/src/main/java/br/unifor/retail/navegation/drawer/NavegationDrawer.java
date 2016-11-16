@@ -28,13 +28,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
-import br.unifor.retail.view.activity.CartActivity_;
-import br.unifor.retail.view.activity.HistoryActivity_;
-import br.unifor.retail.view.activity.InfoClientActivity_;
+import br.unifor.retail.view.activity.CartActivity;
+import br.unifor.retail.view.activity.HistoryActivity;
+import br.unifor.retail.view.activity.InfoClientActivity;
 import br.unifor.retail.view.activity.LoginActivity;
-import br.unifor.retail.view.activity.MainActivity_;
+import br.unifor.retail.view.activity.MainActivity;
 import br.unifor.retail.view.activity.MyProductActivity;
-import br.unifor.retail.view.activity.MyProductActivity_;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
@@ -57,6 +56,7 @@ public class NavegationDrawer {
     private String first_name;
     private String last_name;
     private Bundle bFacebookData;
+    String emailaqui;
 
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
@@ -124,23 +124,23 @@ public class NavegationDrawer {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         switch (i) {
                             case 0:
-                                Intent intent = new Intent(activity, MainActivity_.class);
+                                Intent intent = new Intent(activity, MainActivity.class);
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, InfoClientActivity_.class);
+                                Intent intent1 = new Intent(activity, InfoClientActivity.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
-                                Intent intent2 = new Intent(activity, CartActivity_.class);
+                                Intent intent2 = new Intent(activity, CartActivity.class);
                                 activity.startActivity(intent2);
                                 break;
                             case 3:
-                                Intent intent3 = new Intent(activity, MyProductActivity_.class);
+                                Intent intent3 = new Intent(activity, MyProductActivity.class);
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
-                                Intent intent4 = new Intent(activity, HistoryActivity_.class);
+                                Intent intent4 = new Intent(activity, HistoryActivity.class);
                                 activity.startActivity(intent4);
                                 break;
                             case 5:
@@ -173,13 +173,13 @@ public class NavegationDrawer {
         Profile profile = Profile.getCurrentProfile();
         if (getCurrentAccessToken() != null) {
 
-            String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
-            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+            //String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
+            //Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
 
 
             userId = AccessToken.getCurrentAccessToken().getUserId().toString();
             profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
+          //  grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
 
             if (profile != null)
                 name = profile.getName();
@@ -196,7 +196,8 @@ public class NavegationDrawer {
                             Log.i("NOME", bFacebookData.getString("first_name"));
                             Log.i("EMAIL", bFacebookData.getString("email"));
 
-                            String emailaqui = bFacebookData.getString("email");
+                            emailaqui = bFacebookData.getString("email").toString();
+                            Log.i("email", emailaqui);
 
                         }
 
@@ -206,7 +207,9 @@ public class NavegationDrawer {
             request.setParameters(parameters);
             request.executeAsync();
 
+
         }
+
     }
 
 

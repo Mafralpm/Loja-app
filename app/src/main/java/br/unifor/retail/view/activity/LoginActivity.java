@@ -1,13 +1,14 @@
+
 package br.unifor.retail.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,24 +18,43 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import java.util.Arrays;
+import java.util.List;
 
 import br.unifor.retail.R;
+import br.unifor.retail.rest.ClientService;
+import br.unifor.retail.model.response.ResponseClient;
 
+
+@EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
 
+    @ViewById
+    protected LoginButton loginButton;
 
-    private LoginButton loginButton;
     private CallbackManager callbackManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    @ViewById
+    EditText login_password;
+    @ViewById
+    AutoCompleteTextView login_email;
+
+    @RestService
+    ClientService clientService;
+
+    List<ResponseClient> listaClients;
+
+    @AfterViews
+    protected void begin() {
 
         callbackManager = CallbackManager.Factory.create();
-
-        loginButton = (LoginButton) findViewById(R.id.loginButton);
 
         loginButton.setReadPermissions(Arrays.asList("email", "user_friends", "user_birthday"));
 
@@ -69,10 +89,10 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
     }
+    @Click
+    public void logar (View v){
+        buscarCliente();
 
-    public void entrarMainActivity (View v){
-        Intent intent = new Intent(this, MainActivity_.class);
-        startActivity(intent);
     }
 
     public void esqueciSenha(View v){
@@ -82,9 +102,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Esqueci minha senha");
-        alertDialogBuilder.setMessage("Digite o endereço de email cadastrado: ");
-        // this is set the view from XML inside AlertDialog
         alertDialogBuilder.setView(alertDialogLayout);
 
         // disallow cancel of AlertDialog on click of back button and outside touch
@@ -111,9 +128,42 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void cadastrarUsuario (View v){
-        Intent intent = new Intent(this, RegisterUser.class);
+    public void cadastrarUsuario (View v) {
+        Intent intent = new Intent(this, RegisterUser_.class);
         startActivity(intent);
     }
 
+    @Background
+    public void buscarCliente(){
+        listaClients = clientService.getClients();
+
+        String login = this.login_email.toString();
+        String senha = this.login_password.toString();
+
+        if(login.isEmpty() || senha.isEmpty()) {
+            Toast.makeText(this, "Campo nao preenchido", Toast.LENGTH_SHORT).show();
+        }else{
+            boolean check = false;
+
+//            for(ResponseClient client : listaClients){
+//                if(login == client.) {
+//                    check = true;
+//                    if (senha == client.getPassword()) {
+//                        Toast.makeText(this, "olá, " + client.getNomeClient(), Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(this, MainActivity_.class);
+//                        startActivity(intent);
+//                        break;
+//                    } else {
+//                        Toast.makeText(this, "Senha inválida !!!", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                }
+//            }
+
+            if (!check){
+                Toast.makeText(this, "Login Invalido !!!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
+

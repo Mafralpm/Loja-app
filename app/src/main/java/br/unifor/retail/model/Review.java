@@ -1,47 +1,59 @@
 package br.unifor.retail.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vania on 10/10/16.
  */
 
-public class Review {
+public class Review implements Serializable{
 
-    private Long idReviews;
-    private String descricaoReview;
-    private String notaReview;
-    private Long cliente_id;
+    private Long id;
+    private String review_descric;
+    private String nota;
+    public String created_at;
+    public String updated_at;
     private Long produto_id;
+    private Long cliente_id;
 
-    public Long getProduto_id() {
-        return produto_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setProduto_id(Long produto_id) {
-        this.produto_id = produto_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNotaReview() {
-        return notaReview;
+    public String getReview_descric() {
+        return review_descric;
     }
 
-    public void setNotaReview(String notaReview) {
-        this.notaReview = notaReview;
+    public void setReview_descric(String review_descric) {
+        this.review_descric = review_descric;
     }
 
-    public Long getIdReviews() {
-        return idReviews;
+    public String getNota() {
+        return nota;
     }
 
-    public void setIdReviews(Long idReviews) {
-        this.idReviews = idReviews;
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 
-    public String getDescricaoReview() {
-        return descricaoReview;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setDescricaoReview(String descricaoReview) {
-        this.descricaoReview = descricaoReview;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public Long getCliente_id() {
@@ -50,5 +62,13 @@ public class Review {
 
     public void setCliente_id(Long cliente_id) {
         this.cliente_id = cliente_id;
+    }
+
+    public Long getProduto_id() {
+        return produto_id;
+    }
+
+    public void setProduto_id(Long produto_id) {
+        this.produto_id = produto_id;
     }
 }

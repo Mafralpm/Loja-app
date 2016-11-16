@@ -30,7 +30,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".view.activity.LoginActivity"
+            android:name=".view.activity.LoginActivity_"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".view.activity.ProductActivity_"
@@ -61,7 +61,7 @@
             android:name=".view.activity.InfoClientActivity_"
             android:label="Editar seu Perfil"></activity>
         <activity android:name=".view.activity.MyProductActivity_"></activity>
-        <activity android:name=".view.activity.RegisterUser">
+        <activity android:name=".view.activity.RegisterUser_">
         </activity>
     </application>
 

@@ -5,26 +5,14 @@ package br.unifor.retail.singleton;
  */
 
 public class SingletonProduct {
-    private String nomeUsuario;
+
     private double nota;
     private String comentario;
 
-    public SingletonProduct() {
-    }
+    public SingletonProduct( double nota, String comentario) {
 
-
-    public SingletonProduct(String nomeUsuario, double nota, String comentario) {
-        this.nomeUsuario = nomeUsuario;
         this.nota = nota;
         this.comentario = comentario;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
     }
 
     public double getNota() {

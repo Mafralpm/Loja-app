@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
 
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
-            goLoginScreen();
+   //         goLoginScreen();
         } else {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
@@ -81,7 +81,6 @@ public class MainActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
-
 
     }
 
@@ -134,7 +133,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void goLoginScreen() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
