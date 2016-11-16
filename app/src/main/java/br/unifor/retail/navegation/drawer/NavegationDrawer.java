@@ -28,12 +28,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
-import br.unifor.retail.view.activity.CartActivity;
-import br.unifor.retail.view.activity.HistoryActivity;
-import br.unifor.retail.view.activity.InfoClientActivity;
-import br.unifor.retail.view.activity.LoginActivity;
-import br.unifor.retail.view.activity.MainActivity;
-import br.unifor.retail.view.activity.MyProductActivity;
+import br.unifor.retail.model.Usuario;
+import br.unifor.retail.view.activity.CartActivity_;
+import br.unifor.retail.view.activity.HistoryActivity_;
+import br.unifor.retail.view.activity.InfoClientActivity_;
+import br.unifor.retail.view.activity.LoginActivity_;
+import br.unifor.retail.view.activity.MyProductActivity_;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
@@ -56,7 +56,8 @@ public class NavegationDrawer {
     private String first_name;
     private String last_name;
     private Bundle bFacebookData;
-    String emailaqui;
+
+    Usuario usuario = new Usuario();
 
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
@@ -112,11 +113,10 @@ public class NavegationDrawer {
 
 
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Inicio"),
                         new PrimaryDrawerItem().withName("Perfil").withIcon(activity.getResources().getDrawable(R.drawable.perfil)),
                         new PrimaryDrawerItem().withName("Carrinho").withIcon(activity.getResources().getDrawable(R.drawable.carrinho)),
                         new PrimaryDrawerItem().withName("Meus pedidos").withIcon(activity.getResources().getDrawable(R.drawable.pedidos)),
-                        new PrimaryDrawerItem().withName("Historico de itens").withIcon(activity.getResources().getDrawable(R.drawable.visualizacao)),
+                        new PrimaryDrawerItem().withName("Histórico de itens visualizados").withIcon(activity.getResources().getDrawable(R.drawable.visualizacao)),
                         new PrimaryDrawerItem().withName("Sair").withIcon(activity.getResources().getDrawable(R.drawable.sair))
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -124,26 +124,22 @@ public class NavegationDrawer {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         switch (i) {
                             case 0:
-                                Intent intent = new Intent(activity, MainActivity.class);
+                                Intent intent = new Intent(activity, InfoClientActivity_.class);
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, InfoClientActivity.class);
+                                Intent intent1 = new Intent(activity, CartActivity_.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
-                                Intent intent2 = new Intent(activity, CartActivity.class);
+                                Intent intent2 = new Intent(activity, MyProductActivity_.class);
                                 activity.startActivity(intent2);
                                 break;
                             case 3:
-                                Intent intent3 = new Intent(activity, MyProductActivity.class);
+                                Intent intent3 = new Intent(activity, HistoryActivity_.class);
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
-                                Intent intent4 = new Intent(activity, HistoryActivity.class);
-                                activity.startActivity(intent4);
-                                break;
-                            case 5:
                                 LoginManager.getInstance().logOut();
                                 goLoginScreen();
                                 break;
@@ -164,7 +160,7 @@ public class NavegationDrawer {
     }
 
     private void goLoginScreen() {
-        Intent intent = new Intent(activity, LoginActivity.class);
+        Intent intent = new Intent(activity, LoginActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
@@ -173,13 +169,13 @@ public class NavegationDrawer {
         Profile profile = Profile.getCurrentProfile();
         if (getCurrentAccessToken() != null) {
 
-            //String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
-            //Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+            String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
+            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
 
 
             userId = AccessToken.getCurrentAccessToken().getUserId().toString();
             profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-          //  grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
+            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
 
             if (profile != null)
                 name = profile.getName();
@@ -196,8 +192,7 @@ public class NavegationDrawer {
                             Log.i("NOME", bFacebookData.getString("first_name"));
                             Log.i("EMAIL", bFacebookData.getString("email"));
 
-                            emailaqui = bFacebookData.getString("email").toString();
-                            Log.i("email", emailaqui);
+                            String emailaqui = bFacebookData.getString("email");
 
                         }
 
@@ -207,9 +202,10 @@ public class NavegationDrawer {
             request.setParameters(parameters);
             request.executeAsync();
 
-
+        } else{
+            name = usuario.getNome();
+            email = usuario.getEmail();
         }
-
     }
 
 
@@ -244,17 +240,10 @@ public class NavegationDrawer {
                 bundle.putString("location", object.getJSONObject("location").getString("name"));
 
             return bundle;
-        }
-        catch(JSONException e) {
-            Log.d("xxxx","Error parsing JSON");
+        } catch (JSONException e) {
+            Log.d("xxxx", "Error parsing JSON");
         }
         return bundlex;
     }
 }
-
-
-
-
-
-
 

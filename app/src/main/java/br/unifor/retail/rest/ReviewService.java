@@ -13,6 +13,7 @@ import java.util.Collection;
 
 import br.unifor.retail.model.Review;
 
+
 /**
  * Created by vania on 27/10/16.
  */
@@ -26,6 +27,7 @@ public interface ReviewService {
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
             @Header(name = "X-Admin-Token", value = "C5TqmVb2GdaQJsPgy3mR")})
     Collection<Review> searchProductReview(@Path int produto_id);
+
 
 }
 

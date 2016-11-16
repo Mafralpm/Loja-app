@@ -19,9 +19,11 @@
             android:numStars="5"
             android:scaleX="0.5"
             android:scaleY="0.5"
+
             android:layout_marginStart="56dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
+
 
     </RelativeLayout>
 

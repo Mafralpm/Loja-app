@@ -1,11 +1,13 @@
 package br.unifor.retail.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -20,6 +22,7 @@ import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
+import br.unifor.retail.model.Product;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.SingletonCar;
 import me.sudar.zxingorient.Barcode;
@@ -33,7 +36,14 @@ public class CartActivity extends AppCompatActivity {
     NavegationDrawer navegationDrawer;
     ImageView imageViewDelete;
 
+    Product product =  new Product();
+
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
+
+    protected Intent intent;
+    protected String contents;
+
+    ProductActivity productActivity = new ProductActivity();
 
 
     @AfterViews
@@ -54,9 +64,17 @@ public class CartActivity extends AppCompatActivity {
         listView.setAdapter(adapter_listView_car);
 
 
+        String contents = String.valueOf(productActivity.getProduct());
+        Log.d("sc", contents);
+
+
+
+
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
+
+
     }
 
 
@@ -83,24 +101,16 @@ public class CartActivity extends AppCompatActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
 
     public List<SingletonCar> todos_os_produtos() {
         List<SingletonCar> singleton_cars = new ArrayList<>();
 
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa1, "Camisa1", "Camisa social masculina", "verde"));
-        singleton_cars.add(new SingletonCar(R.drawable.camisa2, "Camisa2", "Camisa social femenina", "salmao"));
+        singleton_cars.add(new SingletonCar(R.drawable.camisa_preta, "Camisa Fem.", "Camisa femenina", "preta"));
 
         return singleton_cars;
     }

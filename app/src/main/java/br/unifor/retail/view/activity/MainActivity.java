@@ -10,14 +10,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    boolean doubleBackToExitPressedOnce = false;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
@@ -49,7 +51,6 @@ public class MainActivity extends BaseActivity {
 
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
-   //         goLoginScreen();
         } else {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
@@ -62,6 +63,7 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMain);
         toolbar.setTitle("Retail");
@@ -101,16 +103,10 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), MainActivity_.class);
-        if (menuItem.getItemId() == R.id.menu_carinho) {
-            startActivity(intent);
-        } else {
-            startActivity(intent2);
-        }
-
-        return true;
+    @OptionsItem(R.id.menu_carinho)
+    public void carrinho() {
+        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        startActivity(intent);
     }
 
 
@@ -172,32 +168,32 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
 
     public ArrayList<SingletonMain> todos_Os_Produtos() {
         ArrayList<SingletonMain> singleton_mains = new ArrayList<>();
 
 
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
-        singleton_mains.add(new SingletonMain(R.drawable.camisa1, R.drawable.camisa2, "R$ 20,00", "Camisa social Masc.", "R$ 1000,00", "Camisa social Feme."));
+        singleton_mains.add(new SingletonMain(R.drawable.imagem_blusa_laranja, R.drawable.imagem_blusa_star_wars, "R$ 200,00", "Camisa social Masc.", "R$ 337,99", "Camisa social Feme."));
+
 
 
         return singleton_mains;

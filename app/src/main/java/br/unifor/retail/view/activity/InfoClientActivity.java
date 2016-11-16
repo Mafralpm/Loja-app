@@ -2,46 +2,22 @@ package br.unifor.retail.view.activity;
 
 import android.Manifest;
 import android.content.Intent;
-
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.OnCheckedChangeListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +27,6 @@ import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.view.activity.dialog.DateDialog;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
-
-import static com.facebook.AccessToken.getCurrentAccessToken;
 
 
 @OptionsMenu(R.menu.menu_info_client)
@@ -148,8 +122,8 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerSexo.setOnItemSelectedListener(this);
 
         List<String> sexos = new ArrayList<>();
-        sexos.add("Masculino");
         sexos.add("Femenino");
+        sexos.add("Masculino");
 
         ArrayAdapter<String> adapterSexos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexos);
         adapterSexos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -160,7 +134,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoBlusa.setOnItemSelectedListener(this);
 
         List<String> tamanhdoBlusas = new ArrayList<String>();
-        tamanhdoBlusas.add(" ");
+//        tamanhdoBlusas.add(" ");
         tamanhdoBlusas.add("GG");
         tamanhdoBlusas.add("G");
         tamanhdoBlusas.add("M");
@@ -176,7 +150,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalça.setOnItemSelectedListener(this);
 
         List<String> tamanhdoCalças = new ArrayList<String>();
-        tamanhdoCalças.add(" ");
+//        tamanhdoCalças.add(" ");
         tamanhdoCalças.add("GG");
         tamanhdoCalças.add("G");
         tamanhdoCalças.add("M");
@@ -192,7 +166,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         spinnerTamanhoCalçado.setOnItemSelectedListener(this);
 
         List<String> tamanhdoCalçados = new ArrayList<String>();
-        tamanhdoCalçados.add(" ");
+//        tamanhdoCalçados.add(" ");
         for (int i = 30; i < 49; i += 2) {
             tamanhdoCalçados.add("" + i);
         }
@@ -201,6 +175,11 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         ArrayAdapter<String> adapterTamanhoCalçado = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoCalçados);
         adapterTamanhoCalçado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
     }
 
 
@@ -212,6 +191,11 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public  void  vaiPraMain(View v){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
     }
 
 

@@ -6,7 +6,6 @@
     android:background="@drawable/bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,20 +14,17 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
-
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/logo" />
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="#ffffff">
-
             <AutoCompleteTextView
-                android:id="@+id/login_email"
+                android:id="@+id/email"
                 style="@style/Theme.MyTheme.Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,16 +32,13 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="#ffffff" />
-
         </android.support.design.widget.TextInputLayout>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="#ffffff">
-
             <EditText
-                android:id="@+id/login_password"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
@@ -54,15 +47,12 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1" />
-
         </android.support.design.widget.TextInputLayout>
-
         <LinearLayout
             android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,10 +63,8 @@
                 android:onClick="esqueciSenha"
                 android:textStyle="bold" />
         </LinearLayout>
-
-
         <Button
-            android:id="@+id/logar"
+            android:id="@+id/email_sign_in_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,21 +73,17 @@
             android:onClick="entrarMainActivity"
             android:text="Entrar"
             android:textStyle="bold" />
-
         <com.facebook.login.widget.LoginButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="20dp" />
-
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">
-
         <Button
             android:onClick="cadastrarUsuario"
             style="?android:attr/borderlessButtonStyle"
@@ -107,8 +91,5 @@
             android:layout_height="50dp"
             android:text="Ainda não possue conta? cadastre-se"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
-
-
 </LinearLayout>

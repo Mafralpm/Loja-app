@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -79,6 +80,16 @@ public class ProductActivity extends BaseActivity {
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
 
+    Long product;
+
+    public Long getProduct() {
+        return product;
+    }
+
+    public void setProduct(Long product) {
+        this.product = product;
+    }
+
     ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
 
     @AfterViews
@@ -119,7 +130,11 @@ public class ProductActivity extends BaseActivity {
             responseProduct = productService.searchProduct(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
 
+
             mostrarActivity(responseProduct, responseReview);
+
+
+
 
         } catch (Exception e) {
             Log.d("Erro", e.toString());
@@ -129,6 +144,7 @@ public class ProductActivity extends BaseActivity {
 
     @UiThread
     public void mostrarActivity(ResponseProduct responseProduct, Collection<Review> responseReview) {
+
 
         try {
             produto_nome.setText(responseProduct.getNome().toString());
@@ -140,6 +156,9 @@ public class ProductActivity extends BaseActivity {
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
+            Long a =  responseProduct.getId();
+
+            setProduct(a);
 
             for (Review review : responseReview){
 
@@ -166,9 +185,17 @@ public class ProductActivity extends BaseActivity {
         }
     }
 
+    @Click
+    public void adcionar_carrinho(){
+        Intent intent = new Intent(this, CartActivity_.class);
+        intent.putExtra("id", product);
+        startActivity(intent);
+    }
+
     @OptionsItem(R.id.menu_carinho)
     public void carrinho() {
         Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+
         startActivity(intent);
     }
 
@@ -193,6 +220,12 @@ public class ProductActivity extends BaseActivity {
                 .setBeep(false)
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
+    }
+
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
     }
 
 }

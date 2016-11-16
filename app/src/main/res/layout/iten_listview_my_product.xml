@@ -50,15 +50,10 @@
                     android:id="@+id/my_product_textView_Produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Descricao"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:id="@+id/activity_car_TextView_Cor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="Cor"
                     android:textColor="#000000" />
+
+
 
             </LinearLayout>
 
@@ -88,7 +83,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="99 itens"
+                        android:text="1 itens"
                         android:textColor="#000000" />
 
                 </LinearLayout>
@@ -111,7 +106,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000,00"
+                        android:text="150,00"
                         android:textColor="#000000" />
                 </LinearLayout>
 

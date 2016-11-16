@@ -3,13 +3,10 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -89,22 +86,15 @@ public class MyProductActivity extends AppCompatActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
+    }
+
     public ArrayList<SingletonMyProduct> todos_Os_Produtos() {
         ArrayList<SingletonMyProduct> singleton_my_products = new ArrayList<>();
 
 
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
-        singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
         singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa1, "Camisa Social", "Verde", "Tamanho G"));
         singleton_my_products.add(new SingletonMyProduct(R.drawable.camisa2, "Camisa Social", "Salmão", "Tamanho G"));
 

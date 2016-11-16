@@ -109,6 +109,7 @@
                     android:text="Cor"
                     android:textColor="#000000"
                     android:textStyle="bold" />
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/produto_cor"
@@ -132,7 +133,8 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:elevation="5dp"
         android:background="@color/colorAccent"
-        android:text="Adicionar ao carrinho" />
+        android:text="Adicionar ao carrinho"
+        android:id="@+id/adcionar_carrinho"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -145,7 +147,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Comentarios:"
+            android:text="Comentários:"
             android:textSize="15dp"
             android:textStyle="bold" />
 
