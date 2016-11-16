@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.Usuario;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.view.activity.dialog.DateDialog;
 
@@ -48,6 +49,8 @@ public class RegisterUser extends AppCompatActivity {
     EditText nome;
     EditText email;
     EditText txtDate;
+    Button button;
+    Usuario usuario = new Usuario();
 
     private Toolbar toolbar;
 
@@ -61,8 +64,15 @@ public class RegisterUser extends AppCompatActivity {
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
 
+        button = (Button) findViewById(R.id.RegisterUser_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+                startActivity(intent);
+            }
+        });
 
     }
-
-
 }

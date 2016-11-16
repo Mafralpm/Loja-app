@@ -93,8 +93,6 @@ public class LoginActivity extends AppCompatActivity {
     @Click
     public void email_sign_in_button (){
 
-
-
         loginService.login(new UserLogin(email.getText().toString(),password.getText().toString()));
         Log.i("email", email.getText().toString());
         Log.i("password", password.getText().toString());

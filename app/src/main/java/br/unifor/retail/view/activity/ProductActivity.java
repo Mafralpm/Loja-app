@@ -66,8 +66,6 @@ public class ProductActivity extends BaseActivity {
     protected RatingBar adapter_review_ratingBar;
     @ViewById
     protected TextView adapter_review_descricao;
-    @ViewById
-    protected TextView adapter_review_usuario;
 
     private static final String KEY_DESCR = "review_descric";
     private static final String KEY_NOTA = "nota";
@@ -133,8 +131,10 @@ public class ProductActivity extends BaseActivity {
             responseProduct = productService.searchProduct(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
-           mostrarActivity(responseProduct, responseReview);
-//            mostrarActivity(responseProduct);
+
+
+            mostrarActivity(responseProduct, responseReview);
+
 //
         } catch (Exception e) {
             Log.d("Puta que Pariu", e.toString());

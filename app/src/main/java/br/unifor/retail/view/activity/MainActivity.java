@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
-            goLoginScreen();
+//            goLoginScreen();
         } else {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
@@ -67,6 +67,24 @@ public class MainActivity extends BaseActivity {
         }
 
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarMain);
+        toolbar.setTitle("Retail");
+        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
+        setSupportActionBar(toolbar);
+
+        ArrayList<SingletonMain> singleton_mains = todos_Os_Produtos();
+
+        AdapterListViewMain adapter = new AdapterListViewMain(singleton_mains, getApplicationContext());
+
+        ListView listView;
+        listView = (ListView) findViewById(R.id.listVire_Main);
+
+        listView.setAdapter(adapter);
+
+
+        navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
+        navegationDrawer.getProfile();
+        navegationDrawer.createNavigationDrawer();
 
 
     }

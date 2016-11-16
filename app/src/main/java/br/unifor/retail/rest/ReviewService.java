@@ -19,10 +19,11 @@ import br.unifor.retail.rest.response.ResponseReview;
 public interface ReviewService {
 
     @Get("/{produto_id}.json")
+    @Accept(MediaType.APPLICATION_JSON)
+
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "JwnBVn6fwMZmv7HPgs88")})
-    @Accept(MediaType.APPLICATION_JSON)
+            @Header(name = "X-Admin-Token", value = "C5TqmVb2GdaQJsPgy3mR")})
     ResponseReview searchProductReview(@Path int produto_id);
 
 }

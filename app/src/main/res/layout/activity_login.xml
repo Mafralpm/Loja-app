@@ -53,24 +53,25 @@
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:textColor="#ffffff" />
 
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-            android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:onClick="esqueciSenha"
                 android:text="Recuperar senha"
                 android:textColor="@android:color/white"
                 android:textSize="17dp"
-                android:onClick="esqueciSenha"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -101,10 +102,10 @@
         android:gravity="bottom">
 
         <Button
-            android:onClick="cadastrarUsuario"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:onClick="cadastrarUsuario"
             android:text="Ainda não possue conta? cadastre-se"
             android:textColor="@android:color/white" />
 

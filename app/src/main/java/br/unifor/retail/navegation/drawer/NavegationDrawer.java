@@ -28,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.Usuario;
 import br.unifor.retail.view.activity.CartActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
@@ -57,6 +58,8 @@ public class NavegationDrawer {
     private String last_name;
     private Bundle bFacebookData;
 
+    Usuario usuario = new Usuario();
+
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
 //        @Override
@@ -79,7 +82,7 @@ public class NavegationDrawer {
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com").withIcon(profileImgUrl))
+                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com"))
                 .build();
 
 
@@ -200,6 +203,9 @@ public class NavegationDrawer {
             request.setParameters(parameters);
             request.executeAsync();
 
+        } else{
+            name = usuario.getNome();
+            email = usuario.getEmail();
         }
     }
 
