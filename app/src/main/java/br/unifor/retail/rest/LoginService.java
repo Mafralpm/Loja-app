@@ -1,13 +1,12 @@
 package br.unifor.retail.rest;
 
-import org.androidannotations.rest.spring.annotations.Accept;
 import org.androidannotations.rest.spring.annotations.Body;
 
 import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
-import br.unifor.retail.rest.response.UserLogin;
+import br.unifor.retail.model.UserLogin;
 
 
 /**

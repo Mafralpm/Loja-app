@@ -4,16 +4,13 @@ package br.unifor.retail.model;
  * Created by vania on 10/10/16.
  */
 
-public class Client{
+public class Cliente {
 
     private Long id;
     private String foto;
-    private String user_id;
     private String nome_cliente;
     private String telefone_cliente;
     private String cpf_cliente;
-    private String created_at;
-    private Integer updated_at;
 
     public Long getId() {
         return id;
@@ -29,14 +26,6 @@ public class Client{
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
     }
 
     public String getNome_cliente() {
@@ -63,19 +52,5 @@ public class Client{
         this.cpf_cliente = cpf_cliente;
     }
 
-    public String getCreated_at() {
-        return created_at;
-    }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public Integer getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Integer updated_at) {
-        this.updated_at = updated_at;
-    }
 }
