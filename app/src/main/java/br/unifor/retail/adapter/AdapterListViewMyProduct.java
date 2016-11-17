@@ -3,6 +3,9 @@ package br.unifor.retail.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,7 +69,8 @@ public class AdapterListViewMyProduct extends BaseAdapter {
         TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
         TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-        Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+        final Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
+        final RatingBar ratingBarListView = (RatingBar) convertView.findViewById(R.id.iten_listview_my_product_RatingBar);
 
         loja.setText(singleton_my_product.getLoja());
         produto.setText(singleton_my_product.getProduto());
@@ -79,8 +83,10 @@ public class AdapterListViewMyProduct extends BaseAdapter {
             public void onClick(View v) {
                 LayoutInflater inflate = inflater;
                 View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_product, null);
-                final RatingBar ratingbar = (RatingBar) alertDialogLayout.findViewById(R.id.ratingBar_Dialog_Product);
+                final RatingBar ratingbarDialog = (RatingBar) alertDialogLayout.findViewById(R.id.ratingBar_Dialog_Product);
                 final EditText boxText = (EditText) alertDialogLayout.findViewById(R.id.boxText_Dialog_Product);
+                Drawable drawable = ratingBarListView.getProgressDrawable();
+                drawable.setColorFilter(Color.parseColor("#5FD300"), PorterDuff.Mode.SRC_ATOP);
 
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
@@ -94,10 +100,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Valor AQUIII", Double.valueOf(ratingbar.getRating()).toString());
-                        Log.d("Valor AQUIII", boxText.toString());
                         Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
-//                        System.out.print(ratingbar.getRating());
                     }
                 });
 
@@ -105,9 +108,11 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Valor AQUIII", Double.valueOf(ratingbar.getRating()).toString());
+                        Log.d("Valor AQUIII", Double.valueOf(ratingbarDialog.getRating()).toString());
                         Log.d("Valor AQUIII", boxText.getText().toString());
                         Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
+                        button.setText("Reavaliar");
+                        ratingBarListView.setRating(ratingbarDialog.getRating());
                     }
                 });
                 AlertDialog dialog = alertDialogBuilder.create();

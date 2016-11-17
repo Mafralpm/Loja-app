@@ -1,6 +1,9 @@
 package br.unifor.retail.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +55,8 @@ public class AdapterListViewProduct extends BaseAdapter{
         }
 
         RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.adapter_review_ratingBar);
+        Drawable drawable = ratingBar.getProgressDrawable();
+        drawable.setColorFilter(Color.parseColor("#092641"), PorterDuff.Mode.SRC_ATOP);
         TextView comentario = (TextView) convertView.findViewById(R.id.adapter_review_descricao);
 
         ratingBar.setRating((float) singletonProduct.getNota());

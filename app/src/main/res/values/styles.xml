@@ -23,6 +23,12 @@
         <item name="android:textColorHint">#ffffff</item>
     </style>
 
+    <style name="RatingBarTheme_MyTheme_Indicador" parent="android:Widget.RatingBar">
+    </style>
+
+    <style name="RatingBarTheme_MyTheme_Product_Small" parent="android:style/Widget.Material.RatingBar.Small">
+    </style>
+
     <style name="RatingBarTheme_MyTheme" parent="android:Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/theme_mytheme_ratingbar_full_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/theme_mytheme_ratingbar_full_holo_light</item>
