@@ -25,6 +25,9 @@ import br.unifor.retail.singleton.SingletonMyProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
+import me.sudar.zxingorient.ZxingOrientResult;
+
+import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_history)
@@ -99,6 +102,27 @@ public class HistoryActivity extends BaseActivity {
                 .setBeep(false)
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                //  String leitura = scanResult.getContents();
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+
+        }
+
     }
 
     public void onBackPressed(){

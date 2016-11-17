@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -52,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:text="Cor"
                     android:textColor="#000000" />
-
 
 
             </LinearLayout>
@@ -121,27 +120,42 @@
 
                 <Button
                     android:id="@+id/my_product_button_avaliar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
                     style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/colorAccent"
                     android:text="Avaliar" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/my_product_textView_Data"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:text="26/10/2016"
-            android:textColor="#000000"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/my_product_textView_Data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:text="26/10/2016"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/iten_listview_my_product_RatingBar"
+                style="@style/RatingBarTheme_MyTheme_Product_Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

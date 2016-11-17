@@ -27,6 +27,9 @@ import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.view.activity.dialog.DateDialog;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
+import me.sudar.zxingorient.ZxingOrientResult;
+
+import static android.R.attr.format;
 
 
 @OptionsMenu(R.menu.menu_info_client)
@@ -116,6 +119,27 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
                 .setBeep(false)
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                //  String leitura = scanResult.getContents();
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+
+        }
+
     }
 
     public void sexoSpinner() {

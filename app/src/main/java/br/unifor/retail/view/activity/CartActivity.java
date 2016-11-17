@@ -27,6 +27,9 @@ import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.SingletonCar;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
+import me.sudar.zxingorient.ZxingOrientResult;
+
+import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
@@ -36,7 +39,7 @@ public class CartActivity extends AppCompatActivity {
     NavegationDrawer navegationDrawer;
     ImageView imageViewDelete;
 
-    Product product =  new Product();
+    Product product = new Product();
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
@@ -66,8 +69,6 @@ public class CartActivity extends AppCompatActivity {
 
         String contents = String.valueOf(productActivity.getProduct());
         Log.d("sc", contents);
-
-
 
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
@@ -101,7 +102,28 @@ public class CartActivity extends AppCompatActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
-    public void onBackPressed(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                //  String leitura = scanResult.getContents();
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+
+        }
+
+    }
+
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
