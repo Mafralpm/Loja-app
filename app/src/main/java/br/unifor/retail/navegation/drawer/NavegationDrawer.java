@@ -81,7 +81,7 @@ public class NavegationDrawer {
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com").withIcon(profileImgUrl))
+                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com"))
                 .build();
 
 

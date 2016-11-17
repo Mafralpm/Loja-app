@@ -1,6 +1,8 @@
 package br.unifor.retail.view.activity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.UiThread;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,23 +27,33 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.Arrays;
 
 import br.unifor.retail.R;
-import br.unifor.retail.rest.LoginService;
-import br.unifor.retail.rest.response.UserLogin;
+import br.unifor.retail.model.UserLogin;
+import br.unifor.retail.rest.ClientService;
+
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
+
     @RestService
-    LoginService loginService;
+    ClientService clientService;
+
     @ViewById(R.id.email)
     EditText email;
+
     @ViewById(R.id.password)
     EditText password;
+
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+
+    private UserLogin userLogin = new UserLogin();
+
     @AfterViews
     protected void begin() {
+
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);
         loginButton.setReadPermissions(Arrays.asList("email", "user_friends", "user_birthday"));
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -58,26 +70,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
     @Background
     @Click
+    @UiThread
     public void email_sign_in_button (){
-        loginService.login(new UserLogin(email.getText().toString(),password.getText().toString()));
+        userLogin.getUser().setEmail(email.getText().toString().toLowerCase());
+        userLogin.getUser().setPassword(password.getText().toString());
+        clientService.login(userLogin);
         Log.i("email", email.getText().toString());
         Log.i("password", password.getText().toString());
 
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
+
     public void esqueciSenha(View v){
         LayoutInflater inflate = getLayoutInflater();
         View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_esquecisenha, null);
@@ -105,8 +124,10 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog dialog = alertDialogBuilder.create();
         dialog.show();
     }
+
+
     public void cadastrarUsuario (View v){
-        Intent intent = new Intent(this, RegisterUser.class);
+        Intent intent = new Intent(this, RegisterUser_.class);
         startActivity(intent);
     }
 }

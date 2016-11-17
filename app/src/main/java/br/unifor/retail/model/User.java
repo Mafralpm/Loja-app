@@ -5,19 +5,18 @@ package br.unifor.retail.model;
  */
 public class User {
 
-    private Long idUser;
+    private Long id;
     private String email;
     private String password;
-    private String passwordConfirmation;
-    private String tokenFacebook;
-    private Integer role;
+    private String password_confirmation;
+    private String role;
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -36,27 +35,20 @@ public class User {
         this.password = password;
     }
 
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
+    public String getPassword_confirmation() {
+        return password_confirmation;
     }
 
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
+    public void setPassword_confirmation(String password_confirmation) {
+        this.password_confirmation = password_confirmation;
     }
 
-    public String getTokenFacebook() {
-        return tokenFacebook;
-    }
-
-    public void setTokenFacebook(String tokenFacebook) {
-        this.tokenFacebook = tokenFacebook;
-    }
-
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(String role) {
         this.role = role;
     }
+
 }
