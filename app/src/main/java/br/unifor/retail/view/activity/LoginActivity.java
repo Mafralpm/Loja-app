@@ -27,14 +27,14 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.Arrays;
 
 import br.unifor.retail.R;
-import br.unifor.retail.rest.LoginService;
 import br.unifor.retail.model.UserLogin;
+import br.unifor.retail.rest.ClientService;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
 
     @RestService
-    LoginService loginService;
+    ClientService clientService;
 
     @ViewById(R.id.email)
     EditText email;
@@ -87,9 +87,9 @@ public class LoginActivity extends AppCompatActivity {
     @Click
     @UiThread
     public void email_sign_in_button (){
-        userLogin.getUser().setEmail(email.getText().toString());
+        userLogin.getUser().setEmail(email.getText().toString().toLowerCase());
         userLogin.getUser().setPassword(password.getText().toString());
-        loginService.login(userLogin);
+        clientService.login(userLogin);
         Log.i("email", email.getText().toString());
         Log.i("password", password.getText().toString());
 

@@ -60,7 +60,7 @@ public class RegisterUser extends BaseActivity{
     }
 
     void setaDadosCliente() {
-        recordLogin.getUser().setEmail(register_email.getText().toString());
+        recordLogin.getUser().setEmail(register_email.getText().toString().toLowerCase());
         recordLogin.getUser().setPassword(register_senha.getText().toString());
         recordLogin.getUser().setPassword_confirmation(register_confirmar_senha.getText().toString());
         recordLogin.getCliente().setNome_cliente(register_nome.getText().toString());
