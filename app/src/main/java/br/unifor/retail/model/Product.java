@@ -1,9 +1,12 @@
 package br.unifor.retail.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by vania on 10/10/16.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product { //nome como eu quiser
 
     public Long id;
@@ -17,6 +20,8 @@ public class Product { //nome como eu quiser
     public String updated_at;
     public String url;
     public String foto;
+    public String foto_file_name;
+
 
     public String getFoto() {
         return foto;
@@ -104,5 +109,13 @@ public class Product { //nome como eu quiser
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getFoto_file_name() {
+        return foto_file_name;
+    }
+
+    public void setFoto_file_name(String foto_file_name) {
+        this.foto_file_name = foto_file_name;
     }
 }

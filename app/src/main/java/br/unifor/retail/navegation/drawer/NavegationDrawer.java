@@ -143,10 +143,10 @@ public class NavegationDrawer {
                                 activity.startActivity(intent3);
                                 break;
                             case 4:
-                                LoginManager.getInstance().logOut();
-                                if (getCurrentAccessToken() != null){
+                                if (getCurrentAccessToken() == null){
                                     manager.logoutUser();
                                 }
+                                LoginManager.getInstance().logOut();
                                 goLoginScreen();
                                 break;
 

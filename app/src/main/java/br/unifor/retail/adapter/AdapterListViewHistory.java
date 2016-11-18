@@ -1,6 +1,7 @@
 package br.unifor.retail.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,35 +9,37 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import br.unifor.retail.R;
-import br.unifor.retail.singleton.SingletonMyProduct;
+import br.unifor.retail.singleton.SingletonHistory;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
 public class AdapterListViewHistory extends BaseAdapter {
-    private List<SingletonMyProduct> singleton_my_productLists;
+    private List<SingletonHistory> singleton_history;
     LayoutInflater inflater;
     Context context;
     int teste;
 
-    public AdapterListViewHistory(List<SingletonMyProduct> singleton_my_productList, Context context) {
-        this.singleton_my_productLists = singleton_my_productList;
+    public AdapterListViewHistory(List<SingletonHistory> singleton_history, Context context) {
+        this.singleton_history = singleton_history;
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return singleton_my_productLists.size();
+        return singleton_history.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return singleton_my_productLists.get(position);
+        return singleton_history.get(position);
     }
 
     @Override
@@ -46,23 +49,25 @@ public class AdapterListViewHistory extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        SingletonMyProduct singleton_my_product = singleton_my_productLists.get(position);
+        SingletonHistory singletonHistory = singleton_history.get(position);
 
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.iten_listview_history, parent, false);
-            }
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.iten_listview_history, parent, false);
+        }
 
-            TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
-            TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
-            TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
-//            Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
-//
-//            button.setVisibility(View.GONE);
-            loja.setText(singleton_my_product.getLoja());
-            produto.setText(singleton_my_product.getProduto());
-            data.setText(singleton_my_product.getData());
-            imageView.setImageResource(singleton_my_product.getImage());
+        TextView nome = (TextView) convertView.findViewById(R.id.iten_listview_history_textView_Nome);
+        TextView data = (TextView) convertView.findViewById(R.id.iten_listview_history_textView_Data);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.iten_listview_history_imageView_Image);
+        TextView preco = (TextView) convertView.findViewById(R.id.iten_listview_history_TextView_Preco);
+
+
+        nome.setText(singletonHistory.getNome());
+        data.setText(singletonHistory.getData());
+//        imageView.setImageResource(Integer.parseInt(String.valueOf(singletonHistory.getImagem())));
+        preco.setText(singletonHistory.getPreco()+"");
+
+        Log.i("URLLL", singletonHistory.getImagem()+"" + singletonHistory.getNome());
+        Picasso.with(context).load(singletonHistory.getImagem()).into(imageView);
 
 
         return convertView;

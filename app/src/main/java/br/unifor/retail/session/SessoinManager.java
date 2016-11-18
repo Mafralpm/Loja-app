@@ -49,11 +49,6 @@ public class SessoinManager {
         editor.putString("foto", recordLogin.getCliente().getFoto());
         editor.putString("email", recordLogin.getUser().getEmail());
 
-        Log.d("Nome3", recordLogin.getCliente().getNome_cliente());
-        Log.d("ID3", recordLogin.getCliente().getId().toString());
-        Log.d("FOTO3", recordLogin.getCliente().getFoto());
-        Log.d("EMAIL3", recordLogin.getUser().getEmail());
-
         editor.commit();
     }
 
@@ -63,11 +58,6 @@ public class SessoinManager {
         recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
         recordLogin.getCliente().setFoto(preferences.getString("foto", ""));
         recordLogin.getUser().setEmail(preferences.getString("email", ""));
-
-        Log.d("Nome2", recordLogin.getCliente().getNome_cliente());
-        Log.d("ID2", recordLogin.getCliente().getId().toString());
-        Log.d("FOTO2", recordLogin.getCliente().getFoto());
-        Log.d("EMAIL2", recordLogin.getUser().getEmail());
         return  recordLogin;
     }
 
