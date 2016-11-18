@@ -173,6 +173,7 @@ public class NavegationDrawer {
 
             String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
             Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
+            String acess = AccessToken.getCurrentAccessToken().getToken().toString();
 
 
             userId = AccessToken.getCurrentAccessToken().getUserId().toString();
@@ -200,7 +201,7 @@ public class NavegationDrawer {
 
                     });
             Bundle parameters = new Bundle();
-            parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+            parameters.putString("fields", "id, first_name, last_name, email,gender, birthday"); // Parámetros que pedimos a facebook
             request.setParameters(parameters);
             request.executeAsync();
         }
@@ -234,8 +235,6 @@ public class NavegationDrawer {
                 bundle.putString("gender", object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("location"))
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
 
             return bundle;
         } catch (JSONException e) {

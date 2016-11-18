@@ -3,6 +3,8 @@ package br.unifor.retail.session;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import br.unifor.retail.model.RecordLogin;
+
 /**
  * Created by vania on 14/11/16.
  */
@@ -40,4 +42,14 @@ public class SessoinManager {
         return preferences.getBoolean(IS_LOGIN, false);
     }
 
+
+    public void addUser(RecordLogin recordLogin){
+        editor.putString("id", String.valueOf(recordLogin.getCliente().getId()));
+        editor.putString("nome", recordLogin.getCliente().getNome_cliente());
+        editor.putString("foto", recordLogin.getCliente().getFoto());
+        editor.putString("email", recordLogin.getUser().getEmail());
+
+        editor.commit();
+
+    }
 }

@@ -3,7 +3,7 @@ package br.unifor.retail.model;
 /**
  * Created by vania on 17/11/16.
  */
-public class UserId {
+public class UserId2 {
 
     Long id;
 

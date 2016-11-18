@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 import br.unifor.retail.R;
 import br.unifor.retail.model.RecordLogin;
-import br.unifor.retail.model.UserId;
+import br.unifor.retail.model.User;
 import br.unifor.retail.rest.ClientService;
 import br.unifor.retail.session.SessoinManager;
 
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private RecordLogin recordLogin= new RecordLogin();
 
-    private UserId userId = new UserId();
+    private User user = new User();
 
     SessoinManager manager;
 
@@ -105,7 +105,21 @@ public class LoginActivity extends AppCompatActivity {
 
         recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
         recordLogin.getUser().setPassword(password.getText().toString());
-        userId = clientService.login(recordLogin);
+        user = clientService.login(recordLogin);
+        recordLogin.getCliente().setId(user.getId());
+        //manager.addUser(recordLogin);
+
+//        Log.i("Teste email", recordLogin.getUser().getEmail());
+//
+//        try{
+//            Log.i("Teste id", recordLogin.getCliente().getId().toString());
+//            Log.i("Teste nome", recordLogin.getCliente().getNome_cliente());
+//
+//            Log.i("Teste foto", recordLogin.getCliente().getFoto());
+//
+//        }catch (Exception e){
+//            Log.i("Teste", e.toString());
+//        }
 
         goMainScreen();
         envia();
@@ -147,6 +161,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void envia(){
       //  userId.getId();
-        Log.d("scacac", userId.getId().toString());
+        Log.d("scacac", user.getId().toString());
+    }
+
+    @Background
+    public void getCliente(){
+
     }
 }
