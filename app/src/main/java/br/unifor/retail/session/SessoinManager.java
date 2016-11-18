@@ -8,17 +8,36 @@ import android.content.SharedPreferences;
  */
 
 public class SessoinManager {
-    SharedPreferences pref;
+    SharedPreferences preferences;
 
     SharedPreferences.Editor editor;
 
-    Context _context;
+    Context context;
 
-    int PRIVATE_MODE = 0;
+    private static final int PRIVATE_MODE = 0;
 
     private static final String PREF_NAME = "MyPref";
 
     private static final String IS_LOGIN = "IsLoggedIn";
 
+    public SessoinManager(Context context) {
+        this.preferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        this.editor = preferences.edit();
+        this.context = context;
+    }
+
+    public void createLoginSession(){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.commit();
+    }
+
+    public void logoutUser() {
+        editor.clear();
+        editor.commit();
+    }
+
+    public boolean isLoggedIn() {
+        return preferences.getBoolean(IS_LOGIN, false);
+    }
 
 }

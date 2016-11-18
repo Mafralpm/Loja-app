@@ -27,9 +27,10 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.Arrays;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.UserId;
-import br.unifor.retail.model.UserLogin;
 import br.unifor.retail.rest.ClientService;
+import br.unifor.retail.session.SessoinManager;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
@@ -46,12 +47,20 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
-    private UserLogin userLogin = new UserLogin();
+    private RecordLogin recordLogin= new RecordLogin();
 
     private UserId userId = new UserId();
 
+    SessoinManager manager;
+
     @AfterViews
     protected void begin() {
+        manager = new SessoinManager(this);
+
+        if (manager.isLoggedIn()){
+            goMainScreen();
+            finish();
+        }
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);
@@ -62,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
 
                 goMainScreen();
+                finish();
             }
             @Override
             public void onCancel() {
@@ -78,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        manager.createLoginSession();
         startActivity(intent);
     }
 
@@ -92,14 +103,11 @@ public class LoginActivity extends AppCompatActivity {
     @UiThread
     public void email_sign_in_button (){
 
-        userLogin.getUser().setEmail(email.getText().toString().toLowerCase());
-        userLogin.getUser().setPassword(password.getText().toString());
-        userId = clientService.login(userLogin);
+        recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
+        recordLogin.getUser().setPassword(password.getText().toString());
+        userId = clientService.login(recordLogin);
 
-        Log.d("Eita carai", userId.getId().toString());
-
-        Intent intent = new Intent(this, MainActivity_.class);
-        startActivity(intent);
+        goMainScreen();
         envia();
     }
 

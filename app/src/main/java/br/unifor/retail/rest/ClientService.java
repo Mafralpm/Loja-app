@@ -8,7 +8,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.UserId;
-import br.unifor.retail.model.UserLogin;
 
 
 /**
@@ -22,8 +21,6 @@ public interface ClientService extends RestClientHeaders{
     void cadastraCliente(@Body RecordLogin recordLogin);
 
     @Post("/sign_in")
-    UserId login(@Body UserLogin userLogin);
-
-
+    UserId login(@Body RecordLogin recordLogin);
 
 }
