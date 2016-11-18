@@ -21,7 +21,7 @@ public interface HistoryService {
     @Post("/historicos")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "C5TqmVb2GdaQJsPgy3mR")})
+            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
     void enviar (@Body History history);
 
 

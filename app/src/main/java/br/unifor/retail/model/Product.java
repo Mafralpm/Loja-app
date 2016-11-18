@@ -6,68 +6,103 @@ package br.unifor.retail.model;
 
 public class Product { //nome como eu quiser
 
-    private Long idProduct;
-    private String descricaoProduct;
-    private Float precoProduct;
-    private String nomeProduct;
-    private Integer quantidadeEmEstoque;
-    private String tamanhoProduct;
-    private String corProduto;
+    public Long id;
+    public String prod_descric;
+    public Float preco;
+    public String nome;
+    public Integer unidade_em_estoque;
+    public String tamanho;
+    public String cor;
+    public String created_at;
+    public String updated_at;
+    public String url;
+    public String foto;
 
-
-    public Long getIdProduct() {
-        return idProduct;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
-    public String getDescricaoProduct() {
-        return descricaoProduct;
+    public Long getId() {
+        return id;
     }
 
-    public void setDescricaoProduct(String descricaoProduct) {
-        this.descricaoProduct = descricaoProduct;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Float getPrecoProduct() {
-        return precoProduct;
+    public String getProd_descric() {
+        return prod_descric;
     }
 
-    public void setPrecoProduct(Float precoProduct) {
-        this.precoProduct = precoProduct;
+    public void setProd_descric(String prod_descric) {
+        this.prod_descric = prod_descric;
     }
 
-    public String getNomeProduct() {
-        return nomeProduct;
+    public Float getPreco() {
+        return preco;
     }
 
-    public void setNomeProduct(String nomeProduct) {
-        this.nomeProduct = nomeProduct;
+    public void setPreco(Float preco) {
+        this.preco = preco;
     }
 
-    public Integer getQuantidadeEmEstoque() {
-        return quantidadeEmEstoque;
+    public String getNome() {
+        return nome;
     }
 
-    public void setQuantidadeEmEstoque(Integer quantidadeEmEstoque) {
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getTamanhoProduct() {
-        return tamanhoProduct;
+    public Integer getUnidade_em_estoque() {
+        return unidade_em_estoque;
     }
 
-    public void setTamanhoProduct(String tamanhoProduct) {
-        this.tamanhoProduct = tamanhoProduct;
+    public void setUnidade_em_estoque(Integer unidade_em_estoque) {
+        this.unidade_em_estoque = unidade_em_estoque;
     }
 
-    public String getCorProduto() {
-        return corProduto;
+    public String getTamanho() {
+        return tamanho;
     }
 
-    public void setCorProduto(String corProduto) {
-        this.corProduto = corProduto;
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

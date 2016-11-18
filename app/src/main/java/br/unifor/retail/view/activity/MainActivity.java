@@ -25,7 +25,9 @@ import java.util.ArrayList;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewMain;
+import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonMain;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
@@ -44,10 +46,16 @@ public class MainActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
     private Handler handler;
+    private SessoinManager manager;
+    private RecordLogin recordLogin;
 
 
     @AfterViews
     public void begin() {
+
+        manager = new SessoinManager(this);
+
+        recordLogin = manager.getUser();
 
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
@@ -55,13 +63,6 @@ public class MainActivity extends BaseActivity {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
 
-
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
         }
 
 
@@ -82,7 +83,6 @@ public class MainActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
 
     }
 

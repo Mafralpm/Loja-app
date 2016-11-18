@@ -32,8 +32,8 @@ import java.util.Collection;
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewProduct;
 import br.unifor.retail.model.History;
+import br.unifor.retail.model.Product;
 import br.unifor.retail.model.Review;
-import br.unifor.retail.model.response.ResponseProduct;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.ProductService;
@@ -73,7 +73,7 @@ public class ProductActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
-    protected ResponseProduct responseProduct;
+    protected Product product;
     protected Collection<Review>  responseReview;
 
     protected Intent intent;
@@ -114,36 +114,31 @@ public class ProductActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
-
-
-
     }
 
     @Background
     public void busca(Long idQrCode) {
 
         try {
-            responseProduct = productService.searchProduct(idQrCode);
+            product = productService.searchProduct(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
-            montaActivity(responseProduct, responseReview);
+            montaActivity(product, responseReview);
 
         } catch (Exception e) {
             Log.d("Erro na busca", e.toString());
         }
     }
 
-
     @UiThread
-    public void montaActivity(ResponseProduct responseProduct, Collection<Review> responseReview) {
+    public void montaActivity(Product product, Collection<Review> responseReview) {
 
         try {
-            produto_nome.setText(responseProduct.getNome().toString());
-            produto_preco.setText(responseProduct.getPreco().toString());
-            produto_tamanho.setText(responseProduct.getTamanho().toString().toUpperCase());
-            int color = Color.parseColor(responseProduct.getCor());
+            produto_nome.setText(product.getNome().toString());
+            produto_preco.setText(product.getPreco().toString());
+            produto_tamanho.setText(product.getTamanho().toString().toUpperCase());
+            int color = Color.parseColor(product.getCor());
             produto_cor.setColorFilter(color);
-            String uri = "http://bluelab.herokuapp.com" + responseProduct.getFoto().toString();
+            String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
@@ -163,8 +158,6 @@ public class ProductActivity extends BaseActivity {
     public void enviaProHistorico(Long idQrCode){
 
         history.setProduto_id(idQrCode);
-        //history.setCliente_id();
-        //historyService.enviar();
 
     }
 
@@ -176,8 +169,6 @@ public class ProductActivity extends BaseActivity {
             Log.d("Testezinho", contents);
         }
         startActivity(intent);
-
-
     }
 
     @OptionsItem(R.id.menu_carinho)

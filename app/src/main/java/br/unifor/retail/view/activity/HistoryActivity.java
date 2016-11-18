@@ -70,8 +70,6 @@ public class HistoryActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
-
 
     }
 

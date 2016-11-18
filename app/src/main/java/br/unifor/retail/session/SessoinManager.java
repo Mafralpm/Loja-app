@@ -2,6 +2,7 @@ package br.unifor.retail.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import br.unifor.retail.model.RecordLogin;
 
@@ -42,14 +43,32 @@ public class SessoinManager {
         return preferences.getBoolean(IS_LOGIN, false);
     }
 
-
     public void addUser(RecordLogin recordLogin){
-        editor.putString("id", String.valueOf(recordLogin.getCliente().getId()));
+        editor.putLong("id", recordLogin.getCliente().getId());
         editor.putString("nome", recordLogin.getCliente().getNome_cliente());
         editor.putString("foto", recordLogin.getCliente().getFoto());
         editor.putString("email", recordLogin.getUser().getEmail());
 
-        editor.commit();
+        Log.d("Nome3", recordLogin.getCliente().getNome_cliente());
+        Log.d("ID3", recordLogin.getCliente().getId().toString());
+        Log.d("FOTO3", recordLogin.getCliente().getFoto());
+        Log.d("EMAIL3", recordLogin.getUser().getEmail());
 
+        editor.commit();
     }
+
+    public RecordLogin getUser(){
+        RecordLogin recordLogin = new RecordLogin();
+        recordLogin.getCliente().setId(preferences.getLong("id", 0));
+        recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
+        recordLogin.getCliente().setFoto(preferences.getString("foto", ""));
+        recordLogin.getUser().setEmail(preferences.getString("email", ""));
+
+        Log.d("Nome2", recordLogin.getCliente().getNome_cliente());
+        Log.d("ID2", recordLogin.getCliente().getId().toString());
+        Log.d("FOTO2", recordLogin.getCliente().getFoto());
+        Log.d("EMAIL2", recordLogin.getUser().getEmail());
+        return  recordLogin;
+    }
+
 }

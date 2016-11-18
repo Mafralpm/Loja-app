@@ -67,7 +67,6 @@ public class CartActivity extends AppCompatActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
 
 
 

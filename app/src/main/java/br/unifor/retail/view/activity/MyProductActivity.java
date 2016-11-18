@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewMyProduct;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonMyProduct;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
@@ -34,10 +35,15 @@ public class MyProductActivity extends AppCompatActivity {
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
 
+    SessoinManager manager;
+
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     @AfterViews
     protected void begin() {
+
+        manager = new SessoinManager(this);
+
         toolbar = (Toolbar) findViewById(R.id.toolbarMyProduct);
         toolbar.setTitle("Meus Produtos");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -55,8 +61,6 @@ public class MyProductActivity extends AppCompatActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
-
 
     }
 

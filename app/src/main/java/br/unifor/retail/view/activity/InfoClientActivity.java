@@ -73,7 +73,6 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
-        navegationDrawer.createNavigationDrawer();
     }
 
     public void onStart() {

@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
 
     private RecordLogin recordLogin= new RecordLogin();
-
     private User user = new User();
 
     SessoinManager manager;
@@ -107,22 +106,18 @@ public class LoginActivity extends AppCompatActivity {
         recordLogin.getUser().setPassword(password.getText().toString());
         user = clientService.login(recordLogin);
         recordLogin.getCliente().setId(user.getId());
-        //manager.addUser(recordLogin);
+        recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
+        recordLogin.getCliente().setFoto(user.getFoto());
 
-//        Log.i("Teste email", recordLogin.getUser().getEmail());
-//
-//        try{
-//            Log.i("Teste id", recordLogin.getCliente().getId().toString());
-//            Log.i("Teste nome", recordLogin.getCliente().getNome_cliente());
-//
-//            Log.i("Teste foto", recordLogin.getCliente().getFoto());
-//
-//        }catch (Exception e){
-//            Log.i("Teste", e.toString());
-//        }
+        Log.d("Nome ", recordLogin.getCliente().getNome_cliente());
+        Log.d("ID", recordLogin.getCliente().getId().toString());
+        Log.d("FOTO", recordLogin.getCliente().getFoto());
+        Log.d("EMAIL", recordLogin.getUser().getEmail());
+
+
+        manager.addUser(recordLogin);
 
         goMainScreen();
-        envia();
     }
 
     public void esqueciSenha(View v){
@@ -159,13 +154,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void envia(){
-      //  userId.getId();
-        Log.d("scacac", user.getId().toString());
-    }
-
-    @Background
-    public void getCliente(){
-
-    }
 }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
@@ -28,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.view.activity.CartActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
@@ -36,6 +36,7 @@ import br.unifor.retail.view.activity.LoginActivity_;
 import br.unifor.retail.view.activity.MyProductActivity_;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by mafra on 01/11/16.
@@ -47,16 +48,17 @@ public class NavegationDrawer {
     private AccountHeader.Result headerNavigationLeft;
     private Toolbar toolbar;
     private Activity activity;
-    private String userId;
     private String name;
-    private String grafiUrl;
     private String profileImgUrl;
     private Bundle bundlex;
     private String email;
     private String first_name;
     private String last_name;
     private Bundle bFacebookData;
+    private String foto;
     SessoinManager manager;
+    RecordLogin recordLogin;
+
 
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
@@ -73,7 +75,7 @@ public class NavegationDrawer {
 
     public void createNavigationDrawer() {
 
-        manager = new SessoinManager(activity);
+
         //NAVIGATION DRAWER
         headerNavigationLeft = new AccountHeader()
                 .withActivity(activity)
@@ -82,7 +84,7 @@ public class NavegationDrawer {
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail("vania.almeida28@hotmail.com"))
+                        new ProfileDrawerItem().withName(name).withEmail(email))
                 .build();
 
 
@@ -142,7 +144,9 @@ public class NavegationDrawer {
                                 break;
                             case 4:
                                 LoginManager.getInstance().logOut();
-                                manager.logoutUser();
+                                if (getCurrentAccessToken() != null){
+                                    manager.logoutUser();
+                                }
                                 goLoginScreen();
                                 break;
 
@@ -168,20 +172,9 @@ public class NavegationDrawer {
     }
 
     public void getProfile() {
-        Profile profile = Profile.getCurrentProfile();
+
         if (getCurrentAccessToken() != null) {
 
-            String accessToken = AccessToken.getCurrentAccessToken().getUserId().toString();
-            Log.d("Teste", AccessToken.getCurrentAccessToken().getUserId().toString());
-            String acess = AccessToken.getCurrentAccessToken().getToken().toString();
-
-
-            userId = AccessToken.getCurrentAccessToken().getUserId().toString();
-            profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            grafiUrl = "https://graph.facebook.com/me?access_token=" + AccessToken.getCurrentAccessToken().getToken();
-
-            if (profile != null)
-                name = profile.getName();
 
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
@@ -191,11 +184,15 @@ public class NavegationDrawer {
                             // Get facebook data from login
                             bFacebookData = getFacebookData(object);
 
-                            Log.i("LoginActhrth", bFacebookData.toString());
-                            Log.i("NOME", bFacebookData.getString("first_name"));
-                            Log.i("EMAIL", bFacebookData.getString("email"));
+                            first_name =  bFacebookData.getString("first_name");
+                            last_name = bFacebookData.getString("last_name");
+                            name = first_name + " " + last_name;
 
-                            String emailaqui = bFacebookData.getString("email");
+                            foto = bFacebookData.getString("profile_pic");
+
+                            email = bFacebookData.getString("email");
+
+                            createNavigationDrawer();
 
                         }
 
@@ -204,6 +201,18 @@ public class NavegationDrawer {
             parameters.putString("fields", "id, first_name, last_name, email,gender, birthday"); // Parámetros que pedimos a facebook
             request.setParameters(parameters);
             request.executeAsync();
+        }else{
+
+            manager = new SessoinManager(getApplicationContext());
+            recordLogin = manager.getUser();
+
+
+            email = recordLogin.getUser().getEmail();
+            name = recordLogin.getCliente().getNome_cliente();
+            profileImgUrl = recordLogin.getCliente().getFoto();
+            foto = "http://bluelab.herokuapp.com" + profileImgUrl;
+            Log.d("FOTO", foto);
+            createNavigationDrawer();
         }
     }
 
