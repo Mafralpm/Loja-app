@@ -84,7 +84,7 @@ public class NavegationDrawer {
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail(email))
+                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(foto))
                 .build();
 
 
@@ -204,7 +204,7 @@ public class NavegationDrawer {
         }else{
 
             manager = new SessoinManager(getApplicationContext());
-            recordLogin = manager.getUser();
+            recordLogin = manager.pegaUsuario();
 
 
             email = recordLogin.getUser().getEmail();

@@ -35,6 +35,7 @@ import br.unifor.retail.model.History;
 import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.Review;
+
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.session.SessoinManager;
@@ -83,6 +84,8 @@ public class HistoryActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
+    protected History history;
+
     @AfterViews
     public void begin() {
         toolbar = (Toolbar) findViewById(R.id.toolbarHistory);
@@ -104,7 +107,7 @@ public class HistoryActivity extends BaseActivity {
         navegationDrawer.getProfile();
 
         manager = new SessoinManager(getApplicationContext());
-        recordLogin = manager.getUser();
+        recordLogin = manager.pegaUsuario();
 
         cliente_id = recordLogin.getCliente().getId();
 
@@ -166,9 +169,9 @@ public class HistoryActivity extends BaseActivity {
     @Background
     public void buscaProdutos(Long cliente_id) {
 
-        Long i = Long.valueOf(1);
+
         try {
-            productCollection = historyService.searchProducts(i);
+            productCollection = historyService.searchProducts(cliente_id);
             montaActivity(productCollection);
 
         } catch (Exception e) {

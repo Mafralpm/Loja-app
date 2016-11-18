@@ -102,22 +102,26 @@ public class LoginActivity extends AppCompatActivity {
     @UiThread
     public void email_sign_in_button (){
 
-        recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
-        recordLogin.getUser().setPassword(password.getText().toString());
-        user = clientService.login(recordLogin);
-        recordLogin.getCliente().setId(user.getId());
-        recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
-        recordLogin.getCliente().setFoto(user.getFoto());
+        try{
+            recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
+            recordLogin.getUser().setPassword(password.getText().toString());
+            user = clientService.login(recordLogin);
+            recordLogin.getCliente().setId(user.getId());
+            recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
+            recordLogin.getCliente().setFoto(user.getFoto());
 
-        Log.d("Nome ", recordLogin.getCliente().getNome_cliente());
-        Log.d("ID", recordLogin.getCliente().getId().toString());
-        Log.d("FOTO", recordLogin.getCliente().getFoto());
-        Log.d("EMAIL", recordLogin.getUser().getEmail());
+            Log.d("Nome ", recordLogin.getCliente().getNome_cliente());
+            Log.d("ID", recordLogin.getCliente().getId().toString());
+            Log.d("FOTO", recordLogin.getCliente().getFoto());
+            Log.d("EMAIL", recordLogin.getUser().getEmail());
 
 
-        manager.addUser(recordLogin);
+            manager.addUser(recordLogin);
 
-        goMainScreen();
+            goMainScreen();
+        }catch (Exception e){
+            Log.d("Erro", e.toString());
+        }
     }
 
     public void esqueciSenha(View v){
