@@ -28,7 +28,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
-import br.unifor.retail.model.Usuario;
 import br.unifor.retail.view.activity.CartActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
@@ -56,8 +55,6 @@ public class NavegationDrawer {
     private String first_name;
     private String last_name;
     private Bundle bFacebookData;
-
-    Usuario usuario = new Usuario();
 
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
@@ -201,10 +198,6 @@ public class NavegationDrawer {
             parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
             request.setParameters(parameters);
             request.executeAsync();
-
-        } else{
-            name = usuario.getNome();
-            email = usuario.getEmail();
         }
     }
 

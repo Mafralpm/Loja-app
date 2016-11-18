@@ -26,7 +26,7 @@ public interface ReviewService {
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
             @Header(name = "X-Admin-Token", value = "C5TqmVb2GdaQJsPgy3mR")})
-    Collection<Review> searchProductReview(@Path int produto_id);
+    Collection<Review> searchProductReview(@Path Long produto_id);
 
 
 }

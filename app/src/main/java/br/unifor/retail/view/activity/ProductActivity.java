@@ -31,9 +31,11 @@ import java.util.Collection;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewProduct;
+import br.unifor.retail.model.History;
 import br.unifor.retail.model.Review;
 import br.unifor.retail.model.response.ResponseProduct;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.singleton.SingletonProduct;
@@ -49,6 +51,8 @@ public class ProductActivity extends BaseActivity {
     protected ProductService productService;
     @RestService
     protected ReviewService reviewService;
+    @RestService
+    protected HistoryService historyService;
 
     @ViewById
     protected TextView produto_nome;
@@ -67,7 +71,6 @@ public class ProductActivity extends BaseActivity {
     @ViewById
     protected TextView adapter_review_descricao;
 
-
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected ResponseProduct responseProduct;
@@ -75,20 +78,12 @@ public class ProductActivity extends BaseActivity {
 
     protected Intent intent;
     protected String contents;
-    protected int idDoQRCOde;
+    protected Long idDoQRCOde;
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    History history = new History();
 
-    Long product;
-
-    public Long getProduct() {
-        return product;
-    }
-
-    public void setProduct(Long product) {
-        this.product = product;
-    }
 
     ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
 
@@ -109,10 +104,10 @@ public class ProductActivity extends BaseActivity {
             @Override
             public void run() {
                 if (!contents.isEmpty()) {
-                    Log.d("sc", contents);
-                    idDoQRCOde = Integer.parseInt(contents);
+                    idDoQRCOde = Long.valueOf(contents);
                     showProgressDialogCancel("Buscando os dados", null);
                     busca(idDoQRCOde);
+                    enviaProHistorico(idDoQRCOde);
                 }
             }
         });
@@ -121,30 +116,26 @@ public class ProductActivity extends BaseActivity {
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
+
+
     }
 
     @Background
-    public void busca(int idQrCode) {
+    public void busca(Long idQrCode) {
 
         try {
             responseProduct = productService.searchProduct(idQrCode);
             responseReview = reviewService.searchProductReview(idQrCode);
-
-
-            mostrarActivity(responseProduct, responseReview);
-
-
-
+            montaActivity(responseProduct, responseReview);
 
         } catch (Exception e) {
-            Log.d("Erro", e.toString());
+            Log.d("Erro na busca", e.toString());
         }
     }
 
 
     @UiThread
-    public void mostrarActivity(ResponseProduct responseProduct, Collection<Review> responseReview) {
-
+    public void montaActivity(ResponseProduct responseProduct, Collection<Review> responseReview) {
 
         try {
             produto_nome.setText(responseProduct.getNome().toString());
@@ -156,40 +147,37 @@ public class ProductActivity extends BaseActivity {
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
-            Long a =  responseProduct.getId();
-
-            setProduct(a);
-
             for (Review review : responseReview){
-
-                Log.d("sdvdvsd", review.getNota().toString());
-                Log.d("sdvdvsd", review.getReview_descric().toString());
-
                 Double nota = Double.valueOf(review.getNota());
-
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
-
             }
 
             AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
-
-            ListView listView;
-            listView = (ListView) findViewById(R.id.produto_list_view);
-
-            listView.setAdapter(adapter);
-
+            produto_list_view.setAdapter(adapter);
 
         } catch (Exception e) {
-            Log.d("Erro do caralho", e.toString());
-
+            Log.d("Erro na mostra:", e.toString());
         }
+    }
+
+    public void enviaProHistorico(Long idQrCode){
+
+        history.setProduto_id(idQrCode);
+        //history.setCliente_id();
+        //historyService.enviar();
+
     }
 
     @Click
     public void adcionar_carrinho(){
         Intent intent = new Intent(this, CartActivity_.class);
-        intent.putExtra("id", product);
+        intent.putExtra("id", contents);
+        if(contents != null){
+            Log.d("Testezinho", contents);
+        }
         startActivity(intent);
+
+
     }
 
     @OptionsItem(R.id.menu_carinho)
@@ -221,7 +209,6 @@ public class ProductActivity extends BaseActivity {
                 .setVibration(true)
                 .initiateScan(Barcode.QR_CODE);
     }
-
 
     public void onBackPressed(){
         Intent intent = new Intent(this, MainActivity_.class);

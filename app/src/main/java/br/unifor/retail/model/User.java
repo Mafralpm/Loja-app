@@ -10,6 +10,7 @@ public class User {
     private String password;
     private String password_confirmation;
     private String role;
+    private String facebook_token;
 
     public Long getId() {
         return id;
@@ -49,6 +50,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getFacebook_token() {
+        return facebook_token;
+    }
+
+    public void setFacebook_token(String facebook_token) {
+        this.facebook_token = facebook_token;
     }
 
 }

@@ -3,6 +3,7 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,13 +17,13 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
-import br.unifor.retail.model.Product;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.SingletonCar;
 import me.sudar.zxingorient.Barcode;
@@ -37,20 +38,21 @@ public class CartActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    protected Intent intent;
+    protected String contents;
+    protected Handler handler;
     ImageView imageViewDelete;
-
-    Product product = new Product();
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
-    protected Intent intent;
-    protected String contents;
-
-    ProductActivity productActivity = new ProductActivity();
-
+    @ViewById
+    ListView car_activity_listView;
 
     @AfterViews
     public void begin() {
+        intent = getIntent();
+        contents = intent.getStringExtra("id");
+
         toolbar = (Toolbar) findViewById(R.id.toolbarCart);
         toolbar.setTitle("Carrinho");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -62,19 +64,17 @@ public class CartActivity extends AppCompatActivity {
 
         AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
 
-
-        ListView listView = (ListView) findViewById(R.id.car_activity_listView);
-        listView.setAdapter(adapter_listView_car);
-
-
-        String contents = String.valueOf(productActivity.getProduct());
-        Log.d("sc", contents);
-
+        car_activity_listView.setAdapter(adapter_listView_car);
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
         navegationDrawer.createNavigationDrawer();
 
+
+
+        if (!contents.isEmpty()) {
+            Log.d("ID no carrinho", contents);
+        }
 
     }
 
@@ -122,12 +122,10 @@ public class CartActivity extends AppCompatActivity {
         }
 
     }
-
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
-
 
     public List<SingletonCar> todos_os_produtos() {
         List<SingletonCar> singleton_cars = new ArrayList<>();
@@ -136,6 +134,5 @@ public class CartActivity extends AppCompatActivity {
 
         return singleton_cars;
     }
-
 
 }

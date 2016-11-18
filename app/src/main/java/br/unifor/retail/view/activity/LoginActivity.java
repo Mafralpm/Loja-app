@@ -27,6 +27,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.Arrays;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.UserId;
 import br.unifor.retail.model.UserLogin;
 import br.unifor.retail.rest.ClientService;
 
@@ -47,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private UserLogin userLogin = new UserLogin();
 
+    private UserId userId = new UserId();
+
     @AfterViews
     protected void begin() {
 
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
                 goMainScreen();
             }
             @Override
@@ -87,17 +91,20 @@ public class LoginActivity extends AppCompatActivity {
     @Click
     @UiThread
     public void email_sign_in_button (){
+
         userLogin.getUser().setEmail(email.getText().toString().toLowerCase());
         userLogin.getUser().setPassword(password.getText().toString());
-        clientService.login(userLogin);
-        Log.i("email", email.getText().toString());
-        Log.i("password", password.getText().toString());
+        userId = clientService.login(userLogin);
+
+        Log.d("Eita carai", userId.getId().toString());
 
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
+        envia();
     }
 
     public void esqueciSenha(View v){
+
         LayoutInflater inflate = getLayoutInflater();
         View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_esquecisenha, null);
         final EditText esquecisenha = (EditText) alertDialogLayout.findViewById(R.id.boxText_Dialog_EsqueciSenha);
@@ -125,9 +132,13 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-
     public void cadastrarUsuario (View v){
         Intent intent = new Intent(this, RegisterUser_.class);
         startActivity(intent);
+    }
+
+    public void envia(){
+      //  userId.getId();
+        Log.d("scacac", userId.getId().toString());
     }
 }
