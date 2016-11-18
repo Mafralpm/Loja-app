@@ -8,7 +8,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -72,9 +71,9 @@ public class CartActivity extends AppCompatActivity {
 
 
 
-        if (!contents.isEmpty()) {
-            Log.d("ID no carrinho", contents);
-        }
+//        if (!contents.isEmpty()) {
+//            Log.d("ID no carrinho", contents);
+//        }
 
     }
 

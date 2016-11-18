@@ -28,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.unifor.retail.R;
+import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.view.activity.CartActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
@@ -55,6 +56,7 @@ public class NavegationDrawer {
     private String first_name;
     private String last_name;
     private Bundle bFacebookData;
+    SessoinManager manager;
 
 
 //    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
@@ -70,6 +72,8 @@ public class NavegationDrawer {
     }
 
     public void createNavigationDrawer() {
+
+        manager = new SessoinManager(activity);
         //NAVIGATION DRAWER
         headerNavigationLeft = new AccountHeader()
                 .withActivity(activity)
@@ -138,6 +142,7 @@ public class NavegationDrawer {
                                 break;
                             case 4:
                                 LoginManager.getInstance().logOut();
+                                manager.logoutUser();
                                 goLoginScreen();
                                 break;
 
