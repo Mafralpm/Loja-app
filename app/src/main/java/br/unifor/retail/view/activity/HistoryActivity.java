@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewHistory;
-import br.unifor.retail.model.response.ResponseHistory;
+import br.unifor.retail.model.History;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.singleton.SingletonMyProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
@@ -49,7 +49,7 @@ public class HistoryActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
-    protected ResponseHistory responseHistory;
+    protected History history;
 
     @AfterViews
     public void begin() {

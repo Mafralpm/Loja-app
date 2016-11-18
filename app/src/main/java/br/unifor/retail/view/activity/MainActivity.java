@@ -16,17 +16,21 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.UiThread;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewMain;
+import br.unifor.retail.model.History;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonMain;
 import br.unifor.retail.view.activity.common.BaseActivity;
@@ -49,20 +53,24 @@ public class MainActivity extends BaseActivity {
     private SessoinManager manager;
     private RecordLogin recordLogin;
 
+    @RestService
+    HistoryService historyService;
+
+    private History history = new History();
+
 
     @AfterViews
     public void begin() {
 
         manager = new SessoinManager(this);
 
-        recordLogin = manager.getUser();
+        recordLogin = manager.pegaUsuario();
 
         handler = new Handler();
         if (AccessToken.getCurrentAccessToken() == null) {
         } else {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
-
         }
 
 
@@ -160,12 +168,31 @@ public class MainActivity extends BaseActivity {
                 intentResult
                         .putExtra("contents", contents)
                         .putExtra("format", format);
+
+                Log.d("èo id ?", contents);
+                manager.setIdProduto(Long.valueOf(contents));
+                enviaProHistorico();
                 startActivity(intentResult);
+
+
             }
         } catch (RuntimeException e) {
 
         }
 
+    }
+
+    @Background
+    public void enviaProHistorico(){
+        setaDadosHistorico();
+        historyService.enviar(history);
+    }
+
+    public void setaDadosHistorico(){
+        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setProduto_id(manager.getIdProduto());
+        Log.d("PRODUTO ID", history.getProduto_id().toString());
     }
 
     @Override

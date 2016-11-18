@@ -57,7 +57,7 @@ public class SessoinManager {
         editor.commit();
     }
 
-    public RecordLogin getUser(){
+    public RecordLogin pegaUsuario(){
         RecordLogin recordLogin = new RecordLogin();
         recordLogin.getCliente().setId(preferences.getLong("id", 0));
         recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
@@ -70,5 +70,16 @@ public class SessoinManager {
         Log.d("EMAIL2", recordLogin.getUser().getEmail());
         return  recordLogin;
     }
+
+    public long getIdProduto(){
+        return preferences.getLong("idProduto", 0);
+    }
+
+    public void setIdProduto(Long idProduto){
+        editor.putLong("idProduto", idProduto);
+        editor.commit();
+    }
+
+
 
 }
