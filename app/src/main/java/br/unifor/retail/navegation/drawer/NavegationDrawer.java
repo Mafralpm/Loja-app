@@ -211,7 +211,6 @@ public class NavegationDrawer {
             name = recordLogin.getCliente().getNome_cliente();
             profileImgUrl = recordLogin.getCliente().getFoto();
             foto = "http://bluelab.herokuapp.com" + profileImgUrl;
-            Log.d("FOTO", foto);
             createNavigationDrawer();
         }
     }

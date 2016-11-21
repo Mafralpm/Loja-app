@@ -2,7 +2,6 @@ package br.unifor.retail.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import br.unifor.retail.model.RecordLogin;
 
@@ -70,6 +69,13 @@ public class SessoinManager {
         editor.commit();
     }
 
+    public String getEmailFacebook(){
+        return preferences.getString("emailFacebook", "");
+    }
 
+    public void setEmailFacebook(String emailFacebook){
+        editor.putString("emailFacebook", emailFacebook);
+        editor.commit();
+    }
 
 }

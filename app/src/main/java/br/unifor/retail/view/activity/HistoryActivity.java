@@ -3,18 +3,13 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -30,26 +25,19 @@ import java.util.Collection;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewHistory;
-import br.unifor.retail.adapter.AdapterListViewProduct;
 import br.unifor.retail.model.History;
 import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
-import br.unifor.retail.model.Review;
-
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonHistory;
-import br.unifor.retail.singleton.SingletonMyProduct;
-import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
 import static android.R.attr.format;
-import static br.unifor.retail.R.id.produto_list_view;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 @OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_history)
@@ -64,8 +52,8 @@ public class HistoryActivity extends BaseActivity {
     protected TextView iten_listview_history_textView_Nome;
     @ViewById
     protected TextView iten_listview_history_TextView_Preco;
-    @ViewById
-    protected TextView iten_listview_history_textView_Data;
+//    @ViewById
+//    protected TextView iten_listview_history_textView_Data;
     @ViewById
     protected ListView action_history_ListView;
 
@@ -89,7 +77,7 @@ public class HistoryActivity extends BaseActivity {
     @AfterViews
     public void begin() {
         toolbar = (Toolbar) findViewById(R.id.toolbarHistory);
-        toolbar.setTitle("Historico");
+        toolbar.setTitle("Histórico");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -186,7 +174,7 @@ public class HistoryActivity extends BaseActivity {
 
             for (Product product : productCollection) {
 
-                String uri = "http://bluelab.herokuapp.com" + product.getFoto_file_name().toString();
+                String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
 
                 singletonHistoryArrayList.add(new SingletonHistory(uri, product.getNome(), product.getPreco(), "18/11/2016"));
 

@@ -20,7 +20,6 @@ public class Product { //nome como eu quiser
     public String updated_at;
     public String url;
     public String foto;
-    public String foto_file_name;
 
 
     public String getFoto() {
@@ -111,11 +110,4 @@ public class Product { //nome como eu quiser
         this.url = url;
     }
 
-    public String getFoto_file_name() {
-        return foto_file_name;
-    }
-
-    public void setFoto_file_name(String foto_file_name) {
-        this.foto_file_name = foto_file_name;
-    }
 }

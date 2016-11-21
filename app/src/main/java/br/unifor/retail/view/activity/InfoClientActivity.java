@@ -18,6 +18,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +44,27 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     Spinner spinnerTamanhoBlusa;
     Spinner spinnerTamanhoCalça;
     Spinner spinnerTamanhoCalçado;
+
+    @ViewById
+    protected EditText info_cliente_nome;
+    @ViewById
+    protected EditText info_cliente_email;
+    @ViewById
+    protected EditText info_cliente_nascimento;
+    @ViewById
+    protected Spinner info_cliente_sexo_spinner;
+    @ViewById
+    protected Spinner info_cliente_blusa_spinner;
+    @ViewById
+    protected Spinner info_cliente_calca_spinner;
+    @ViewById
+    protected Spinner info_cliente_calcado_spinner;
+
     private Toolbar toolbar;
 
     NavegationDrawer navegationDrawer;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
-
-
 
     @AfterViews
     public void begin() {
@@ -59,26 +74,19 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        spinnerSexo = (Spinner) findViewById(R.id.sexoSpinner);
         sexoSpinner();
-
-        spinnerTamanhoBlusa = (Spinner) findViewById(R.id.tamanhoBlusaSpinner);
-        tamanhoBlusaSpinner();
-
-        spinnerTamanhoCalça = (Spinner) findViewById(R.id.tamanhoCalçaSpinner);
-        tamanhoCalçaSpinner();
-
-        spinnerTamanhoCalçado = (Spinner) findViewById(R.id.tamanhoCalçadoSpinner);
-        tamanhoCalçadoSpinner();
+        blusaSpinner();
+        calcaSpinner();
+        calcadoSpinner();
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
+
     }
 
     public void onStart() {
         super.onStart();
-        txtDate = (EditText) findViewById(R.id.textDate);
-        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        info_cliente_nascimento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -142,22 +150,23 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
     }
 
     public void sexoSpinner() {
-        spinnerSexo.setOnItemSelectedListener(this);
+        info_cliente_sexo_spinner.setOnItemSelectedListener(this);
 
         List<String> sexos = new ArrayList<>();
+        sexos.add("");
         sexos.add("Femenino");
         sexos.add("Masculino");
 
         ArrayAdapter<String> adapterSexos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexos);
         adapterSexos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSexo.setAdapter(adapterSexos);
+        info_cliente_sexo_spinner.setAdapter(adapterSexos);
     }
 
-    public void tamanhoBlusaSpinner() {
-        spinnerTamanhoBlusa.setOnItemSelectedListener(this);
+    public void blusaSpinner() {
+        info_cliente_blusa_spinner.setOnItemSelectedListener(this);
 
         List<String> tamanhdoBlusas = new ArrayList<String>();
-//        tamanhdoBlusas.add(" ");
+        tamanhdoBlusas.add(" ");
         tamanhdoBlusas.add("GG");
         tamanhdoBlusas.add("G");
         tamanhdoBlusas.add("M");
@@ -166,14 +175,14 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
         ArrayAdapter<String> adapterTamanhoBlusa = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoBlusas);
         adapterTamanhoBlusa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoBlusa.setAdapter(adapterTamanhoBlusa);
+        info_cliente_blusa_spinner.setAdapter(adapterTamanhoBlusa);
     }
 
-    public void tamanhoCalçaSpinner() {
-        spinnerTamanhoCalça.setOnItemSelectedListener(this);
+    public void calcaSpinner() {
+        info_cliente_calca_spinner.setOnItemSelectedListener(this);
 
         List<String> tamanhdoCalças = new ArrayList<String>();
-//        tamanhdoCalças.add(" ");
+        tamanhdoCalças.add(" ");
         tamanhdoCalças.add("GG");
         tamanhdoCalças.add("G");
         tamanhdoCalças.add("M");
@@ -182,14 +191,14 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
         ArrayAdapter<String> adapterTamanhoCalça = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoCalças);
         adapterTamanhoCalça.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoCalça.setAdapter(adapterTamanhoCalça);
+        info_cliente_calca_spinner.setAdapter(adapterTamanhoCalça);
     }
 
-    public void tamanhoCalçadoSpinner() {
-        spinnerTamanhoCalçado.setOnItemSelectedListener(this);
+    public void calcadoSpinner() {
+        info_cliente_calcado_spinner.setOnItemSelectedListener(this);
 
         List<String> tamanhdoCalçados = new ArrayList<String>();
-//        tamanhdoCalçados.add(" ");
+        tamanhdoCalçados.add(" ");
         for (int i = 30; i < 49; i += 2) {
             tamanhdoCalçados.add("" + i);
         }
@@ -197,7 +206,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
         ArrayAdapter<String> adapterTamanhoCalçado = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tamanhdoCalçados);
         adapterTamanhoCalçado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTamanhoCalçado.setAdapter(adapterTamanhoCalçado);
+        info_cliente_calcado_spinner.setAdapter(adapterTamanhoCalçado);
     }
 
     public void onBackPressed(){
@@ -216,7 +225,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    public  void  vaiPraMain(View v){
+    public void vaiPraMain(View v){
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }

@@ -56,13 +56,13 @@ public class AdapterListViewHistory extends BaseAdapter {
         }
 
         TextView nome = (TextView) convertView.findViewById(R.id.iten_listview_history_textView_Nome);
-        TextView data = (TextView) convertView.findViewById(R.id.iten_listview_history_textView_Data);
+//        TextView data = (TextView) convertView.findViewById(R.id.iten_listview_history_textView_Data);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iten_listview_history_imageView_Image);
         TextView preco = (TextView) convertView.findViewById(R.id.iten_listview_history_TextView_Preco);
 
 
         nome.setText(singletonHistory.getNome());
-        data.setText(singletonHistory.getData());
+//        data.setText(singletonHistory.getData());
 //        imageView.setImageResource(Integer.parseInt(String.valueOf(singletonHistory.getImagem())));
         preco.setText(singletonHistory.getPreco()+"");
 
