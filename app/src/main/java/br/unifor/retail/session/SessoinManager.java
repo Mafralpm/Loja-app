@@ -78,4 +78,14 @@ public class SessoinManager {
         editor.commit();
     }
 
+    public long getIdCarrinho(){
+        return preferences.getLong("idCarrinho", 0);
+    }
+
+    public void setIdCarrinho(Long idCarrinho){
+        editor.putLong("idCarrinho", idCarrinho);
+        editor.commit();
+    }
+
+
 }

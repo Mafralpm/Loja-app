@@ -14,7 +14,7 @@ import br.unifor.retail.model.Product;
  * Created by vania on 24/10/16.
  */
 
-@Rest(rootUrl = "http://bluelab.heroku.com/produtos", converters = MappingJackson2HttpMessageConverter.class)
+@Rest(rootUrl = "http://bluelab.herokuapp.com/produtos", converters = MappingJackson2HttpMessageConverter.class)
 public interface ProductService{
 
     @Get("/{idProduct}.json")

@@ -185,7 +185,7 @@ public class MainActivity extends BaseActivity {
     @Background
     public void enviaProHistorico(){
         setaDadosHistorico();
-        historyService.enviar(history);
+        historyService.cria(history);
     }
 
     public void setaDadosHistorico(){
