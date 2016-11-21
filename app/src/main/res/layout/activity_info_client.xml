@@ -38,11 +38,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/nome"
+                    android:id="@+id/info_cliente_nome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nome"
-                    android:text="Vânia Almeida"
+                    android:text=""
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -52,11 +52,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/info_cliente_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:text="vania.almeida28@hotmail.com"
+                    android:text=""
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -67,13 +67,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/textDate"
+                    android:id="@+id/info_cliente_nascimento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Data de Nascimento"
                     android:inputType="date"
-                    android:text="11/05/1990"
+                    android:text=""
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -90,11 +90,11 @@
                     android:textSize="17dp" />
 
                 <Spinner
-
-                    android:id="@+id/sexoSpinner"
+                    android:id="@+id/info_cliente_sexo_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/sexo_prompt"></Spinner>
+                    android:prompt="@string/sexo_prompt">
+                </Spinner>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -111,10 +111,11 @@
 
                 <Spinner
                     android:layout_marginTop="3dp"
-                    android:id="@+id/tamanhoBlusaSpinner"
+                    android:id="@+id/info_cliente_blusa_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/sexo_prompt"></Spinner>
+                    android:prompt="@string/sexo_prompt">
+                </Spinner>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -130,11 +131,12 @@
                     android:textSize="17dp" />
 
                 <Spinner
-                    android:id="@+id/tamanhoCalçaSpinner"
+                    android:id="@+id/info_cliente_calca_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:prompt="@string/sexo_prompt"></Spinner>
+                    android:prompt="@string/sexo_prompt">
+                </Spinner>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -150,11 +152,12 @@
                     android:textSize="17dp" />
 
                 <Spinner
-                    android:id="@+id/tamanhoCalçadoSpinner"
+                    android:id="@+id/info_cliente_calcado_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:prompt="@string/sexo_prompt"></Spinner>
+                    android:prompt="@string/sexo_prompt">
+                </Spinner>
 
             </android.support.design.widget.TextInputLayout>
 
