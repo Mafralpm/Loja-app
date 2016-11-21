@@ -8,6 +8,7 @@ import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import br.unifor.retail.model.Pedido;
+import br.unifor.retail.model.PedidoHasProduto;
 
 /**
  * Created by vania on 27/10/16.
@@ -26,7 +27,7 @@ public interface PedidoService {
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
             @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
-    void criaPedidoNoProduto(@Body Pedido pedido);
+    void criaPedidoHasProduto(@Body PedidoHasProduto pedidoHasProduto);
 
 
 }

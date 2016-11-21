@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -77,14 +76,14 @@ public class AdapterListViewMain extends BaseAdapter {
         relativeLayoutEsquerda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Clique na imagem da Esquerda: " + position, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, "Clique na imagem da Esquerda: " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
         relativeLayoutDireita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Clique na imagem da Direita: " + position, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(context, "Clique na imagem da Direita: " + position, Toast.LENGTH_SHORT).show();
             }
         });
 

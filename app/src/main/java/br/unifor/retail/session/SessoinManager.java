@@ -87,5 +87,14 @@ public class SessoinManager {
         editor.commit();
     }
 
+    public Boolean getFinalizado(){
+        return preferences.getBoolean("finalizado", false);
+    }
+
+    public void setFinalizado(){
+        editor.putBoolean("finalizado", true);
+        editor.commit();
+    }
+
 
 }

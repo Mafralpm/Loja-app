@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -100,7 +99,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -110,7 +109,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("Valor AQUIII", Double.valueOf(ratingbarDialog.getRating()).toString());
                         Log.d("Valor AQUIII", boxText.getText().toString());
-                        Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
                         button.setText("Reavaliar");
                         ratingBarListView.setRating(ratingbarDialog.getRating());
                     }

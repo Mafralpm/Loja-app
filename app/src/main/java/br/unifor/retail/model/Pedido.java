@@ -13,8 +13,7 @@ public class Pedido  {
     private Long cliente_id;
     private Double valor_total;
     private Boolean finalizado;
-    private Long produto_id;
-    private int quantidade;
+
 
     public Long getId() {
         return id;
@@ -48,19 +47,5 @@ public class Pedido  {
         this.finalizado = finalizado;
     }
 
-    public Long getProduto_id() {
-        return produto_id;
-    }
 
-    public void setProduto_id(Long produto_id) {
-        this.produto_id = produto_id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
 }
