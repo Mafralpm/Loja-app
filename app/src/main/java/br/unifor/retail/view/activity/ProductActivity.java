@@ -32,12 +32,16 @@ import java.util.Collection;
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewProduct;
 import br.unifor.retail.model.History;
+import br.unifor.retail.model.Pedido;
 import br.unifor.retail.model.Product;
+import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.Review;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.HistoryService;
+import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
+import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
@@ -53,6 +57,8 @@ public class ProductActivity extends BaseActivity {
     protected ReviewService reviewService;
     @RestService
     protected HistoryService historyService;
+    @RestService
+    protected PedidoService pedidoService;
 
     @ViewById
     protected TextView produto_nome;
@@ -82,13 +88,25 @@ public class ProductActivity extends BaseActivity {
     protected Handler handler;
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
+    private RecordLogin recordLogin;
+
+
     History history = new History();
+
+    Pedido pedido =  new Pedido();
+
+
+
+    private SessoinManager manager;
 
 
     ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
 
     @AfterViews
     public void begin() {
+
+        manager = new SessoinManager(this);
+        recordLogin = manager.pegaUsuario();
 
         toolbar = (Toolbar) findViewById(R.id.toolbarProduct);
         toolbar.setTitle("Produtos");
@@ -99,6 +117,7 @@ public class ProductActivity extends BaseActivity {
         intent = getIntent();
         contents = intent.getStringExtra("contents");
         handler = new Handler();
+
 
         handler.post(new Runnable() {
             @Override
@@ -163,12 +182,27 @@ public class ProductActivity extends BaseActivity {
 
     @Click
     public void adcionar_carrinho(){
+        criaPedido();
         Intent intent = new Intent(this, CartActivity_.class);
         intent.putExtra("id", contents);
         if(contents != null){
             Log.d("Testezinho", contents);
         }
         startActivity(intent);
+    }
+
+    @Background
+    public void criaPedido(){
+        setaDadosPedido();
+        pedido = pedidoService.criaPedido(pedido);
+        manager.setIdCarrinho(pedido.getId());
+//        Log.d("TESTE DE ID", pedido.getId().toString());
+    }
+
+    public void setaDadosPedido(){
+        pedido.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        pedido.setValor_total(0.00);
+        pedido.setFinalizado(false);
     }
 
     @OptionsItem(R.id.menu_carinho)

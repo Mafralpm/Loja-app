@@ -82,15 +82,6 @@ public class HistoryActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-//        ArrayList<SingletonHistory> singleton_histories;
-//        singleton_histories = todos_Os_Produtos();
-//
-//        AdapterListViewHistory adapter_listView_my_product = new AdapterListViewHistory(singleton_histories, getApplicationContext());
-//
-//        ListView listView = (ListView) findViewById(R.id.action_history_ListView);
-//        listView.setAdapter(adapter_listView_my_product);
-
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
@@ -193,17 +184,5 @@ public class HistoryActivity extends BaseActivity {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
-
-
-//    public ArrayList<SingletonHistory> todos_Os_Produtos() {
-//        ArrayList<SingletonHistory> singleton_histories = new ArrayList<>();
-//
-//        singleton_histories.add(new SingletonHistory(R.drawable.camisa_preta, "Camisa Basica", 5.0, "10/04/2016"));
-//        singleton_histories.add(new SingletonHistory(R.drawable.camisa2, "Camisa Social", 10.9, "10/04/2016"));
-//        singleton_histories.add(new SingletonHistory(R.drawable.camisa1, "Camisa Social", 100.0, "10/04/2016"));
-//
-//        return singleton_histories;
-//    }
-
 
 }
