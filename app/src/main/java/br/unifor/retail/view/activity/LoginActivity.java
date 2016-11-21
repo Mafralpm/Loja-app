@@ -110,12 +110,6 @@ public class LoginActivity extends AppCompatActivity {
             recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
             recordLogin.getCliente().setFoto(user.getFoto());
 
-            Log.d("Nome ", recordLogin.getCliente().getNome_cliente());
-            Log.d("ID", recordLogin.getCliente().getId().toString());
-            Log.d("FOTO", recordLogin.getCliente().getFoto());
-            Log.d("EMAIL", recordLogin.getUser().getEmail());
-
-
             manager.addUser(recordLogin);
 
             goMainScreen();
