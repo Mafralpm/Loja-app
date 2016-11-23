@@ -2,6 +2,7 @@ package br.unifor.retail.view.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,7 +19,7 @@ import br.unifor.retail.rest.ClientService;
 import br.unifor.retail.view.activity.common.BaseActivity;
 
 @EActivity(R.layout.activity_register_user)
-public class RegisterUser extends BaseActivity{
+public class RegisterUser extends BaseActivity {
 
     @RestService
     ClientService clientService;
@@ -50,26 +51,37 @@ public class RegisterUser extends BaseActivity{
 
     }
 
-    @Click
+
+//    void register_cadastrar() {
+//        setaDadosCliente();
+//        clientService.cadastraCliente(recordLogin);
+//        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+//        startActivity(intent);
+//    }
+
     @Background
+    @Click
     void register_cadastrar() {
-        setaDadosCliente();
-        clientService.cadastraCliente(recordLogin);
-        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
-        startActivity(intent);
+        try {
+            recordLogin.getUser().setEmail(register_email.getText().toString().toLowerCase().trim());
+            recordLogin.getUser().setPassword(register_senha.getText().toString().trim());
+            recordLogin.getUser().setPassword_confirmation(register_confirmar_senha.getText().toString().trim());
+            recordLogin.getUser().setRole(ROLE_CLIENT);
+            recordLogin.getCliente().setNome_cliente(register_nome.getText().toString().trim());
+            clientService.cadastraCliente(recordLogin);
+            Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.d("LOgin", e.toString());
+        }
+
+
+//    try{
+//
+//    }catch (Exception e){
+//        Log.d("LOgin", e.toString());
+//    }
+
+
     }
-
-    void setaDadosCliente() {
-        recordLogin.getUser().setEmail(register_email.getText().toString().toLowerCase());
-        recordLogin.getUser().setPassword(register_senha.getText().toString());
-        recordLogin.getUser().setPassword_confirmation(register_confirmar_senha.getText().toString());
-        recordLogin.getCliente().setNome_cliente(register_nome.getText().toString());
-        recordLogin.getUser().setRole(ROLE_CLIENT);
-    }
-
-
-
-
-
-
 }
