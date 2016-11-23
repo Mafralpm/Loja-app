@@ -22,19 +22,19 @@
     </string>
 
 
-    //Variaveis da tela "informações do decricao
+    //Variaveis da tela "informações do preco
     <string name="title_activity_info_produto">Informações do Produto</string>
-    <string name="image_info_produto">imagem do decricao</string>
-    <string name="nome_produto">nome do decricao</string>
-    <string name="preco_produto">preço do decricao</string>
-    <string name="tamanho_produto">tamanho do decricao</string>
-    <string name="cor_produto">cor do decricao</string>
-    <string name="valor_preco_produto">valor do preço do decricao</string>
-    <string name="valor_tamanho_produto">valor do tamanho do decricao</string>
-    <string name="valor_cor_produto">valor das cores do decricao</string>
-    <string name="list_review">lista com comentarios sobre o decricao</string>
-    <string name="chamar_atendente_info_produto">button chamar atendente info decricao</string>
-    <string name="adicionar_carrinho">button adicionar o decricao no carirnho</string>
+    <string name="image_info_produto">imagem do preco</string>
+    <string name="nome_produto">nome do preco</string>
+    <string name="preco_produto">preço do preco</string>
+    <string name="tamanho_produto">tamanho do preco</string>
+    <string name="cor_produto">cor do preco</string>
+    <string name="valor_preco_produto">valor do preço do preco</string>
+    <string name="valor_tamanho_produto">valor do tamanho do preco</string>
+    <string name="valor_cor_produto">valor das cores do preco</string>
+    <string name="list_review">lista com comentarios sobre o preco</string>
+    <string name="chamar_atendente_info_produto">button chamar atendente info preco</string>
+    <string name="adicionar_carrinho">button adicionar o preco no carirnho</string>
 
     //Tela Info_Client
     <string-array name="sexo">

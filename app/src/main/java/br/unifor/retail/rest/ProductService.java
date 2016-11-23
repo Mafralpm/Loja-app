@@ -22,4 +22,6 @@ public interface ProductService{
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
             @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
     Product searchProduct (@Path Long idProduct);
+
+
 }

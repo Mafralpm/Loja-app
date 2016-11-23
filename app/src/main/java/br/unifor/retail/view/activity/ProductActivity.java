@@ -81,7 +81,7 @@ public class ProductActivity extends BaseActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected Product product;
-    protected Collection<Review>  responseReview;
+    protected Collection<Review> reviews;
 
     protected Intent intent;
     protected String contents;
@@ -98,12 +98,11 @@ public class ProductActivity extends BaseActivity {
 
     PedidoHasProduto pedidoHasProduto =  new PedidoHasProduto();
 
-
-
     private SessoinManager manager;
 
 
-    ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
+    ArrayList<SingletonProduct> singletonProductArrayList;
+    AdapterListViewProduct adapter;
 
     @AfterViews
     public void begin() {
@@ -120,6 +119,9 @@ public class ProductActivity extends BaseActivity {
         intent = getIntent();
         contents = intent.getStringExtra("contents");
         handler = new Handler();
+
+        singletonProductArrayList =  new ArrayList<>();
+        adapter = new AdapterListViewProduct(singletonProductArrayList,this);
 
 
         handler.post(new Runnable() {
@@ -143,8 +145,8 @@ public class ProductActivity extends BaseActivity {
 
         try {
             product = productService.searchProduct(idQrCode);
-            responseReview = reviewService.searchProductReview(idQrCode);
-            montaActivity(product, responseReview);
+            reviews = reviewService.searchProductReview(idQrCode);
+            montaActivity(product, reviews);
 
         } catch (Exception e) {
             Log.d("Erro na busca", e.toString());
@@ -169,7 +171,7 @@ public class ProductActivity extends BaseActivity {
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
             }
 
-            AdapterListViewProduct adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
+            adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
             produto_list_view.setAdapter(adapter);
 
         } catch (Exception e) {
@@ -178,17 +180,13 @@ public class ProductActivity extends BaseActivity {
     }
 
     public void enviaProHistorico(Long idQrCode){
-
         history.setProduto_id(idQrCode);
-
     }
 
     @Click
     public void adcionar_carrinho(){
         criaPedido();
-        criaPedidoHasProduto();
-//
-        Intent intent = new Intent(this, CartActivity_.class);
+        Intent intent = new Intent(this, PedidoActivity_.class);
         intent.putExtra("id", contents);
         if(contents != null){
             Log.d("Testezinho", contents);
@@ -202,10 +200,13 @@ public class ProductActivity extends BaseActivity {
         pedido = pedidoService.criaPedido(pedido);
         manager.setIdCarrinho(pedido.getId());
         Log.d("TESTE DE ID", manager.getIdCarrinho()+"");
+        criaPedidoHasProduto();
     }
 
     public void setaDadosPedido(){
         pedido.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        Log.d("TESTE DE ID do cliente", manager.pegaUsuario().getCliente().getId().toString());
+
         pedido.setValor_total(0.00);
         pedido.setFinalizado(false);
     }
@@ -218,14 +219,19 @@ public class ProductActivity extends BaseActivity {
 
     public void setaDadosPedidoHasProduto(){
         pedidoHasProduto.setProduto_id(manager.getIdProduto());
+        Log.d("TESTE DE ID PRODUTO", pedidoHasProduto.getProduto_id().toString());
+
         pedidoHasProduto.setPedido_id(manager.getIdCarrinho());
+        Log.d("TESTE PEDIDO", pedidoHasProduto.getPedido_id().toString());
+
         pedidoHasProduto.setQuantidade(1);
+        Log.d("TESTE DE QUANTIDADE", String.valueOf(pedidoHasProduto.getQuantidade()));
+
     }
 
     @OptionsItem(R.id.menu_carinho)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
-
+        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
         startActivity(intent);
     }
 

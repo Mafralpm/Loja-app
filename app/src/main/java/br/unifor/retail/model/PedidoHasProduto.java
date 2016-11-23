@@ -1,9 +1,12 @@
 package br.unifor.retail.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by vania on 21/11/16.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PedidoHasProduto {
 
     private Long produto_id;

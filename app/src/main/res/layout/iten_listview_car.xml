@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:gravity="center_horizontal"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.67"
             android:orientation="vertical">
 
             <TextView
@@ -36,44 +36,8 @@
                 android:id="@+id/activity_car_TextView_Nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome"
+                android:text=""
                 android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/activity_car_TextView_Descricao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Descricao"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/activity_car_TextView_Cor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cor"
-                android:textColor="#000000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Qtd."
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="5dp"
-                android:text="1" />
 
         </LinearLayout>
 
@@ -98,14 +62,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="150,00"
-                android:textColor="#000000" />
+                android:text=""
+                android:textColor="#000000"
+                android:id="@+id/activity_car_TextView_Preco"/>
 
             <ImageView
                 android:id="@+id/activity_car_ImageView_Image_Delete"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_width="30dp"
+                android:layout_marginLeft="55dp"
+                android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:src="@drawable/lixeira"/>
 

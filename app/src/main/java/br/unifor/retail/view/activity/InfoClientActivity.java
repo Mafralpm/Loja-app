@@ -101,7 +101,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     @OptionsItem(R.id.carinho_cliente)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
         startActivity(intent);
     }
 
