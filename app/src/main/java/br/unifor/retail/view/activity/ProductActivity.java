@@ -38,6 +38,7 @@ import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.Review;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
@@ -81,7 +82,7 @@ public class ProductActivity extends BaseActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected Product product;
-    protected Collection<Review>  responseReview;
+    protected Collection<Review> responseReview;
 
     protected Intent intent;
     protected String contents;
@@ -94,16 +95,17 @@ public class ProductActivity extends BaseActivity {
 
     History history = new History();
 
-    Pedido pedido =  new Pedido();
+    Pedido pedido = new Pedido();
 
-    PedidoHasProduto pedidoHasProduto =  new PedidoHasProduto();
+    PedidoHasProduto pedidoHasProduto = new PedidoHasProduto();
 
+    QrCode qrCode;
 
 
     private SessoinManager manager;
 
 
-    ArrayList<SingletonProduct> singletonProductArrayList =  new ArrayList<>();
+    ArrayList<SingletonProduct> singletonProductArrayList = new ArrayList<>();
 
     @AfterViews
     public void begin() {
@@ -136,6 +138,8 @@ public class ProductActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
+
+        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @Background
@@ -164,7 +168,7 @@ public class ProductActivity extends BaseActivity {
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
-            for (Review review : responseReview){
+            for (Review review : responseReview) {
                 Double nota = Double.valueOf(review.getNota());
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
             }
@@ -177,46 +181,46 @@ public class ProductActivity extends BaseActivity {
         }
     }
 
-    public void enviaProHistorico(Long idQrCode){
+    public void enviaProHistorico(Long idQrCode) {
 
         history.setProduto_id(idQrCode);
 
     }
 
     @Click
-    public void adcionar_carrinho(){
+    public void adcionar_carrinho() {
         criaPedido();
         criaPedidoHasProduto();
 //
         Intent intent = new Intent(this, CartActivity_.class);
         intent.putExtra("id", contents);
-        if(contents != null){
+        if (contents != null) {
             Log.d("Testezinho", contents);
         }
         startActivity(intent);
     }
 
     @Background
-    public void criaPedido(){
+    public void criaPedido() {
         setaDadosPedido();
         pedido = pedidoService.criaPedido(pedido);
         manager.setIdCarrinho(pedido.getId());
-        Log.d("TESTE DE ID", manager.getIdCarrinho()+"");
+        Log.d("TESTE DE ID", manager.getIdCarrinho() + "");
     }
 
-    public void setaDadosPedido(){
+    public void setaDadosPedido() {
         pedido.setCliente_id(manager.pegaUsuario().getCliente().getId());
         pedido.setValor_total(0.00);
         pedido.setFinalizado(false);
     }
 
     @Background
-    public void criaPedidoHasProduto(){
+    public void criaPedidoHasProduto() {
         setaDadosPedidoHasProduto();
         pedidoService.criaPedidoHasProduto(pedidoHasProduto);
     }
 
-    public void setaDadosPedidoHasProduto(){
+    public void setaDadosPedidoHasProduto() {
         pedidoHasProduto.setProduto_id(manager.getIdProduto());
         pedidoHasProduto.setPedido_id(manager.getIdCarrinho());
         pedidoHasProduto.setQuantidade(1);
@@ -231,28 +235,10 @@ public class ProductActivity extends BaseActivity {
 
     @OptionsItem(R.id.menu_qr_code)
     public void qrCode() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
-        }
+        qrCode.scanQR();
     }
 
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
-
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }

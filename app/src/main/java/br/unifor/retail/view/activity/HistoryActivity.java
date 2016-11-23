@@ -29,6 +29,7 @@ import br.unifor.retail.model.History;
 import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonHistory;
@@ -37,6 +38,7 @@ import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
+import static android.R.attr.contextClickable;
 import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
@@ -52,7 +54,7 @@ public class HistoryActivity extends BaseActivity {
     protected TextView iten_listview_history_textView_Nome;
     @ViewById
     protected TextView iten_listview_history_TextView_Preco;
-//    @ViewById
+    //    @ViewById
 //    protected TextView iten_listview_history_textView_Data;
     @ViewById
     protected ListView action_history_ListView;
@@ -65,6 +67,8 @@ public class HistoryActivity extends BaseActivity {
 
     private Toolbar toolbar;
     protected Collection<Product> productCollection;
+
+    QrCode qrCode;
 
     ArrayList<SingletonHistory> singletonHistoryArrayList = new ArrayList<>();
 
@@ -93,6 +97,8 @@ public class HistoryActivity extends BaseActivity {
         Log.i("Cliente id", cliente_id + "");
 
         buscaProdutos(cliente_id);
+
+        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @OptionsItem(R.id.menu_carinho)
@@ -103,26 +109,9 @@ public class HistoryActivity extends BaseActivity {
 
     @OptionsItem(R.id.menu_qr_code)
     public void qrCode() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
-        }
+        qrCode.scanQR();
     }
 
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
