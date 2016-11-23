@@ -1,8 +1,13 @@
 package br.unifor.retail.view.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -52,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     SessoinManager manager;
 
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
+
     @AfterViews
     protected void begin() {
         manager = new SessoinManager(this);
@@ -82,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Erro", error.toString());
             }
         });
+
     }
 
     private void goMainScreen() {

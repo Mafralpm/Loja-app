@@ -30,6 +30,7 @@ import br.unifor.retail.adapter.AdapterListViewMain;
 import br.unifor.retail.model.History;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonMain;
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
     HistoryService historyService;
 
     private History history = new History();
+
+    QrCode qrCode;
 
 
     @AfterViews
@@ -92,18 +95,20 @@ public class MainActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, MainActivity.this);
         navegationDrawer.getProfile();
 
-    }
-
-    @Click
-    public void scanQR() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+        if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
         }
+
+        qrCode = new QrCode(this, getApplicationContext());
+
+    }
+
+    @Click
+    public void scanQR() {
+        qrCode.scanQR();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,23 +123,23 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CAMERA: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    scanBarcode();
-                } else {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialogHelper.showAlertDialog("Atenção", "Permita o acesso à câmera", null);
-                        }
-                    });
-                }
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode) {
+//            case MY_PERMISSIONS_REQUEST_CAMERA: {
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    qrCode.scanQR();
+//                } else {
+//                    handler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dialogHelper.showAlertDialog("Atenção", "Permita o acesso à câmera", null);
+//                        }
+//                    });
+//                }
+//            }
+//        }
+//    }
 
     private void goLoginScreen() {
         Intent intent = new Intent(this, LoginActivity_.class);
@@ -142,17 +147,6 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
     }
 
-
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
 
 
     @Override

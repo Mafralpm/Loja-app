@@ -1,12 +1,8 @@
 package br.unifor.retail.view.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
@@ -38,6 +34,7 @@ import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.Review;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
@@ -45,8 +42,6 @@ import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
-import me.sudar.zxingorient.Barcode;
-import me.sudar.zxingorient.ZxingOrient;
 
 @OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_product)
@@ -83,6 +78,7 @@ public class ProductActivity extends BaseActivity {
     protected Product product;
     protected Collection<Review> reviews;
 
+
     protected Intent intent;
     protected String contents;
     protected Long idDoQRCOde;
@@ -94,15 +90,17 @@ public class ProductActivity extends BaseActivity {
 
     History history = new History();
 
-    Pedido pedido =  new Pedido();
+    Pedido pedido = new Pedido();
 
-    PedidoHasProduto pedidoHasProduto =  new PedidoHasProduto();
+    PedidoHasProduto pedidoHasProduto = new PedidoHasProduto();
 
     private SessoinManager manager;
 
 
     ArrayList<SingletonProduct> singletonProductArrayList;
     AdapterListViewProduct adapter;
+
+    QrCode qrCode;
 
     @AfterViews
     public void begin() {
@@ -138,6 +136,8 @@ public class ProductActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
+
+        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @Background
@@ -166,7 +166,7 @@ public class ProductActivity extends BaseActivity {
 
             Picasso.with(produto_foto.getContext()).load(uri).into(produto_foto);
 
-            for (Review review : responseReview){
+            for (Review review : responseReview) {
                 Double nota = Double.valueOf(review.getNota());
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
             }
@@ -180,30 +180,32 @@ public class ProductActivity extends BaseActivity {
     }
 
     public void enviaProHistorico(Long idQrCode){
+
         history.setProduto_id(idQrCode);
     }
 
     @Click
-    public void adcionar_carrinho(){
+    public void adcionar_carrinho() {
         criaPedido();
         Intent intent = new Intent(this, PedidoActivity_.class);
         intent.putExtra("id", contents);
-        if(contents != null){
+        if (contents != null) {
             Log.d("Testezinho", contents);
         }
         startActivity(intent);
     }
 
     @Background
-    public void criaPedido(){
+    public void criaPedido() {
         setaDadosPedido();
         pedido = pedidoService.criaPedido(pedido);
         manager.setIdCarrinho(pedido.getId());
         Log.d("TESTE DE ID", manager.getIdCarrinho()+"");
         criaPedidoHasProduto();
+
     }
 
-    public void setaDadosPedido(){
+    public void setaDadosPedido() {
         pedido.setCliente_id(manager.pegaUsuario().getCliente().getId());
         Log.d("TESTE DE ID do cliente", manager.pegaUsuario().getCliente().getId().toString());
 
@@ -212,12 +214,12 @@ public class ProductActivity extends BaseActivity {
     }
 
     @Background
-    public void criaPedidoHasProduto(){
+    public void criaPedidoHasProduto() {
         setaDadosPedidoHasProduto();
         pedidoService.criaPedidoHasProduto(pedidoHasProduto);
     }
 
-    public void setaDadosPedidoHasProduto(){
+    public void setaDadosPedidoHasProduto() {
         pedidoHasProduto.setProduto_id(manager.getIdProduto());
         Log.d("TESTE DE ID PRODUTO", pedidoHasProduto.getProduto_id().toString());
 
@@ -237,28 +239,10 @@ public class ProductActivity extends BaseActivity {
 
     @OptionsItem(R.id.menu_qr_code)
     public void qrCode() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
-        }
+        qrCode.scanQR();
     }
 
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
-
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }

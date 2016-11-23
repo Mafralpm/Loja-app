@@ -16,11 +16,13 @@ import org.androidannotations.annotations.UiThread;
 
 import br.unifor.retail.R;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.session.SessoinManager;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
+import static android.R.attr.contextClickable;
 import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
@@ -31,6 +33,8 @@ public class MyProductActivity extends AppCompatActivity {
     NavegationDrawer navegationDrawer;
 
     SessoinManager manager;
+
+    QrCode qrCode;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
@@ -57,6 +61,7 @@ public class MyProductActivity extends AppCompatActivity {
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
+        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @OptionsItem(R.id.menu_carinho)
@@ -67,26 +72,9 @@ public class MyProductActivity extends AppCompatActivity {
 
     @OptionsItem(R.id.menu_qr_code)
     public void qrCode() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
-        }
+        qrCode.scanQR();
     }
 
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

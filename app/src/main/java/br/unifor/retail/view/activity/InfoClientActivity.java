@@ -25,6 +25,7 @@ import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.view.activity.dialog.DateDialog;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
@@ -64,6 +65,8 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     NavegationDrawer navegationDrawer;
 
+    QrCode qrCode;
+
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     @AfterViews
@@ -82,6 +85,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
+        qrCode = new QrCode(this, getApplicationContext());
     }
 
     public void onStart() {
@@ -107,26 +111,9 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     @OptionsItem(R.id.qr_code_cliete)
     public void qrCode() {
-        if (!(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            scanBarcode();
-        }
+        qrCode.scanQR();
     }
 
-    @UiThread
-    public void scanBarcode() {
-        ZxingOrient integrator = new ZxingOrient(this);
-        integrator
-                .setToolbarColor("#AA000000")
-                .showInfoBox(false)
-                .setBeep(false)
-                .setVibration(true)
-                .initiateScan(Barcode.QR_CODE);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -209,7 +196,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
         info_cliente_calcado_spinner.setAdapter(adapterTamanhoCalçado);
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
@@ -225,7 +212,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    public void vaiPraMain(View v){
+    public void vaiPraMain(View v) {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
