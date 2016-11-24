@@ -103,7 +103,7 @@ public class HistoryActivity extends BaseActivity {
 
     @OptionsItem(R.id.menu_carinho)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), CartActivity_.class);
+        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
         startActivity(intent);
     }
 

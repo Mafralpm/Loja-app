@@ -51,7 +51,8 @@
             android:background="@color/colorAccent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:text="Enviar para caixa" />
+            android:text="Enviar para caixa"
+            android:id="@+id/pedido_envia_pro_caixa"/>
     </LinearLayout>
 
 

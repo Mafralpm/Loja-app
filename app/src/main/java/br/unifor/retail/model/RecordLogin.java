@@ -1,9 +1,11 @@
 package br.unifor.retail.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by vania on 17/11/16.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RecordLogin {
 
     Cliente cliente = new Cliente();

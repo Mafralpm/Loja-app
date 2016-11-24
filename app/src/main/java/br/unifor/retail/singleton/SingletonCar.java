@@ -5,29 +5,22 @@ package br.unifor.retail.singleton;
  */
 
 public class SingletonCar {
-    private int imageProduct, flag;
-    private String nome, decricao, cor;
+    private String imageProduct;
+    private String nome, preco;
 
     public SingletonCar() {
     }
-
-    public SingletonCar(int image, String nome, String decricao, String cor) {
+    public SingletonCar(String image, String nome, String preco) {
         this.imageProduct = image;
         this.nome = nome;
-        this.decricao = decricao;
-        this.cor = cor;
-        this.flag = 0;
+        this.preco = preco;
     }
 
-    public SingletonCar(int flag) {
-        this.flag = flag;
-    }
-
-    public int getImageProduct() {
+    public String getImageProduct() {
         return imageProduct;
     }
 
-    public void setImageProduct(int imageProduct) {
+    public void setImageProduct(String imageProduct) {
         this.imageProduct = imageProduct;
     }
 
@@ -39,27 +32,13 @@ public class SingletonCar {
         this.nome = nome;
     }
 
-    public String getDecricao() {
-        return decricao;
+    public String getPreco() {
+        return preco;
     }
 
-    public void setDecricao(String decricao) {
-        this.decricao = decricao;
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
 
-    public String getCor() {
-        return cor;
-    }
 
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public int getFlag() {
-        return flag;
-    }
-
-    public void setFlag(int flag) {
-        this.flag = flag;
-    }
 }

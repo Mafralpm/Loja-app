@@ -29,7 +29,7 @@ import java.net.URL;
 import br.unifor.retail.R;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.session.SessoinManager;
-import br.unifor.retail.view.activity.CartActivity_;
+import br.unifor.retail.view.activity.PedidoActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
 import br.unifor.retail.view.activity.LoginActivity_;
@@ -131,7 +131,7 @@ public class NavegationDrawer {
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, CartActivity_.class);
+                                Intent intent1 = new Intent(activity, PedidoActivity_.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:

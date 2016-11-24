@@ -3,27 +3,35 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
+import android.util.Log;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
+import br.unifor.retail.model.Pedido;
+import br.unifor.retail.model.Product;
+import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.rest.PedidoService;
+import br.unifor.retail.rest.ProductService;
+import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonCar;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
@@ -33,49 +41,57 @@ import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
-public class CartActivity extends AppCompatActivity {
+public class PedidoActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
     protected Intent intent;
     protected String contents;
-    protected Handler handler;
-    ImageView imageViewDelete;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     @ViewById
-    ListView car_activity_listView;
+    protected ListView car_activity_listView;
+
+    @ViewById
+    protected Toolbar toolbarCart;
+
+    @RestService
+    protected PedidoService pedidoService;
+
+    @RestService
+    protected ProductService productService;
+
+    protected Collection<Product> productCollection;
+
+    ArrayList<SingletonCar> singleton_cars = new ArrayList<>();
+
+    private SessoinManager manager;
+    private RecordLogin recordLogin;
+
+    private Pedido pedido;
 
     @AfterViews
     public void begin() {
+        manager = new SessoinManager(this);
+        recordLogin = manager.pegaUsuario();
+
         intent = getIntent();
         contents = intent.getStringExtra("id");
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarCart);
-        toolbar.setTitle("Carrinho");
-        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
-        setSupportActionBar(toolbar);
+        toolbarCart.setTitle("Carrinho");
+        toolbarCart.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
+        setSupportActionBar(toolbarCart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<SingletonCar> singleton_cars;
-        singleton_cars = todos_os_produtos();
-
-        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
+        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext());
 
         car_activity_listView.setAdapter(adapter_listView_car);
 
-        navegationDrawer = new NavegationDrawer(toolbar, this);
+        navegationDrawer = new NavegationDrawer(toolbarCart, this);
         navegationDrawer.getProfile();
 
-
-
-//        if (!contents.isEmpty()) {
-//            Log.d("ID no carrinho", contents);
-//        }
-
+        buscaPedidoHasProdutos();
     }
-
 
     @OptionsItem(R.id.carrinho_qr_code)
     public void qrCode() {
@@ -116,7 +132,7 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intentResult);
             }
         } catch (RuntimeException e) {
-
+            Log.i("TETESRGFG111111", e.toString());
         }
 
     }
@@ -125,12 +141,46 @@ public class CartActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public List<SingletonCar> todos_os_produtos() {
-        List<SingletonCar> singleton_cars = new ArrayList<>();
+    @Background
+    public void buscaPedidoHasProdutos(){
+      try {
+          productCollection = pedidoService.searchProductReview(manager.getIdCarrinho());
+          Log.d("IDCARRRINHo", manager.getIdCarrinho()+"");
+          mostraNaTela(productCollection);
 
-        singleton_cars.add(new SingletonCar(R.drawable.camisa_preta, "Camisa Fem.", "Camisa femenina", "preta"));
+      }catch (Exception e){
+          Log.i("TETESRGFG111111", e.toString());
+      }
 
-        return singleton_cars;
     }
+
+    @UiThread
+    @Background
+    public void mostraNaTela(Collection<Product> productCollection){
+        try {
+            for (Product product : productCollection ){
+                String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
+                singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
+
+                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext());
+                car_activity_listView.setAdapter(adapterListViewCar);
+            }
+        }catch (Exception e){
+            Log.i("TETESRGFG222222", e.toString());
+        }
+    }
+
+    @Background
+    public void buscaPedido(){
+        pedido = pedidoService.buscaPedido(manager.getIdCarrinho());
+        pedido.setFinalizado(true);
+        pedidoService.finalizaPedido(manager.getIdCarrinho(), pedido);
+    }
+
+    @Click
+    public void pedido_envia_pro_caixa(){
+        buscaPedido();
+    }
+
 
 }
