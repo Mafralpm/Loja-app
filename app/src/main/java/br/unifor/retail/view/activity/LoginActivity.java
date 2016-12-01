@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.v4.app.ActivityCompat;
@@ -28,6 +29,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Arrays;
 
@@ -36,9 +39,11 @@ import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.User;
 import br.unifor.retail.rest.ClientService;
 import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.view.activity.common.BaseActivity;
+import br.unifor.retail.view.activity.common.DialogHelper;
 
 @EActivity(R.layout.activity_login)
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     @RestService
     ClientService clientService;
@@ -52,10 +57,14 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
-    private RecordLogin recordLogin= new RecordLogin();
+    private RecordLogin recordLogin = new RecordLogin();
     private User user = new User();
 
     SessoinManager manager;
+
+    Handler handler = new Handler();
+
+    DialogHelper dialogHelper = new DialogHelper();
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
@@ -63,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void begin() {
         manager = new SessoinManager(this);
 
-        if (manager.isLoggedIn()){
+        if (manager.isLoggedIn()) {
             goMainScreen();
             finish();
         }
@@ -75,14 +84,15 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
                 goMainScreen();
                 finish();
             }
+
             @Override
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
@@ -108,25 +118,66 @@ public class LoginActivity extends AppCompatActivity {
     @Background
     @Click
     @UiThread
-    public void email_sign_in_button (){
+    public void email_sign_in_button() {
 
-        try{
-            recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
-            recordLogin.getUser().setPassword(password.getText().toString());
-            user = clientService.login(recordLogin);
-            recordLogin.getCliente().setId(user.getId());
-            recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
-            recordLogin.getCliente().setFoto(user.getFoto());
+        if (email.getText().toString().equals("") || password.getText().toString().equals(" ")) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "Insira login e senha para entrar", Toast.LENGTH_SHORT).show();
+//                    dialogHelper.showDialog("Algo deu errado", "Verifique se email e senha nao possuem nenhum erro");
 
-            manager.addUser(recordLogin);
+                }
+            });
+        } else {
+            try {
 
-            goMainScreen();
-        }catch (Exception e){
-            Log.d("Erro", e.toString());
+                recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
+                recordLogin.getUser().setPassword(password.getText().toString());
+                user = clientService.login(recordLogin);
+                recordLogin.getCliente().setId(user.getId());
+                recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
+                recordLogin.getCliente().setFoto(user.getFoto());
+
+                manager.addUser(recordLogin);
+
+                goMainScreen();
+
+            } catch (HttpClientErrorException e) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "Verifique se email e senha estão corretos", Toast.LENGTH_SHORT).show();
+                        dialogHelper.showDialog("Email ou Senha errados", "Verifique se email e senha estão corretos");
+
+                    }
+                });
+            } catch (ResourceAccessException e) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
+                        dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
+
+                    }
+                });
+
+            } catch (Exception e) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
+                        dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
+
+                    }
+                });
+            }
         }
+
+
     }
 
-    public void esqueciSenha(View v){
+    public void esqueciSenha(View v) {
 
         LayoutInflater inflate = getLayoutInflater();
         View alertDialogLayout = inflate.inflate(R.layout.custom_dialog_esquecisenha, null);
@@ -138,24 +189,26 @@ public class LoginActivity extends AppCompatActivity {
         alertDialogBuilder.setView(alertDialogLayout);
         // disallow cancel of AlertDialog on click of back button and outside touch
         alertDialogBuilder.setCancelable(false);
+
+
         alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-//                        System.out.print(ratingbar.getRating());
+                dialog.dismiss();
             }
         });
+
+
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog dialog = alertDialogBuilder.create();
         dialog.show();
     }
 
-    public void cadastrarUsuario (View v){
+    public void cadastrarUsuario(View v) {
         Intent intent = new Intent(this, RegisterUser_.class);
         startActivity(intent);
     }
