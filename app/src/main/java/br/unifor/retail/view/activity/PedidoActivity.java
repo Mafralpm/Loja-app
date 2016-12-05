@@ -3,6 +3,7 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +35,7 @@ import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.session.SessoinManager;
 import br.unifor.retail.singleton.SingletonCar;
+import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
@@ -41,7 +44,7 @@ import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
-public class PedidoActivity extends AppCompatActivity {
+public class PedidoActivity extends BaseActivity {
 
     NavegationDrawer navegationDrawer;
     protected Intent intent;
@@ -69,6 +72,8 @@ public class PedidoActivity extends AppCompatActivity {
     private RecordLogin recordLogin;
 
     private Pedido pedido;
+
+    Handler handler = new Handler();
 
     @AfterViews
     public void begin() {
@@ -136,49 +141,67 @@ public class PedidoActivity extends AppCompatActivity {
         }
 
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
 
     @Background
-    public void buscaPedidoHasProdutos(){
-      try {
-          productCollection = pedidoService.searchProductReview(manager.getIdCarrinho());
-          Log.d("IDCARRRINHo", manager.getIdCarrinho()+"");
-          mostraNaTela(productCollection);
+    public void buscaPedidoHasProdutos() {
+        try {
+            productCollection = pedidoService.searchProductReview(manager.getIdCarrinho());
+            Log.d("IDCARRRINHo", manager.getIdCarrinho() + "");
+            mostraNaTela(productCollection);
 
-      }catch (Exception e){
-          Log.i("TETESRGFG111111", e.toString());
-      }
+        } catch (ResourceAccessException e) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
+                    dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
+
+                }
+            });
+
+        } catch (Exception e) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
+                    dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
+
+                }
+            });
+        }
 
     }
 
     @UiThread
     @Background
-    public void mostraNaTela(Collection<Product> productCollection){
+    public void mostraNaTela(Collection<Product> productCollection) {
         try {
-            for (Product product : productCollection ){
+            for (Product product : productCollection) {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
                 singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
 
                 AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext());
                 car_activity_listView.setAdapter(adapterListViewCar);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.i("TETESRGFG222222", e.toString());
         }
     }
 
     @Background
-    public void buscaPedido(){
+    public void buscaPedido() {
         pedido = pedidoService.buscaPedido(manager.getIdCarrinho());
         pedido.setFinalizado(true);
         pedidoService.finalizaPedido(manager.getIdCarrinho(), pedido);
     }
 
     @Click
-    public void pedido_envia_pro_caixa(){
+    public void pedido_envia_pro_caixa() {
         buscaPedido();
     }
 

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +22,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -118,8 +120,8 @@ public class ProductActivity extends BaseActivity {
         contents = intent.getStringExtra("contents");
         handler = new Handler();
 
-        singletonProductArrayList =  new ArrayList<>();
-        adapter = new AdapterListViewProduct(singletonProductArrayList,this);
+        singletonProductArrayList = new ArrayList<>();
+        adapter = new AdapterListViewProduct(singletonProductArrayList, this);
 
 
         handler.post(new Runnable() {
@@ -148,8 +150,25 @@ public class ProductActivity extends BaseActivity {
             reviews = reviewService.searchProductReview(idQrCode);
             montaActivity(product, reviews);
 
+        } catch (ResourceAccessException e) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
+//                    dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
+
+                }
+            });
+
         } catch (Exception e) {
-            Log.d("Erro na busca", e.toString());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
+//                    dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
+
+                }
+            });
         }
     }
 
@@ -179,7 +198,7 @@ public class ProductActivity extends BaseActivity {
         }
     }
 
-    public void enviaProHistorico(Long idQrCode){
+    public void enviaProHistorico(Long idQrCode) {
 
         history.setProduto_id(idQrCode);
     }
@@ -200,7 +219,7 @@ public class ProductActivity extends BaseActivity {
         setaDadosPedido();
         pedido = pedidoService.criaPedido(pedido);
         manager.setIdCarrinho(pedido.getId());
-        Log.d("TESTE DE ID", manager.getIdCarrinho()+"");
+        Log.d("TESTE DE ID", manager.getIdCarrinho() + "");
         criaPedidoHasProduto();
 
     }

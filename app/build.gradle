@@ -75,7 +75,7 @@ dependencies {
     compile "com.android.support:design:$AndroidSupportVersion"
 
     //facebook
-    compile "com.facebook.android:facebook-android-sdk:$FaceboobAndroidSDK"
+    compile "com.facebook.android:facebook-android-sdk:4.+"
 
     //Aannotations
     apt "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"

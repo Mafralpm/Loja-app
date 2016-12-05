@@ -124,8 +124,8 @@ public class LoginActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(), "Insira login e senha para entrar", Toast.LENGTH_SHORT).show();
-//                    dialogHelper.showDialog("Algo deu errado", "Verifique se email e senha nao possuem nenhum erro");
+//                    Toast.makeText(getApplicationContext(), "Insira login e senha para entrar", Toast.LENGTH_SHORT).show();
+                    dialogHelper.showDialog("Campos em branco", "Insira login e senha para entrar");
 
                 }
             });

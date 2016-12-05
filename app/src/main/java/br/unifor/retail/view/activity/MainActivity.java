@@ -171,7 +171,9 @@ public class MainActivity extends BaseActivity {
 
             }
         } catch (RuntimeException e) {
-
+            Log.d("Deu nessa xibata", e.toString());
+        } catch (Exception e) {
+            Log.d("DEU ERRO AQUI CARALHO", e.toString());
         }
 
     }

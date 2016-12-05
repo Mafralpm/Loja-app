@@ -3,6 +3,7 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,6 +79,8 @@ public class HistoryActivity extends BaseActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected History history;
+
+    Handler handler = new Handler();
 
     @AfterViews
     public void begin() {
@@ -142,8 +146,25 @@ public class HistoryActivity extends BaseActivity {
             productCollection = historyService.searchProducts(cliente_id);
             montaActivity(productCollection);
 
+        } catch (ResourceAccessException e) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
+                    dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
+
+                }
+            });
+
         } catch (Exception e) {
-            Log.d("Erro na busca", e.toString());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
+                    dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
+
+                }
+            });
         }
     }
 
