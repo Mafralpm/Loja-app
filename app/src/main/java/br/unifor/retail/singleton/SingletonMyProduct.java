@@ -10,49 +10,50 @@ import android.widget.TextView;
  */
 
 public class SingletonMyProduct {
-    private int image;
-    private String loja, produto, data;
+    private String imagem;
+    private String nome;
+    private String preco;
+    private String quantidade;
 
-    public SingletonMyProduct() {}
-
-    public SingletonMyProduct(int image, String loja, String produto, String data) {
-        this.image = image;
-        this.loja = loja;
-        this.produto = produto;
-        this.data = data;
+    public SingletonMyProduct() {
     }
 
-
-    public int getImage() {
-        return image;
+    public SingletonMyProduct(String imagem, String nome, String preco, String quantidade) {
+        this.imagem = imagem;
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public String getImagem() {
+        return imagem;
     }
 
-    public String getLoja() {
-        return loja;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
-    public void setLoja(String loja) {
-        this.loja = loja;
+    public String getNome() {
+        return nome;
     }
 
-    public String getProduto() {
-        return produto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public String getPreco() {
+        return preco;
     }
 
-    public String getData() {
-        return data;
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public String getQuantidade() {
+        return quantidade;
     }
 
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
 }

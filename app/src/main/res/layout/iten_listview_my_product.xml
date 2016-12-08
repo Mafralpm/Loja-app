@@ -24,33 +24,25 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:paddingLeft="7dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Produto"
-                    android:textColor="#000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/my_product_textView_Loja"
+                    android:id="@+id/my_product_textView_nome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nome"
                     android:textColor="#000000" />
 
                 <TextView
-                    android:id="@+id/my_product_textView_Produto"
+                    android:id="@+id/my_product_textView_preco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cor"
+                    android:text="150,00"
                     android:textColor="#000000" />
 
 
@@ -59,62 +51,25 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/my_product_textView_quantidade"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Quant."
-                        android:textColor="#000000"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 itens"
-                        android:textColor="#000000" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Preço"
-                        android:textColor="#000000"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="150,00"
-                        android:textColor="#000000" />
-                </LinearLayout>
+                    android:text="quant."
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -129,20 +84,9 @@
             </LinearLayout>
 
         </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/my_product_textView_Data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
-                android:text="26/10/2016"
-                android:textColor="#000000"
-                android:textSize="16dp"
-                android:textStyle="bold" />
 
             <RatingBar
                 android:id="@+id/iten_listview_my_product_RatingBar"
@@ -155,6 +99,9 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
+
+
+
 
     </LinearLayout>
 

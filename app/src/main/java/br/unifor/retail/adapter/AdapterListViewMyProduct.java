@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import br.unifor.retail.R;
@@ -64,18 +66,18 @@ public class AdapterListViewMyProduct extends BaseAdapter {
             convertView = inflater.inflate(R.layout.iten_listview_my_product, parent, false);
         }
 
-        TextView loja = (TextView) convertView.findViewById(R.id.my_product_textView_Loja);
-        TextView produto = (TextView) convertView.findViewById(R.id.my_product_textView_Produto);
-        TextView data = (TextView) convertView.findViewById(R.id.my_product_textView_Data);
+        TextView nome = (TextView) convertView.findViewById(R.id.my_product_textView_nome);
+        TextView preco = (TextView) convertView.findViewById(R.id.my_product_textView_preco);
+        TextView quantidade = (TextView) convertView.findViewById(R.id.my_product_textView_quantidade);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.my_product_imageView_Image);
         final Button button = (Button) convertView.findViewById(R.id.my_product_button_avaliar);
         final RatingBar ratingBarListView = (RatingBar) convertView.findViewById(R.id.iten_listview_my_product_RatingBar);
 
-        loja.setText(singleton_my_product.getLoja());
-        produto.setText(singleton_my_product.getProduto());
-        data.setText(singleton_my_product.getData());
-        imageView.setImageResource(singleton_my_product.getImage());
+        nome.setText(singleton_my_product.getNome());
+        preco.setText(singleton_my_product.getPreco());
+        quantidade.setText(singleton_my_product.getQuantidade());
 
+        Picasso.with(context).load(singleton_my_product.getImagem()).into(imageView);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +91,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-                alertDialogBuilder.setTitle("Avaliçao " + singleton_my_product.getLoja());
+                alertDialogBuilder.setTitle("Avaliçao " + singleton_my_product.getNome());
                 // this is set the view from XML inside AlertDialog
                 alertDialogBuilder.setView(alertDialogLayout);
 
@@ -109,7 +111,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("Valor AQUIII", Double.valueOf(ratingbarDialog.getRating()).toString());
                         Log.d("Valor AQUIII", boxText.getText().toString());
-                     //   Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
                         button.setText("Reavaliar");
                         ratingBarListView.setRating(ratingbarDialog.getRating());
                     }
