@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +27,10 @@ public class AdapterListViewCar extends BaseAdapter {
     Context context;
     Activity activity;
 
-    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context) {
+    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity) {
         this.singleton_cars = singleton_cars;
         this.context = context;
+        this.activity = activity;
         inflater = LayoutInflater.from(context);
     }
 
@@ -60,7 +62,7 @@ public class AdapterListViewCar extends BaseAdapter {
         TextView nome = (TextView) convertView.findViewById(R.id.activity_car_TextView_Nome);
         TextView preco = (TextView) convertView.findViewById(R.id.activity_car_TextView_Preco);
         ImageView imageProduct = (ImageView) convertView.findViewById(R.id.activity_car_ImageView_Image_Product);
-        ImageView imageDelete = (ImageView) convertView.findViewById(R.id.activity_car_ImageView_Image_Delete);
+        Button buttonDelete = (Button) convertView.findViewById(R.id.activity_car_ImageView_Image_Delete);
 
         nome.setText(singleton_car.getNome());
         preco.setText(singleton_car.getPreco());
@@ -68,7 +70,7 @@ public class AdapterListViewCar extends BaseAdapter {
         Picasso.with(context).load(singleton_car.getImageProduct()).into(imageProduct);
 
 
-        imageDelete.setOnClickListener(new View.OnClickListener() {
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertExcluir = new AlertDialog.Builder(activity);

@@ -25,7 +25,7 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/myproduct"
+            android:id="@+id/action_myproduct_ListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
