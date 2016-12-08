@@ -25,30 +25,12 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:paddingLeft="7dp">
 
-                <!--<TextView-->
-                    <!--android:id="@+id/iten_listview_history_textView_Data"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:background="@color/colorAccent"-->
-                    <!--android:text="26/10/2016"-->
-                    <!--android:textColor="#000000"-->
-                    <!--android:textSize="18dp"-->
-                    <!--android:textStyle="bold" />-->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Produto"
-                    android:textColor="#000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/iten_listview_history_textView_Nome"
@@ -64,24 +46,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Preço"
-                        android:textColor="#000000"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/iten_listview_history_TextView_Preco"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="150,00"
-                        android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/iten_listview_history_TextView_Preco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="150,00"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
