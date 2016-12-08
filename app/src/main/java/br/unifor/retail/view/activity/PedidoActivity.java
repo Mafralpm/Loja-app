@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ListView;
@@ -33,7 +32,7 @@ import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
-import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonCar;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import me.sudar.zxingorient.Barcode;
@@ -68,7 +67,7 @@ public class PedidoActivity extends BaseActivity {
 
     ArrayList<SingletonCar> singleton_cars = new ArrayList<>();
 
-    private SessoinManager manager;
+    private SessionManager manager;
     private RecordLogin recordLogin;
 
     private Pedido pedido;
@@ -77,7 +76,7 @@ public class PedidoActivity extends BaseActivity {
 
     @AfterViews
     public void begin() {
-        manager = new SessoinManager(this);
+        manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
 
         intent = getIntent();
@@ -88,7 +87,7 @@ public class PedidoActivity extends BaseActivity {
         setSupportActionBar(toolbarCart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext());
+        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
 
         car_activity_listView.setAdapter(adapter_listView_car);
 
@@ -185,7 +184,7 @@ public class PedidoActivity extends BaseActivity {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
                 singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
 
-                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext());
+                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
                 car_activity_listView.setAdapter(adapterListViewCar);
             }
         } catch (Exception e) {
@@ -204,6 +203,9 @@ public class PedidoActivity extends BaseActivity {
     public void pedido_envia_pro_caixa() {
         buscaPedido();
     }
+
+
+
 
 
 }

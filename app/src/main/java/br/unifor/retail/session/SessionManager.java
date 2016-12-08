@@ -9,7 +9,7 @@ import br.unifor.retail.model.RecordLogin;
  * Created by vania on 14/11/16.
  */
 
-public class SessoinManager {
+public class SessionManager {
     SharedPreferences preferences;
 
     SharedPreferences.Editor editor;
@@ -22,7 +22,7 @@ public class SessoinManager {
 
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    public SessoinManager(Context context) {
+    public SessionManager(Context context) {
         this.preferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         this.editor = preferences.edit();
         this.context = context;

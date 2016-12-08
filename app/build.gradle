@@ -51,8 +51,8 @@ android {
 }
 
 def Junit = '4.12'
-def AndroidSupportVersion = '24.2.1'
-def FaceboobAndroidSDK = '[4,5)'
+def AndroidSupportVersion = '24.+'
+def FaceboobAndroidSDK = '4.+'
 def AndroidAnnotationsVersion = '4.0.+'
 def ORMLiteVersion = '4.48'
 def SpringAndroidRestTemplateVersion = '2.0.+'
@@ -75,7 +75,7 @@ dependencies {
     compile "com.android.support:design:$AndroidSupportVersion"
 
     //facebook
-    compile "com.facebook.android:facebook-android-sdk:4.+"
+    compile "com.facebook.android:facebook-android-sdk:$FaceboobAndroidSDK"
 
     //Aannotations
     apt "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"

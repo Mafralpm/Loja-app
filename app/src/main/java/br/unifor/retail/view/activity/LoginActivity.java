@@ -1,16 +1,10 @@
 package br.unifor.retail.view.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +32,7 @@ import br.unifor.retail.R;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.User;
 import br.unifor.retail.rest.ClientService;
-import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.view.activity.common.BaseActivity;
 import br.unifor.retail.view.activity.common.DialogHelper;
 
@@ -60,22 +54,15 @@ public class LoginActivity extends BaseActivity {
     private RecordLogin recordLogin = new RecordLogin();
     private User user = new User();
 
-    SessoinManager manager;
+    private SessionManager manager;
 
-    Handler handler = new Handler();
+    private Handler handler = new Handler();
 
-    DialogHelper dialogHelper = new DialogHelper();
-
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
+    protected DialogHelper dialogHelper = new DialogHelper();
 
     @AfterViews
     protected void begin() {
-        manager = new SessoinManager(this);
-
-        if (manager.isLoggedIn()) {
-            goMainScreen();
-            finish();
-        }
+        manager = new SessionManager(this);
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);

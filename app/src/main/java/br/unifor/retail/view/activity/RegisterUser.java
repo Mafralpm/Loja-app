@@ -23,7 +23,6 @@ public class RegisterUser extends BaseActivity {
 
     @RestService
     ClientService clientService;
-
     @ViewById
     protected EditText register_nome;
     @ViewById
@@ -34,30 +33,19 @@ public class RegisterUser extends BaseActivity {
     protected EditText register_confirmar_senha;
     @ViewById
     protected Button register_cadastrar;
+    @ViewById
+    protected Toolbar toolbarInfo_Client;
 
-    RecordLogin recordLogin = new RecordLogin();
+    private RecordLogin recordLogin = new RecordLogin();
 
     private static final String ROLE_CLIENT = "client";
 
-    private Toolbar toolbar;
-
-
     @AfterViews
     public void begin() {
-        toolbar = (Toolbar) findViewById(R.id.toolbarInfo_Client);
-        toolbar.setTitle("Cadastro");
-        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
-        setSupportActionBar(toolbar);
-
+        toolbarInfo_Client.setTitle("Cadastro");
+        toolbarInfo_Client.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
+        setSupportActionBar(toolbarInfo_Client);
     }
-
-
-//    void register_cadastrar() {
-//        setaDadosCliente();
-//        clientService.cadastraCliente(recordLogin);
-//        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
-//        startActivity(intent);
-//    }
 
     @Background
     @Click
@@ -69,19 +57,16 @@ public class RegisterUser extends BaseActivity {
             recordLogin.getUser().setRole(ROLE_CLIENT);
             recordLogin.getCliente().setNome_cliente(register_nome.getText().toString().trim());
             clientService.cadastraCliente(recordLogin);
-            Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
-            startActivity(intent);
+
+            goMainActivity();
         } catch (Exception e) {
             Log.d("LOgin", e.toString());
         }
 
+    }
 
-//    try{
-//
-//    }catch (Exception e){
-//        Log.d("LOgin", e.toString());
-//    }
-
-
+    private void goMainActivity(){
+        Intent intent = new Intent(this, MainActivity_.class);
+        startActivity(intent);
     }
 }

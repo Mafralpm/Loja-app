@@ -41,7 +41,7 @@ import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.rest.ReviewService;
-import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
 
@@ -74,46 +74,38 @@ public class ProductActivity extends BaseActivity {
     protected RatingBar adapter_review_ratingBar;
     @ViewById
     protected TextView adapter_review_descricao;
-
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
-
-    protected Product product;
-    protected Collection<Review> reviews;
-
+    @ViewById
+    protected Toolbar toolbarProduct;
 
     protected Intent intent;
     protected String contents;
     protected Long idDoQRCOde;
     protected Handler handler;
-    private Toolbar toolbar;
-    NavegationDrawer navegationDrawer;
+    private NavegationDrawer navegationDrawer;
     private RecordLogin recordLogin;
 
+    protected Product product;
+    protected Collection<Review> reviews;
+    private History history = new History();
+    private Pedido pedido = new Pedido();
+    private PedidoHasProduto pedidoHasProduto = new PedidoHasProduto();
+    private SessionManager manager;
 
-    History history = new History();
+    private ArrayList<SingletonProduct> singletonProductArrayList;
+    private AdapterListViewProduct adapter;
 
-    Pedido pedido = new Pedido();
-
-    PedidoHasProduto pedidoHasProduto = new PedidoHasProduto();
-
-    private SessoinManager manager;
-
-
-    ArrayList<SingletonProduct> singletonProductArrayList;
-    AdapterListViewProduct adapter;
-
-    QrCode qrCode;
+    private QrCode qrCode;
 
     @AfterViews
     public void begin() {
 
-        manager = new SessoinManager(this);
+        manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
+        qrCode = new QrCode(this, getApplicationContext());
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarProduct);
-        toolbar.setTitle("Produtos");
-        toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
-        setSupportActionBar(toolbar);
+        toolbarProduct.setTitle("Produtos");
+        toolbarProduct.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
+        setSupportActionBar(toolbarProduct);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
@@ -136,15 +128,13 @@ public class ProductActivity extends BaseActivity {
             }
         });
 
-        navegationDrawer = new NavegationDrawer(toolbar, this);
+        navegationDrawer = new NavegationDrawer(toolbarProduct, this);
         navegationDrawer.getProfile();
 
-        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @Background
     public void busca(Long idQrCode) {
-
         try {
             product = productService.searchProduct(idQrCode);
             reviews = reviewService.searchProductReview(idQrCode);
@@ -194,7 +184,7 @@ public class ProductActivity extends BaseActivity {
             produto_list_view.setAdapter(adapter);
 
         } catch (Exception e) {
-            Log.d("Erro na mostra:", e.toString());
+            Log.d("Erro no mostra:", e.toString());
         }
     }
 

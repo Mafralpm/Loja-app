@@ -28,7 +28,7 @@ import java.net.URL;
 
 import br.unifor.retail.R;
 import br.unifor.retail.model.RecordLogin;
-import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.view.activity.PedidoActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
@@ -56,17 +56,8 @@ public class NavegationDrawer {
     private String last_name;
     private Bundle bFacebookData;
     private String foto;
-    SessoinManager manager;
-    RecordLogin recordLogin;
-
-
-
-//    private OnCheckedChangeListener mOnCheckedChangeListener = new OnCheckedChangeListener(){
-//        @Override
-//        public void onCheckedChanged(IDrawerItem iDrawerItem, CompoundButton compoundButton, boolean b) {
-//            Toast.makeText(activity, "onCheckedChanged: "+( b ? "true" : "false" ), Toast.LENGTH_SHORT).show();
-//        }
-//    };
+    private SessionManager manager;
+    private RecordLogin recordLogin;
 
     public NavegationDrawer(Toolbar toolbar, Activity activity) {
         this.toolbar = toolbar;
@@ -75,18 +66,14 @@ public class NavegationDrawer {
 
     public void createNavigationDrawer() {
 
-
-        //NAVIGATION DRAWER
         headerNavigationLeft = new AccountHeader()
                 .withActivity(activity)
                 .withCompactStyle(false)
-//                .withSavedInstance(savedInstanceState)
                 .withThreeSmallProfileImages(true)
                 .withHeaderBackground(R.drawable.menu)
                 .addProfiles(
                         new ProfileDrawerItem().withName(name).withEmail(email).withIcon(foto))
                 .build();
-
 
         navigationDrawerLeft = new Drawer()
                 .withActivity(activity)
@@ -94,7 +81,6 @@ public class NavegationDrawer {
                 .withDisplayBelowToolbar(false)
                 .withActionBarDrawerToggleAnimated(true)
                 .withDrawerGravity(Gravity.LEFT)
-//                .withSavedInstance(savedInstanceState)
                 .withSelectedItem(-2)
                 .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerNavigationLeft)
@@ -104,16 +90,6 @@ public class NavegationDrawer {
                         return false;
                     }
                 })
-
-
-//                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-//                        Toast.makeText(activity, "onItemLongClick: " + i, Toast.LENGTH_SHORT).show();
-//                        return false;
-//                    }
-//                })
-
 
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Perfil").withIcon(activity.getResources().getDrawable(R.drawable.perfil)),
@@ -145,12 +121,11 @@ public class NavegationDrawer {
                             case 4:
                                 if (getCurrentAccessToken() == null){
                                     manager.logoutUser();
+                                }else{
+                                    LoginManager.getInstance().logOut();
                                 }
-                                LoginManager.getInstance().logOut();
                                 goLoginScreen();
                                 break;
-
-
                         }
                     }
                 })
@@ -162,7 +137,6 @@ public class NavegationDrawer {
                     }
                 })
                 .build();
-
     }
 
     private void goLoginScreen() {
@@ -175,21 +149,16 @@ public class NavegationDrawer {
 
         if (getCurrentAccessToken() != null) {
 
-
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject object, GraphResponse response) {
-                            Log.i("LoginActivity", response.toString());
-                            // Get facebook data from login
-                            bFacebookData = getFacebookData(object);
 
+                            bFacebookData = getFacebookData(object);
                             first_name =  bFacebookData.getString("first_name");
                             last_name = bFacebookData.getString("last_name");
                             name = first_name + " " + last_name;
-
                             foto = bFacebookData.getString("profile_pic");
-
                             email = bFacebookData.getString("email");
 
                             createNavigationDrawer();
@@ -203,10 +172,8 @@ public class NavegationDrawer {
             request.executeAsync();
         }else{
 
-            manager = new SessoinManager(getApplicationContext());
+            manager = new SessionManager(getApplicationContext());
             recordLogin = manager.pegaUsuario();
-
-
             email = recordLogin.getUser().getEmail();
             name = recordLogin.getCliente().getNome_cliente();
             profileImgUrl = recordLogin.getCliente().getFoto();

@@ -1,11 +1,7 @@
 package br.unifor.retail.view.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
@@ -33,14 +29,12 @@ import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
-import br.unifor.retail.session.SessoinManager;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonHistory;
 import br.unifor.retail.view.activity.common.BaseActivity;
-import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
-import static android.R.attr.contextClickable;
 import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
@@ -64,7 +58,7 @@ public class HistoryActivity extends BaseActivity {
 
     protected Intent intent;
     protected Long cliente_id;
-    SessoinManager manager;
+    SessionManager manager;
     RecordLogin recordLogin;
 
     private Toolbar toolbar;
@@ -93,7 +87,7 @@ public class HistoryActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
-        manager = new SessoinManager(getApplicationContext());
+        manager = new SessionManager(getApplicationContext());
         recordLogin = manager.pegaUsuario();
 
         cliente_id = recordLogin.getCliente().getId();

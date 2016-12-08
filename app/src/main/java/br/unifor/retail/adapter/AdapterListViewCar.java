@@ -1,9 +1,9 @@
 package br.unifor.retail.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +19,17 @@ import java.util.List;
 import br.unifor.retail.R;
 import br.unifor.retail.singleton.SingletonCar;
 
-
 public class AdapterListViewCar extends BaseAdapter {
     private List<SingletonCar> singleton_cars;
     LayoutInflater inflater;
     Context context;
     Activity activity;
 
-    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context) {
+    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity) {
         this.singleton_cars = singleton_cars;
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.activity = activity;
     }
 
     @Override
@@ -72,26 +72,26 @@ public class AdapterListViewCar extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertExcluir = new AlertDialog.Builder(activity);
-                alertExcluir.setMessage("Você deseja realmente excluir o item?");
-                alertExcluir.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        singleton_cars.remove(position);
-                        AdapterListViewCar.this.notifyDataSetChanged();
-                    }
-                });
-
-                alertExcluir.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        Toast.makeText(context, "Cancelou", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                alertExcluir.show();
+        alertExcluir.setMessage("Você deseja realmente excluir o item?");
+        alertExcluir.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                singleton_cars.remove(position);
+                AdapterListViewCar.this.notifyDataSetChanged();
             }
         });
+
+        alertExcluir.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                Toast.makeText(context, "Cancelou", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertExcluir.show();
+    }
+});
 
         return convertView;
     }

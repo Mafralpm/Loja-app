@@ -1,10 +1,6 @@
 package br.unifor.retail.view.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,17 +8,14 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.UiThread;
 
 import br.unifor.retail.R;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.qr.code.QrCode;
-import br.unifor.retail.session.SessoinManager;
-import me.sudar.zxingorient.Barcode;
+import br.unifor.retail.session.SessionManager;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
-import static android.R.attr.contextClickable;
 import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
@@ -32,7 +25,7 @@ public class MyProductActivity extends AppCompatActivity {
     private Toolbar toolbar;
     NavegationDrawer navegationDrawer;
 
-    SessoinManager manager;
+    SessionManager manager;
 
     QrCode qrCode;
 
@@ -41,7 +34,7 @@ public class MyProductActivity extends AppCompatActivity {
     @AfterViews
     protected void begin() {
 
-        manager = new SessoinManager(this);
+        manager = new SessionManager(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMyProduct);
         toolbar.setTitle("Meus Produtos");
