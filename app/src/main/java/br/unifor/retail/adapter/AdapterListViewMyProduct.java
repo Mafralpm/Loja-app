@@ -20,6 +20,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+
 import java.util.List;
 
 import br.unifor.retail.R;
@@ -29,18 +32,21 @@ import br.unifor.retail.singleton.SingletonMyProduct;
  * Created by mafra on 19/10/16.
  */
 
+@EBean
 public class AdapterListViewMyProduct extends BaseAdapter {
     private List<SingletonMyProduct> singleton_my_productLists;
     LayoutInflater inflater;
-    Context context;
     Activity activity;
 
-    public AdapterListViewMyProduct(List<SingletonMyProduct> singleton_my_productList, Context context, Activity activity) {
-        this.singleton_my_productLists = singleton_my_productList;
-        this.context = context;
-        this.activity = activity;
-        inflater = LayoutInflater.from(context);
-    }
+    @RootContext
+    Context context;
+
+//    public AdapterListViewMyProduct(List<SingletonMyProduct> singleton_my_productList, Context context, Activity activity) {
+//        this.singleton_my_productLists = singleton_my_productList;
+//        this.context = context;
+//        this.activity = activity;
+//        inflater = LayoutInflater.from(context);
+//    }
 
     @Override
     public int getCount() {
@@ -59,6 +65,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        inflater = LayoutInflater.from(context);
         final SingletonMyProduct singleton_my_product = singleton_my_productLists.get(position);
 
 
@@ -123,5 +130,10 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    public void getDadosMyProduct(List<SingletonMyProduct> singleton_my_productList, Activity activity){
+        this.singleton_my_productLists = singleton_my_productList;
+        this.activity = activity;
     }
 }

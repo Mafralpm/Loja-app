@@ -2,6 +2,7 @@ package br.unifor.retail.view.activity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -61,6 +62,9 @@ public class MyProductActivity extends AppCompatActivity {
     protected Intent intent;
     protected Long cliente_id;
     RecordLogin recordLogin;
+
+    @Bean
+    AdapterListViewMyProduct adapter;
 
     @AfterViews
     protected void begin() {
@@ -166,7 +170,7 @@ public class MyProductActivity extends AppCompatActivity {
                 Log.i("HHHHHHHHHHHHHH", uri);
             }
 
-            AdapterListViewMyProduct adapter = new AdapterListViewMyProduct(singletonMyProductArrayList, getApplicationContext(), this);
+            adapter.getDadosMyProduct(singletonMyProductArrayList, this);
             action_myproduct_ListView.setAdapter(adapter);
 
         } catch (Exception e) {

@@ -14,9 +14,11 @@ import com.facebook.AccessToken;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
@@ -61,6 +63,10 @@ public class MainActivity extends BaseActivity {
 
     private QrCode qrCode;
 
+    @Bean
+    AdapterListViewMain adapter;
+    ArrayList<SingletonMain> singleton_mains;
+
 
     @AfterViews
     public void begin() {
@@ -79,11 +85,8 @@ public class MainActivity extends BaseActivity {
         toolbarMain.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbarMain);
 
-        ArrayList<SingletonMain> singleton_mains = todos_Os_Produtos();
-
-        AdapterListViewMain adapter = new AdapterListViewMain(singleton_mains, getApplicationContext());
-
-        listVire_Main.setAdapter(adapter);
+        singleton_mains = new ArrayList<>();
+        todos_Os_Produtos();
 
         navegationDrawer = new NavegationDrawer(toolbarMain, MainActivity.this);
         navegationDrawer.getProfile();
@@ -182,11 +185,13 @@ public class MainActivity extends BaseActivity {
         }, 2000);
     }
 
-    public ArrayList<SingletonMain> todos_Os_Produtos() {
-        ArrayList<SingletonMain> singleton_mains = new ArrayList<>();
+    @UiThread
+    public void todos_Os_Produtos() {
 
         singleton_mains.add(new SingletonMain(R.drawable.imagem_blusa_laranja, R.drawable.imagem_blusa_star_wars, "R$ 200,00", "Camisa social Masc.", "R$ 337,99", "Camisa social Feme."));
-        return singleton_mains;
+
+        adapter.getDadosMain(singleton_mains);
+        listVire_Main.setAdapter(adapter);
     }
 
 

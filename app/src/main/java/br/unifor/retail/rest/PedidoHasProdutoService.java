@@ -22,7 +22,7 @@ public interface PedidoHasProdutoService {
     @Get(("/pedidos_finalizados/{pedido_id}.json"))
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long pedido_id);
 
 }

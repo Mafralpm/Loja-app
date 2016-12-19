@@ -20,7 +20,7 @@ public interface ProductService{
     @Get("/{idProduct}.json")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Product searchProduct (@Path Long idProduct);
 
 

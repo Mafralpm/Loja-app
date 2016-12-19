@@ -1,6 +1,7 @@
 package br.unifor.retail.rest;
 
 import org.androidannotations.rest.spring.annotations.Body;
+import org.androidannotations.rest.spring.annotations.Delete;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Header;
 import org.androidannotations.rest.spring.annotations.Headers;
@@ -26,30 +27,37 @@ public interface PedidoService {
     @Post("/pedidos.json")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Pedido criaPedido(@Body Pedido pedido);
 
     @Post("/pedidos_has_produtos")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     void criaPedidoHasProduto(@Body PedidoHasProduto pedidoHasProduto);
 
     @Get(("/pedido_produtos/{pedido_id}.json"))
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Collection<Product> searchProductReview(@Path Long pedido_id);
 
     @Put("/pedidos/{pedido_id}.json")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Pedido finalizaPedido(@Path Long pedido_id, @Body Pedido pedido);
 
-    @Get(("/pedidos/{pedido_id}.json"))
+    @Get("/pedidos/{pedido_id}.json")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Pedido buscaPedido(@Path Long pedido_id);
+
+    @Delete("/pedidos/{produto_id}.json")
+    @Headers({
+            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
+    Pedido deletarPedido (@Path Long produto_id);
+
 }

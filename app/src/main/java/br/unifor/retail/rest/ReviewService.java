@@ -27,13 +27,13 @@ public interface ReviewService {
     @Accept(MediaType.APPLICATION_JSON_VALUE)
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     Collection<Review> searchProductReview(@Path Long produto_id);
 
     @Post("/reviews")
     @Headers({
             @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = "X-Admin-Token", value = "j8UepQwzQwSbmnJVJ88C")})
     void criaReview(@Body Review review);
 
 

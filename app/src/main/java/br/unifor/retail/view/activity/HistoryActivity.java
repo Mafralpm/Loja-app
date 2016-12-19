@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -56,6 +57,10 @@ public class HistoryActivity extends BaseActivity {
     protected ListView action_history_ListView;
 
 
+    @Bean
+    AdapterListViewHistory adapter;
+
+
     protected Intent intent;
     protected Long cliente_id;
     SessionManager manager;
@@ -70,7 +75,6 @@ public class HistoryActivity extends BaseActivity {
 
     NavegationDrawer navegationDrawer;
 
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     protected History history;
 
@@ -176,7 +180,8 @@ public class HistoryActivity extends BaseActivity {
                 Log.i("HHHHHHHHHHHHHH", uri);
             }
 
-            AdapterListViewHistory adapter = new AdapterListViewHistory(singletonHistoryArrayList, getApplicationContext());
+
+            adapter.getDadosHistory(singletonHistoryArrayList);
             action_history_ListView.setAdapter(adapter);
 
         } catch (Exception e) {

@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
@@ -92,7 +93,9 @@ public class ProductActivity extends BaseActivity {
     private SessionManager manager;
 
     private ArrayList<SingletonProduct> singletonProductArrayList;
-    private AdapterListViewProduct adapter;
+
+    @Bean
+    protected AdapterListViewProduct adapter;
 
     private QrCode qrCode;
 
@@ -113,7 +116,7 @@ public class ProductActivity extends BaseActivity {
         handler = new Handler();
 
         singletonProductArrayList = new ArrayList<>();
-        adapter = new AdapterListViewProduct(singletonProductArrayList, this);
+//        adapter.getDadosProduct(singletonProductArrayList);
 
 
         handler.post(new Runnable() {
@@ -180,7 +183,7 @@ public class ProductActivity extends BaseActivity {
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
             }
 
-            adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
+            adapter.getDadosProduct(singletonProductArrayList);
             produto_list_view.setAdapter(adapter);
 
         } catch (Exception e) {

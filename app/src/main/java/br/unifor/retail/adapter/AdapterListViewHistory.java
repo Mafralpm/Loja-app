@@ -11,26 +11,26 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+
 import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.singleton.SingletonHistory;
+import br.unifor.retail.singleton.SingletonMyProduct;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
+@EBean
 public class AdapterListViewHistory extends BaseAdapter {
     private List<SingletonHistory> singleton_history;
     LayoutInflater inflater;
-    Context context;
-    int teste;
 
-    public AdapterListViewHistory(List<SingletonHistory> singleton_history, Context context) {
-        this.singleton_history = singleton_history;
-        this.context = context;
-        inflater = LayoutInflater.from(context);
-    }
+    @RootContext
+    Context context;
 
     @Override
     public int getCount() {
@@ -49,6 +49,7 @@ public class AdapterListViewHistory extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        inflater = LayoutInflater.from(context);
         SingletonHistory singletonHistory = singleton_history.get(position);
 
         if (convertView == null) {
@@ -61,12 +62,16 @@ public class AdapterListViewHistory extends BaseAdapter {
 
 
         nome.setText(singletonHistory.getNome());
-        preco.setText(singletonHistory.getPreco()+"");
+        preco.setText(singletonHistory.getPreco() + "");
 
-        Log.i("URLLL", singletonHistory.getImagem()+"" + singletonHistory.getNome());
+        Log.i("URLLL", singletonHistory.getImagem() + "" + singletonHistory.getNome());
         Picasso.with(context).load(singletonHistory.getImagem()).into(imageView);
 
 
         return convertView;
+    }
+
+    public void getDadosHistory(List<SingletonHistory> historyList){
+        this.singleton_history = historyList;
     }
 }
