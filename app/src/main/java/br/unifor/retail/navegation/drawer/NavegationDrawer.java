@@ -29,7 +29,8 @@ import java.net.URL;
 import br.unifor.retail.R;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.session.SessionManager;
-import br.unifor.retail.view.activity.PedidoActivity_;
+import br.unifor.retail.statics.StaticsRest;
+import br.unifor.retail.view.activity.CarrinhoActivity_;
 import br.unifor.retail.view.activity.HistoryActivity_;
 import br.unifor.retail.view.activity.InfoClientActivity_;
 import br.unifor.retail.view.activity.LoginActivity_;
@@ -54,7 +55,7 @@ public class NavegationDrawer {
     private String email;
     private String first_name;
     private String last_name;
-    private Bundle bFacebookData;
+    private Bundle  bFacebookData;
     private String foto;
     private SessionManager manager;
     private RecordLogin recordLogin;
@@ -107,7 +108,7 @@ public class NavegationDrawer {
                                 activity.startActivity(intent);
                                 break;
                             case 1:
-                                Intent intent1 = new Intent(activity, PedidoActivity_.class);
+                                Intent intent1 = new Intent(activity, CarrinhoActivity_.class);
                                 activity.startActivity(intent1);
                                 break;
                             case 2:
@@ -121,7 +122,9 @@ public class NavegationDrawer {
                             case 4:
                                 if (getCurrentAccessToken() == null){
                                     manager.logoutUser();
+                                    manager.logoutFacebook();
                                 }else{
+                                    manager.logoutFacebook();
                                     LoginManager.getInstance().logOut();
                                 }
                                 goLoginScreen();
@@ -146,6 +149,7 @@ public class NavegationDrawer {
     }
 
     public void getProfile() {
+        manager = new SessionManager(getApplicationContext());
 
         if (getCurrentAccessToken() != null) {
 
@@ -162,7 +166,13 @@ public class NavegationDrawer {
                             email = bFacebookData.getString("email");
 
                             createNavigationDrawer();
+                            recordLogin = new RecordLogin();
+                            recordLogin.getCliente().setNome_cliente(name);
+                            recordLogin.getUser().setEmail(email);
+                            recordLogin.getCliente().setFoto(foto);
+                            recordLogin.getUser().setFacebook_token(getCurrentAccessToken().getToken());
 
+                            manager.addFacebook(recordLogin);
                         }
 
                     });
@@ -171,20 +181,16 @@ public class NavegationDrawer {
             request.setParameters(parameters);
             request.executeAsync();
         }else{
-
-            manager = new SessionManager(getApplicationContext());
             recordLogin = manager.pegaUsuario();
             email = recordLogin.getUser().getEmail();
             name = recordLogin.getCliente().getNome_cliente();
             profileImgUrl = recordLogin.getCliente().getFoto();
-            foto = "http://bluelab.herokuapp.com" + profileImgUrl;
+            foto = StaticsRest.ROOT_URL + profileImgUrl;
             createNavigationDrawer();
         }
     }
 
-
     private Bundle getFacebookData(JSONObject object) {
-
         try {
             Bundle bundle = new Bundle();
             String id = object.getString("id");
@@ -193,7 +199,6 @@ public class NavegationDrawer {
                 URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
                 Log.i("profile_pic", profile_pic + "");
                 bundle.putString("profile_pic", profile_pic.toString());
-
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return null;
@@ -210,7 +215,6 @@ public class NavegationDrawer {
                 bundle.putString("gender", object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
-
             return bundle;
         } catch (JSONException e) {
             Log.d("xxxx", "Error parsing JSON");

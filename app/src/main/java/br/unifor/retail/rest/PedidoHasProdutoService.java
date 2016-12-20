@@ -10,7 +10,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import java.util.Collection;
 
 import br.unifor.retail.model.PedidoHasProduto;
-import br.unifor.retail.model.Product;
+import br.unifor.retail.statics.StaticsAdmin;
 
 /**
  * Created by mafra on 05/12/16.
@@ -21,8 +21,8 @@ public interface PedidoHasProdutoService {
 
     @Get(("/pedidos_finalizados/{pedido_id}.json"))
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long pedido_id);
 
 }

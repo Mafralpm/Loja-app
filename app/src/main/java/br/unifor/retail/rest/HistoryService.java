@@ -20,6 +20,7 @@ import java.util.Collection;
 
 import br.unifor.retail.model.History;
 import br.unifor.retail.model.Product;
+import br.unifor.retail.statics.StaticsAdmin;
 
 
 @Rest(rootUrl = "https://bluelab.herokuapp.com/", converters = MappingJackson2HttpMessageConverter.class)
@@ -27,14 +28,14 @@ public interface HistoryService {
 
     @Post("/historicos")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     void cria (@Body History history);
 
     @Get("/cliente_historicos/{cliente_id}.json")
     @Accept(MediaType.APPLICATION_JSON_VALUE)
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Collection<Product> searchProducts(@Path Long cliente_id);
 }

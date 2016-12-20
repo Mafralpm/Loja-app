@@ -50,34 +50,39 @@ public class HistoryActivity extends BaseActivity {
     protected TextView iten_listview_history_textView_Nome;
     @ViewById
     protected TextView iten_listview_history_TextView_Preco;
-    //    @ViewById
-//    protected TextView iten_listview_history_textView_Data;
     @ViewById
     protected ListView action_history_ListView;
 
 
     protected Intent intent;
     protected Long cliente_id;
-    SessionManager manager;
-    RecordLogin recordLogin;
+    private SessionManager manager;
+    private RecordLogin recordLogin;
 
     private Toolbar toolbar;
     protected Collection<Product> productCollection;
 
-    QrCode qrCode;
+    private QrCode qrCode;
 
     ArrayList<SingletonHistory> singletonHistoryArrayList = new ArrayList<>();
 
-    NavegationDrawer navegationDrawer;
+    private NavegationDrawer navegationDrawer;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
-    protected History history;
+    private History history = new History();
 
-    Handler handler = new Handler();
+    private Handler handler = new Handler();
 
     @AfterViews
     public void begin() {
+        showProgressDialog("Buscando produtos visualizados");
+
+        manager = new SessionManager(getApplicationContext());
+        recordLogin = manager.pegaUsuario();
+
+        qrCode = new QrCode(this, getApplicationContext());
+
         toolbar = (Toolbar) findViewById(R.id.toolbarHistory);
         toolbar.setTitle("Histórico");
         toolbar.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -87,21 +92,13 @@ public class HistoryActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
-        manager = new SessionManager(getApplicationContext());
-        recordLogin = manager.pegaUsuario();
-
         cliente_id = recordLogin.getCliente().getId();
-
-        Log.i("Cliente id", cliente_id + "");
-
         buscaProdutos(cliente_id);
-
-        qrCode = new QrCode(this, getApplicationContext());
     }
 
     @OptionsItem(R.id.menu_carinho)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
+        Intent intent = new Intent(getApplicationContext(), CarrinhoActivity_.class);
         startActivity(intent);
     }
 
@@ -111,52 +108,23 @@ public class HistoryActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-        ZxingOrientResult scanResult =
-                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
-        try {
-            if (scanResult != null) {
-                //  String leitura = scanResult.getContents();
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                Intent intentResult = new Intent(this, ProductActivity_.class);
-                intentResult
-                        .putExtra("contents", contents)
-                        .putExtra("format", format);
-                startActivity(intentResult);
-            }
-        } catch (RuntimeException e) {
-
-        }
-
-    }
-
     @Background
     public void buscaProdutos(Long cliente_id) {
-
-
         try {
             productCollection = historyService.searchProducts(cliente_id);
             montaActivity(productCollection);
-
         } catch (ResourceAccessException e) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
                     dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
-
                 }
             });
-
         } catch (Exception e) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
                     dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
-
                 }
             });
         }
@@ -164,24 +132,23 @@ public class HistoryActivity extends BaseActivity {
 
     @UiThread
     public void montaActivity(Collection<Product> productCollection) {
-
         try {
-
             for (Product product : productCollection) {
-
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
-
                 singletonHistoryArrayList.add(new SingletonHistory(uri, product.getNome(), product.getPreco(), "18/11/2016"));
-
-                Log.i("HHHHHHHHHHHHHH", uri);
             }
-
             AdapterListViewHistory adapter = new AdapterListViewHistory(singletonHistoryArrayList, getApplicationContext());
             action_history_ListView.setAdapter(adapter);
-
         } catch (Exception e) {
             Log.d("Erro na mostra:", e.toString());
         }
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialogHelper.dismissDialog();
+            }
+        }, 2000);
+
     }
 
     public void onBackPressed() {
@@ -189,4 +156,42 @@ public class HistoryActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
+
+                Log.d("èo id ?", contents);
+                Long id = Long.valueOf(contents);
+                manager.setIdProduto(id);
+                Log.d("Id do produto", manager.getIdProduto()+"");
+                enviaProHistorico();
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+            Log.d("Deu nessa xibata", e.toString());
+        } catch (Exception e) {
+            Log.d("DEU ERRO AQUI CARALHO", e.toString());
+        }
+        }
+
+    @Background
+    public void enviaProHistorico(){
+        setaDadosHistorico();
+        historyService.cria(history);
+    }
+
+    public void setaDadosHistorico(){
+        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setProduto_id(manager.getIdProduto());
+        Log.d("PRODUTO ID", history.getProduto_id().toString());
+    }
 }

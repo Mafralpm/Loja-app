@@ -10,7 +10,7 @@ public class Review implements Serializable{
 
     private Long id;
     private String review_descric;
-    private String nota;
+    private Double nota;
     public String created_at;
     public String updated_at;
     private Long produto_id;
@@ -32,11 +32,11 @@ public class Review implements Serializable{
         this.review_descric = review_descric;
     }
 
-    public String getNota() {
+    public Double getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(Double nota) {
         this.nota = nota;
     }
 

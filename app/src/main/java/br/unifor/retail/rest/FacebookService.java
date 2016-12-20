@@ -7,14 +7,18 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.model.User;
+import br.unifor.retail.statics.StaticsRest;
 
 /**
  * Created by vania on 21/11/16.
  */
 
-@Rest(rootUrl = "http://bluelab.heroku.com", converters = MappingJackson2HttpMessageConverter.class)
+@Rest(rootUrl = StaticsRest.ROOT_URL, converters = MappingJackson2HttpMessageConverter.class)
 public interface FacebookService {
 
-    @Post("/user_facebook/sign_in")
-    RecordLogin pegaFacebook(@Body User user);
+    @Post(StaticsRest.FACEBOOK_SING_IN)
+    User pegaFacebook(@Body RecordLogin recordLogin);
+
+    @Post(StaticsRest.FACEBOOK_SING_UP)
+    User criaFacebook(@Body RecordLogin recordLogin);
 }

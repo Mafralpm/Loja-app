@@ -14,6 +14,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import java.util.Collection;
 
 import br.unifor.retail.model.Review;
+import br.unifor.retail.statics.StaticsAdmin;
 
 
 /**
@@ -26,16 +27,15 @@ public interface ReviewService {
     @Get("/{produto_id}.json")
     @Accept(MediaType.APPLICATION_JSON_VALUE)
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Collection<Review> searchProductReview(@Path Long produto_id);
 
     @Post("/reviews")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
-    void criaReview(@Body Review review);
-
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
+    Review criaReview(@Body Review review);
 
 }
 

@@ -1,10 +1,5 @@
 package br.unifor.retail.singleton;
 
-import android.media.Image;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 /**
  * Created by mafra on 19/10/16.
  */
@@ -14,16 +9,19 @@ public class SingletonMyProduct {
     private String nome;
     private String preco;
     private String quantidade;
+    private Long idProduto;
 
     public SingletonMyProduct() {
     }
 
-    public SingletonMyProduct(String imagem, String nome, String preco, String quantidade) {
+    public SingletonMyProduct(String imagem, String nome, String preco, String quantidade, Long id) {
         this.imagem = imagem;
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.idProduto = id;
     }
+
 
     public String getImagem() {
         return imagem;
@@ -55,5 +53,13 @@ public class SingletonMyProduct {
 
     public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long id) {
+        this.idProduto = id;
     }
 }

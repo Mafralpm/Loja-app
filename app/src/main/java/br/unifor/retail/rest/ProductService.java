@@ -9,6 +9,7 @@ import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import br.unifor.retail.model.Product;
+import br.unifor.retail.statics.StaticsAdmin;
 
 /**
  * Created by vania on 24/10/16.
@@ -19,8 +20,8 @@ public interface ProductService{
 
     @Get("/{idProduct}.json")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Product searchProduct (@Path Long idProduct);
 
 

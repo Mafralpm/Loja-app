@@ -97,4 +97,5 @@ public class AdapterListViewCar extends BaseAdapter {
 
         return convertView;
     }
+
 }

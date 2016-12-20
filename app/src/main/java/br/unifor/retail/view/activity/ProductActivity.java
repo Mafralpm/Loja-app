@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +43,10 @@ import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
+import me.sudar.zxingorient.ZxingOrient;
+import me.sudar.zxingorient.ZxingOrientResult;
+
+import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_product)
@@ -99,6 +102,8 @@ public class ProductActivity extends BaseActivity {
     @AfterViews
     public void begin() {
 
+        showProgressDialog("Buscando os dados");
+
         manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
         qrCode = new QrCode(this, getApplicationContext());
@@ -121,7 +126,6 @@ public class ProductActivity extends BaseActivity {
             public void run() {
                 if (!contents.isEmpty()) {
                     idDoQRCOde = Long.valueOf(contents);
-                    showProgressDialogCancel("Buscando os dados", null);
                     busca(idDoQRCOde);
                     enviaProHistorico(idDoQRCOde);
                 }
@@ -130,7 +134,6 @@ public class ProductActivity extends BaseActivity {
 
         navegationDrawer = new NavegationDrawer(toolbarProduct, this);
         navegationDrawer.getProfile();
-
     }
 
     @Background
@@ -144,8 +147,7 @@ public class ProductActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
-//                    dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
+                    dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
 
                 }
             });
@@ -154,8 +156,7 @@ public class ProductActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
-//                    dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
+                    dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
 
                 }
             });
@@ -180,12 +181,30 @@ public class ProductActivity extends BaseActivity {
                 singletonProductArrayList.add(new SingletonProduct(nota, review.getReview_descric()));
             }
 
-            adapter = new AdapterListViewProduct(singletonProductArrayList, getApplicationContext());
             produto_list_view.setAdapter(adapter);
+
+
+        } catch (StringIndexOutOfBoundsException e){
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    dialogHelper.showDialog("Algo deu errado", "Ocorreu um erro no cadastro do produto, mas já estamos resolvendo");
+
+                }
+            });
 
         } catch (Exception e) {
             Log.d("Erro no mostra:", e.toString());
+            dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
         }
+
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+              dialogHelper.dismissDialog();
+          }
+      }, 2000);
+
     }
 
     public void enviaProHistorico(Long idQrCode) {
@@ -196,7 +215,7 @@ public class ProductActivity extends BaseActivity {
     @Click
     public void adcionar_carrinho() {
         criaPedido();
-        Intent intent = new Intent(this, PedidoActivity_.class);
+        Intent intent = new Intent(this, CarrinhoActivity_.class);
         intent.putExtra("id", contents);
         if (contents != null) {
             Log.d("Testezinho", contents);
@@ -242,7 +261,7 @@ public class ProductActivity extends BaseActivity {
 
     @OptionsItem(R.id.menu_carinho)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
+        Intent intent = new Intent(getApplicationContext(), CarrinhoActivity_.class);
         startActivity(intent);
     }
 
@@ -254,6 +273,45 @@ public class ProductActivity extends BaseActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
+
+                Log.d("èo id ?", contents);
+                Long id = Long.valueOf(contents);
+                manager.setIdProduto(id);
+                Log.d("Id do produto", manager.getIdProduto()+"");
+                enviaProHistorico();
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+            Log.d("Deu nessa xibata", e.toString());
+        } catch (Exception e) {
+            Log.d("DEU ERRO AQUI CARALHO", e.toString());
+        }
+    }
+
+    @Background
+    public void enviaProHistorico(){
+        setaDadosHistorico();
+        historyService.cria(history);
+    }
+
+    public void setaDadosHistorico(){
+        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setProduto_id(manager.getIdProduto());
+        Log.d("PRODUTO ID", history.getProduto_id().toString());
     }
 
 }

@@ -26,10 +26,12 @@ import java.util.Collection;
 
 import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
+import br.unifor.retail.model.History;
 import br.unifor.retail.model.Pedido;
 import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
+import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.session.SessionManager;
@@ -43,13 +45,16 @@ import static android.R.attr.format;
 
 @OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
-public class PedidoActivity extends BaseActivity {
+public class CarrinhoActivity extends BaseActivity {
 
     NavegationDrawer navegationDrawer;
     protected Intent intent;
     protected String contents;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
+
+    @RestService
+    protected HistoryService historyService;
 
     @ViewById
     protected ListView car_activity_listView;
@@ -72,10 +77,15 @@ public class PedidoActivity extends BaseActivity {
 
     private Pedido pedido;
 
+    private History history = new History();
+
     Handler handler = new Handler();
 
     @AfterViews
     public void begin() {
+
+        showProgressDialog("Buscando produtos do carrinho");
+
         manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
 
@@ -94,7 +104,7 @@ public class PedidoActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbarCart, this);
         navegationDrawer.getProfile();
 
-        buscaPedidoHasProdutos();
+            buscaPedidoHasProdutos();
     }
 
     @OptionsItem(R.id.carrinho_qr_code)
@@ -120,27 +130,6 @@ public class PedidoActivity extends BaseActivity {
                 .initiateScan(Barcode.QR_CODE);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-        ZxingOrientResult scanResult =
-                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
-        try {
-            if (scanResult != null) {
-                //  String leitura = scanResult.getContents();
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                Intent intentResult = new Intent(this, ProductActivity_.class);
-                intentResult
-                        .putExtra("contents", contents)
-                        .putExtra("format", format);
-                startActivity(intentResult);
-            }
-        } catch (RuntimeException e) {
-            Log.i("TETESRGFG111111", e.toString());
-        }
-
-    }
-
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
@@ -157,9 +146,7 @@ public class PedidoActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
                     dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
-
                 }
             });
 
@@ -167,9 +154,7 @@ public class PedidoActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
                     dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
-
                 }
             });
         }
@@ -190,6 +175,13 @@ public class PedidoActivity extends BaseActivity {
         } catch (Exception e) {
             Log.i("TETESRGFG222222", e.toString());
         }
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialogHelper.dismissDialog();
+            }
+        }, 2000);
     }
 
     @Background
@@ -197,15 +189,60 @@ public class PedidoActivity extends BaseActivity {
         pedido = pedidoService.buscaPedido(manager.getIdCarrinho());
         pedido.setFinalizado(true);
         pedidoService.finalizaPedido(manager.getIdCarrinho(), pedido);
+        manager.setIdCarrinho((long) 0);
     }
 
     @Click
     public void pedido_envia_pro_caixa() {
-        buscaPedido();
+        Log.d("Entrou?", "Entrou aqui?");
+        try {
+            Log.d("Entrou2222?", "Entrou aqui2222?");
+            buscaPedido();
+
+            Intent itent = new Intent(this, MyProductActivity_.class);
+            startActivity(itent);
+        }catch (Exception e){
+            Log.d("IHNHJJJKJ", e.toString());
+        }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        ZxingOrientResult scanResult =
+                ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
+        try {
+            if (scanResult != null) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Intent intentResult = new Intent(this, ProductActivity_.class);
+                intentResult
+                        .putExtra("contents", contents)
+                        .putExtra("format", format);
 
+                Log.d("èo id ?", contents);
+                Long id = Long.valueOf(contents);
+                manager.setIdProduto(id);
+                Log.d("Id do produto", manager.getIdProduto()+"");
+                enviaProHistorico();
+                startActivity(intentResult);
+            }
+        } catch (RuntimeException e) {
+            Log.d("Deu nessa xibata", e.toString());
+        } catch (Exception e) {
+            Log.d("DEU ERRO AQUI CARALHO", e.toString());
+        }
 
+    }
 
+    @Background
+    public void enviaProHistorico(){
+        setaDadosHistorico();
+        historyService.cria(history);
+    }
 
+    public void setaDadosHistorico(){
+        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setProduto_id(manager.getIdProduto());
+        Log.d("PRODUTO ID", history.getProduto_id().toString());
+    }
 }

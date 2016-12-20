@@ -22,7 +22,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
 
         manager = new SessionManager(getApplicationContext());
         Handler handler = new Handler();
-        handler.postDelayed(this, 2000);
+        handler.postDelayed(this, 1);
     }
 
     @Override

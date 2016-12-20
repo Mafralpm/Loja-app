@@ -15,6 +15,7 @@ import java.util.Collection;
 import br.unifor.retail.model.Pedido;
 import br.unifor.retail.model.PedidoHasProduto;
 import br.unifor.retail.model.Product;
+import br.unifor.retail.statics.StaticsAdmin;
 
 /**
  * Created by vania on 27/10/16.
@@ -25,31 +26,31 @@ public interface PedidoService {
 
     @Post("/pedidos.json")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Pedido criaPedido(@Body Pedido pedido);
 
     @Post("/pedidos_has_produtos")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     void criaPedidoHasProduto(@Body PedidoHasProduto pedidoHasProduto);
 
     @Get(("/pedido_produtos/{pedido_id}.json"))
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Collection<Product> searchProductReview(@Path Long pedido_id);
 
     @Put("/pedidos/{pedido_id}.json")
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Pedido finalizaPedido(@Path Long pedido_id, @Body Pedido pedido);
 
     @Get(("/pedidos/{pedido_id}.json"))
     @Headers({
-            @Header(name = "X-Admin-Email", value = "admin@admin.com"),
-            @Header(name = "X-Admin-Token", value = "6r2p9zNbeoTeoTcU6msP")})
+            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
+            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
     Pedido buscaPedido(@Path Long pedido_id);
 }

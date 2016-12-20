@@ -100,6 +100,7 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 
     @Background
@@ -111,14 +112,11 @@ public class LoginActivity extends BaseActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                    Toast.makeText(getApplicationContext(), "Insira login e senha para entrar", Toast.LENGTH_SHORT).show();
                     dialogHelper.showDialog("Campos em branco", "Insira login e senha para entrar");
-
                 }
             });
         } else {
             try {
-
                 recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
                 recordLogin.getUser().setPassword(password.getText().toString());
                 user = clientService.login(recordLogin);
@@ -134,7 +132,6 @@ public class LoginActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(getApplicationContext(), "Verifique se email e senha estão corretos", Toast.LENGTH_SHORT).show();
                         dialogHelper.showDialog("Email ou Senha errados", "Verifique se email e senha estão corretos");
 
                     }
@@ -143,7 +140,6 @@ public class LoginActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(getApplicationContext(), "Verifique a sua conexão com a internet", Toast.LENGTH_SHORT).show();
                         dialogHelper.showDialog("Problemas de internet", "Verifique a sua conexão com a internet");
 
                     }
@@ -153,15 +149,12 @@ public class LoginActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(getApplicationContext(), "Ocorreu algum erro no servidor, mas já estamos resolvendo", Toast.LENGTH_SHORT).show();
                         dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
 
                     }
                 });
             }
         }
-
-
     }
 
     public void esqueciSenha(View v) {
@@ -177,14 +170,12 @@ public class LoginActivity extends BaseActivity {
         // disallow cancel of AlertDialog on click of back button and outside touch
         alertDialogBuilder.setCancelable(false);
 
-
         alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-
 
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

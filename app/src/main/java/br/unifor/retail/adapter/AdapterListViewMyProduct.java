@@ -23,13 +23,21 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.Review;
+import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonMyProduct;
 
 /**
  * Created by mafra on 19/10/16.
  */
 
+
 public class AdapterListViewMyProduct extends BaseAdapter {
+
+    private Review review = new Review();
+
+    private SessionManager manager;
+
     private List<SingletonMyProduct> singleton_my_productLists;
     LayoutInflater inflater;
     Context context;
@@ -40,6 +48,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
         this.context = context;
         this.activity = activity;
         inflater = LayoutInflater.from(context);
+        manager =  new SessionManager(context.getApplicationContext());
     }
 
     @Override
@@ -92,16 +101,13 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
                 alertDialogBuilder.setTitle("Avaliçao " + singleton_my_product.getNome());
-                // this is set the view from XML inside AlertDialog
                 alertDialogBuilder.setView(alertDialogLayout);
 
-                // disallow cancel of AlertDialog on click of back button and outside touch
                 alertDialogBuilder.setCancelable(false);
                 alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                     //   Toast.makeText(context, "Cancel clicked", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -111,17 +117,27 @@ public class AdapterListViewMyProduct extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("Valor AQUIII", Double.valueOf(ratingbarDialog.getRating()).toString());
                         Log.d("Valor AQUIII", boxText.getText().toString());
-//                        Toast.makeText(context, "Comentario feito com sucesso ", Toast.LENGTH_SHORT).show();
                         button.setText("Reavaliar");
                         ratingBarListView.setRating(ratingbarDialog.getRating());
+
+                        Double nota = Double.valueOf(ratingbarDialog.getRating());
+
+                        review.setNota(nota);
+                        review.setProduto_id(singleton_my_product.getIdProduto());
+                        review.setReview_descric(String.valueOf(boxText.getText()));
+                        review.setCliente_id(manager.pegaUsuario().getCliente().getId());
+
+                        Log.d("ID do produto", review.getProduto_id().toString());
+                        Log.d("ID do cliente", review.getCliente_id().toString());
+                        Log.d("nota", review.getNota().toString());
+                        Log.d("descricap ", review.getReview_descric().toString());
                     }
                 });
                 AlertDialog dialog = alertDialogBuilder.create();
                 dialog.show();
             }
         });
-
-
         return convertView;
     }
+
 }

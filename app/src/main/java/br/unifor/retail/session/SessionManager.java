@@ -2,6 +2,7 @@ package br.unifor.retail.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import br.unifor.retail.model.RecordLogin;
 
@@ -38,6 +39,11 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void logoutFacebook(){
+        editor.clear();
+        editor.commit();
+    }
+
     public boolean isLoggedIn() {
         return preferences.getBoolean(IS_LOGIN, false);
     }
@@ -47,7 +53,6 @@ public class SessionManager {
         editor.putString("nome", recordLogin.getCliente().getNome_cliente());
         editor.putString("foto", recordLogin.getCliente().getFoto());
         editor.putString("email", recordLogin.getUser().getEmail());
-
         editor.commit();
     }
 
@@ -57,6 +62,11 @@ public class SessionManager {
         recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
         recordLogin.getCliente().setFoto(preferences.getString("foto", ""));
         recordLogin.getUser().setEmail(preferences.getString("email", ""));
+        Log.d("NOME", recordLogin.getCliente().getNome_cliente());
+        Log.d("FOTO", recordLogin.getCliente().getFoto());
+        Log.d("EMAIL", recordLogin.getUser().getEmail());
+        Log.d("ID", recordLogin.getCliente().getId().toString());
+
         return  recordLogin;
     }
 
@@ -66,15 +76,6 @@ public class SessionManager {
 
     public void setIdProduto(Long idProduto){
         editor.putLong("idProduto", idProduto);
-        editor.commit();
-    }
-
-    public String getEmailFacebook(){
-        return preferences.getString("emailFacebook", "");
-    }
-
-    public void setEmailFacebook(String emailFacebook){
-        editor.putString("emailFacebook", emailFacebook);
         editor.commit();
     }
 
@@ -96,5 +97,25 @@ public class SessionManager {
         editor.commit();
     }
 
+    public RecordLogin pegaFacebook(){
+        RecordLogin recordLogin = new RecordLogin();
+        recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
+        recordLogin.getCliente().setFoto(preferences.getString("foto", ""));
+        recordLogin.getUser().setEmail(preferences.getString("email", ""));
+        recordLogin.getUser().setFacebook_token(preferences.getString("token", ""));
+        return  recordLogin;
+    }
+
+    public void addFacebook(RecordLogin recordLogin){
+        editor.putString("nome", recordLogin.getCliente().getNome_cliente());
+        editor.putString("foto", recordLogin.getCliente().getFoto());
+        editor.putString("email", recordLogin.getUser().getEmail());
+        editor.putString("token", recordLogin.getUser().getFacebook_token());
+        editor.commit();
+    }
+
 
 }
+
+
+

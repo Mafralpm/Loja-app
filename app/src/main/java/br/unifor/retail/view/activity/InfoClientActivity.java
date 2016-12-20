@@ -1,10 +1,6 @@
 package br.unifor.retail.view.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,7 +13,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -27,7 +22,6 @@ import br.unifor.retail.R;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.view.activity.dialog.DateDialog;
-import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
@@ -105,7 +99,7 @@ public class InfoClientActivity extends AppCompatActivity implements AdapterView
 
     @OptionsItem(R.id.carinho_cliente)
     public void carrinho() {
-        Intent intent = new Intent(getApplicationContext(), PedidoActivity_.class);
+        Intent intent = new Intent(getApplicationContext(), CarrinhoActivity_.class);
         startActivity(intent);
     }
 
