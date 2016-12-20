@@ -10,6 +10,7 @@ import android.widget.ListView;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -64,16 +65,19 @@ public class MyProductActivity extends BaseActivity {
 
     @ViewById
     protected ListView action_myproduct_ListView;
+
     @ViewById
     protected Button my_product_button_avaliar;
 
+    @Bean
+    AdapterListViewMyProduct adapter;
+
     protected Intent intent;
     protected Long cliente_id;
+
     private RecordLogin recordLogin;
 
     private History history = new History();
-
-    AdapterListViewMyProduct adapter;
 
     @AfterViews
     protected void begin() {
@@ -144,7 +148,8 @@ public class MyProductActivity extends BaseActivity {
 
                 singletonMyProductArrayList.add(new SingletonMyProduct(uri, pedidoHasProduto.getNome(), preco, quantidade, id));
             }
-            adapter = new AdapterListViewMyProduct(singletonMyProductArrayList, getApplicationContext(), this);
+
+            adapter.getDadosMyProduct(singletonMyProductArrayList, this);
             action_myproduct_ListView.setAdapter(adapter);
         } catch (Exception e) {
             Log.d("Erro na mostra:", e.toString());
@@ -202,8 +207,5 @@ public class MyProductActivity extends BaseActivity {
 
     @Click
     public void my_product_button_avaliar(){
-
-
-
     }
 }

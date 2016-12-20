@@ -11,6 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+
 import java.util.List;
 
 import br.unifor.retail.R;
@@ -20,16 +23,13 @@ import br.unifor.retail.singleton.SingletonProduct;
  * Created by mafra on 09/11/16.
  */
 
+@EBean
 public class AdapterListViewProduct extends BaseAdapter{
     List<SingletonProduct> singletonProductList;
-    Context context;
     LayoutInflater layoutInflater;
 
-    public AdapterListViewProduct(List<SingletonProduct> singletonProductList, Context context) {
-        this.singletonProductList = singletonProductList;
-        this.context = context;
-        layoutInflater = layoutInflater.from(context);
-    }
+    @RootContext
+    Context context;
 
     @Override
     public int getCount() {
@@ -48,6 +48,7 @@ public class AdapterListViewProduct extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        layoutInflater = layoutInflater.from(context);
         SingletonProduct singletonProduct = singletonProductList.get(position);
 
         if (convertView == null){
@@ -63,5 +64,9 @@ public class AdapterListViewProduct extends BaseAdapter{
         comentario.setText(singletonProduct.getComentario());
 
         return convertView;
+    }
+
+    public void getDadosProduct(List<SingletonProduct> singletonProductList){
+        this.singletonProductList = singletonProductList;
     }
 }

@@ -14,28 +14,35 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import java.util.Collection;
 
 import br.unifor.retail.model.Review;
-import br.unifor.retail.statics.StaticsAdmin;
+
+import static br.unifor.retail.statics.StaticsAdmin.EMAIL;
+import static br.unifor.retail.statics.StaticsAdmin.EMAIL_KEY;
+import static br.unifor.retail.statics.StaticsAdmin.TOKEN;
+import static br.unifor.retail.statics.StaticsAdmin.TOKEN_KEY;
+import static br.unifor.retail.statics.StaticsRest.BUSCA_REVIEWS_PRODUTO;
+import static br.unifor.retail.statics.StaticsRest.REVIEWS;
+import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
 
 /**
  * Created by vania on 27/10/16.
  */
 
-@Rest(rootUrl = "http://bluelab.heroku.com/reviews_produto", converters = MappingJackson2HttpMessageConverter.class)
+@Rest(rootUrl = ROOT_URL, converters = MappingJackson2HttpMessageConverter.class)
 public interface ReviewService {
 
-    @Get("/{produto_id}.json")
+    @Get(BUSCA_REVIEWS_PRODUTO)
     @Accept(MediaType.APPLICATION_JSON_VALUE)
     @Headers({
-            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
-            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
+            @Header(name = EMAIL_KEY, value = EMAIL),
+            @Header(name = TOKEN_KEY, value = TOKEN)})
     Collection<Review> searchProductReview(@Path Long produto_id);
 
-    @Post("/reviews")
+    @Post(REVIEWS)
     @Headers({
-            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
-            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
-    Review criaReview(@Body Review review);
+            @Header(name = EMAIL_KEY, value = EMAIL),
+            @Header(name = TOKEN_KEY, value = TOKEN)})
+    void criaReview(@Body Review review);
 
 }
 

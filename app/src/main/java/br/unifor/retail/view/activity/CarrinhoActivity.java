@@ -97,7 +97,7 @@ public class CarrinhoActivity extends BaseActivity {
         setSupportActionBar(toolbarCart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
+        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this, pedidoService);
 
         car_activity_listView.setAdapter(adapter_listView_car);
 
@@ -169,7 +169,7 @@ public class CarrinhoActivity extends BaseActivity {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
                 singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
 
-                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext(), this);
+                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext(), this, pedidoService);
                 car_activity_listView.setAdapter(adapterListViewCar);
             }
         } catch (Exception e) {

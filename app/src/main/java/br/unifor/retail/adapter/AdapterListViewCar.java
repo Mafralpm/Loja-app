@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.androidannotations.annotations.Background;
+
 import java.util.List;
 
 import br.unifor.retail.R;
+import br.unifor.retail.model.Pedido;
+import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.singleton.SingletonCar;
 
 public class AdapterListViewCar extends BaseAdapter {
@@ -25,13 +29,15 @@ public class AdapterListViewCar extends BaseAdapter {
     LayoutInflater inflater;
     Context context;
     Activity activity;
+    PedidoService pedidoService;
 
-    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity) {
+    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity, PedidoService pedidoService) {
         this.singleton_cars = singleton_cars;
         this.context = context;
         this.activity = activity;
         inflater = LayoutInflater.from(context);
         this.activity = activity;
+        this.pedidoService = pedidoService;
     }
 
     @Override
@@ -80,6 +86,7 @@ public class AdapterListViewCar extends BaseAdapter {
             public void onClick(DialogInterface dialog, int which) {
                 singleton_cars.remove(position);
                 AdapterListViewCar.this.notifyDataSetChanged();
+                pedidoService.deletarPedido(1L);
             }
         });
 

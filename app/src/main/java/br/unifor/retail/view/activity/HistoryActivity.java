@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -53,6 +54,9 @@ public class HistoryActivity extends BaseActivity {
     @ViewById
     protected ListView action_history_ListView;
 
+    @Bean
+    AdapterListViewHistory adapter;
+
 
     protected Intent intent;
     protected Long cliente_id;
@@ -64,11 +68,9 @@ public class HistoryActivity extends BaseActivity {
 
     private QrCode qrCode;
 
-    ArrayList<SingletonHistory> singletonHistoryArrayList = new ArrayList<>();
+    private ArrayList<SingletonHistory> singletonHistoryArrayList = new ArrayList<>();
 
     private NavegationDrawer navegationDrawer;
-
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     private History history = new History();
 
@@ -137,7 +139,7 @@ public class HistoryActivity extends BaseActivity {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
                 singletonHistoryArrayList.add(new SingletonHistory(uri, product.getNome(), product.getPreco(), "18/11/2016"));
             }
-            AdapterListViewHistory adapter = new AdapterListViewHistory(singletonHistoryArrayList, getApplicationContext());
+            adapter.getDadosHistory(singletonHistoryArrayList);
             action_history_ListView.setAdapter(adapter);
         } catch (Exception e) {
             Log.d("Erro na mostra:", e.toString());

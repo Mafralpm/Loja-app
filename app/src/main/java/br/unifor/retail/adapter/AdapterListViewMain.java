@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+
 import java.util.List;
 
 import br.unifor.retail.R;
@@ -18,16 +21,22 @@ import br.unifor.retail.singleton.SingletonMain;
  * Created by mafra on 19/10/16.
  */
 
+@EBean
 public class AdapterListViewMain extends BaseAdapter {
     private List<SingletonMain> singleton_mainList;
     LayoutInflater inflater;
+//    Context context;
+
+
+    @RootContext
     Context context;
 
-    public AdapterListViewMain(List<SingletonMain> singleton_mainList, Context context) {
-        this.singleton_mainList = singleton_mainList;
-        inflater = LayoutInflater.from(context);
-        this.context = context;
-    }
+
+//    public AdapterListViewMain(List<SingletonMain> singleton_mainList, Context context) {
+//        this.singleton_mainList = singleton_mainList;
+//        inflater = LayoutInflater.from(context);
+//        this.context = context;
+//    }
 
     @Override
     public int getCount() {
@@ -46,6 +55,7 @@ public class AdapterListViewMain extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        inflater = LayoutInflater.from(context);
         SingletonMain singleton_main = singleton_mainList.get(position);
 
 
@@ -88,5 +98,9 @@ public class AdapterListViewMain extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    public void getDadosMain(List<SingletonMain> singleton_mainList){
+        this.singleton_mainList = singleton_mainList;
     }
 }

@@ -11,17 +11,24 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import br.unifor.retail.model.Product;
 import br.unifor.retail.statics.StaticsAdmin;
 
+import static br.unifor.retail.statics.StaticsAdmin.EMAIL;
+import static br.unifor.retail.statics.StaticsAdmin.EMAIL_KEY;
+import static br.unifor.retail.statics.StaticsAdmin.TOKEN;
+import static br.unifor.retail.statics.StaticsAdmin.TOKEN_KEY;
+import static br.unifor.retail.statics.StaticsRest.BUSCA_PRODUTOS;
+import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
+
 /**
  * Created by vania on 24/10/16.
  */
 
-@Rest(rootUrl = "http://bluelab.herokuapp.com/produtos", converters = MappingJackson2HttpMessageConverter.class)
+@Rest(rootUrl = ROOT_URL, converters = MappingJackson2HttpMessageConverter.class)
 public interface ProductService{
 
-    @Get("/{idProduct}.json")
+    @Get(BUSCA_PRODUTOS)
     @Headers({
-            @Header(name = StaticsAdmin.EMAIL_KEY, value = StaticsAdmin.EMAIL),
-            @Header(name = StaticsAdmin.TOKEN_KEY, value = StaticsAdmin.TOKEN)})
+            @Header(name = EMAIL_KEY, value = EMAIL),
+            @Header(name = TOKEN_KEY, value = TOKEN)})
     Product searchProduct (@Path Long idProduct);
 
 
