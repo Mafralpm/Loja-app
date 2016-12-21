@@ -10,7 +10,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import java.util.Collection;
 
 import br.unifor.retail.model.PedidoHasProduto;
-import br.unifor.retail.statics.StaticsAdmin;
 
 import static br.unifor.retail.statics.StaticsAdmin.EMAIL;
 import static br.unifor.retail.statics.StaticsAdmin.EMAIL_KEY;
@@ -30,6 +29,6 @@ public interface PedidoHasProdutoService {
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long pedido_id);
+    Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long client_id);
 
 }

@@ -36,13 +36,13 @@ public class StaticsRest {
 
     public static final String PEDIDOS_FINALIZADOS = "/pedidos_finalizados";
 
-    public static final String BUSCA_PEDIDOS_FINALIZADOS = PEDIDOS_FINALIZADOS + "/{pedido_id}.json";
+    public static final String BUSCA_PEDIDOS_FINALIZADOS = PEDIDOS_FINALIZADOS + "/{client_id}.json";
 
     public static final String REVIEWS_PRODUTO = "/reviews_produto";
 
     public static final String BUSCA_REVIEWS_PRODUTO = REVIEWS_PRODUTO + "/{produto_id}.json";
 
-    public static final String REVIEWS = REVIEWS_PRODUTO + "/reviews";
+    public static final String REVIEWS = "/reviews.json";
 
     public static final String PEDIDOS = "/pedidos.json";
 

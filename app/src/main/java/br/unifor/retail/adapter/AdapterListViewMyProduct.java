@@ -17,18 +17,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.List;
 
 import br.unifor.retail.R;
 import br.unifor.retail.model.Review;
+import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonMyProduct;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by mafra on 19/10/16.
@@ -37,16 +45,26 @@ import br.unifor.retail.singleton.SingletonMyProduct;
 @EBean
 public class AdapterListViewMyProduct extends BaseAdapter {
 
+    @RootContext
+    Context context;
+
+    @RestService
+    protected ReviewService reviewService;
+
+    @ViewById
+    protected TextView my_product_textView_nome;
+    @ViewById
+    protected TextView my_product_textView_preco;
+    @ViewById
+    protected TextView my_product_textView_quantidade;
+
     private Review review = new Review();
 
-    private SessionManager manager;
+    private SessionManager manager = new SessionManager(getApplicationContext());
 
     private List<SingletonMyProduct> singleton_my_productLists;
     LayoutInflater inflater;
     Activity activity;
-
-    @RootContext
-    Context context;
 
     @Override
     public int getCount() {
@@ -113,8 +131,6 @@ public class AdapterListViewMyProduct extends BaseAdapter {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Valor AQUIII", Double.valueOf(ratingbarDialog.getRating()).toString());
-                        Log.d("Valor AQUIII", boxText.getText().toString());
                         button.setText("Reavaliar");
                         ratingBarListView.setRating(ratingbarDialog.getRating());
 
@@ -125,10 +141,7 @@ public class AdapterListViewMyProduct extends BaseAdapter {
                         review.setReview_descric(String.valueOf(boxText.getText()));
                         review.setCliente_id(manager.pegaUsuario().getCliente().getId());
 
-                        Log.d("ID do produto", review.getProduto_id().toString());
-                        Log.d("ID do cliente", review.getCliente_id().toString());
-                        Log.d("nota", review.getNota().toString());
-                        Log.d("descricap ", review.getReview_descric().toString());
+                        criandoReview(review);
                     }
                 });
                 AlertDialog dialog = alertDialogBuilder.create();
@@ -141,5 +154,23 @@ public class AdapterListViewMyProduct extends BaseAdapter {
     public void getDadosMyProduct(List<SingletonMyProduct> singleton_my_productList, Activity activity){
         this.singleton_my_productLists = singleton_my_productList;
         this.activity = activity;
+    }
+
+
+    @Background
+    public void criandoReview(Review review){
+        try{
+            reviewService.criaReview(review);
+            toasts("Review criado!");
+        }catch (Exception e){
+            Log.d("exception ", e.toString());
+
+        }
+    }
+
+    @UiThread
+    public void toasts(String string){
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -31,7 +31,6 @@ import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.qr.code.QrCode;
 import br.unifor.retail.rest.HistoryService;
 import br.unifor.retail.rest.PedidoHasProdutoService;
-import br.unifor.retail.rest.ReviewService;
 import br.unifor.retail.session.SessionManager;
 import br.unifor.retail.singleton.SingletonMyProduct;
 import br.unifor.retail.view.activity.common.BaseActivity;
@@ -39,6 +38,7 @@ import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
 import static android.R.attr.format;
+import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
 @OptionsMenu(R.menu.menu_geral)
 @EActivity(R.layout.activity_my_prodcuct)
@@ -59,9 +59,6 @@ public class MyProductActivity extends BaseActivity {
 
     @RestService
     protected HistoryService historyService;
-
-    @RestService
-    protected ReviewService reviewService;
 
     @ViewById
     protected ListView action_myproduct_ListView;
@@ -141,7 +138,7 @@ public class MyProductActivity extends BaseActivity {
     public void montaActivity(Collection<PedidoHasProduto> responsePedidoHasProduct) {
         try {
             for (PedidoHasProduto pedidoHasProduto : responsePedidoHasProduct) {
-                String uri = "http://bluelab.herokuapp.com" + pedidoHasProduto.getFoto().toString();
+                String uri = ROOT_URL + pedidoHasProduto.getFoto().toString();
                 String preco = String.valueOf(pedidoHasProduto.getPreco());
                 String quantidade = String.valueOf(pedidoHasProduto.getQuantidade());
                 Long id = pedidoHasProduto.getProduto_id();
