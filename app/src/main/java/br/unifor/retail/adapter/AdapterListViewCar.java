@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
 import java.util.List;
 
@@ -24,21 +26,24 @@ import br.unifor.retail.model.Pedido;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.singleton.SingletonCar;
 
+@EBean
 public class AdapterListViewCar extends BaseAdapter {
     private List<SingletonCar> singleton_cars;
     LayoutInflater inflater;
-    Context context;
     Activity activity;
     PedidoService pedidoService;
 
-    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity, PedidoService pedidoService) {
-        this.singleton_cars = singleton_cars;
-        this.context = context;
-        this.activity = activity;
-        inflater = LayoutInflater.from(context);
-        this.activity = activity;
-        this.pedidoService = pedidoService;
-    }
+//    public AdapterListViewCar(List<SingletonCar> singleton_cars, Context context, Activity activity, PedidoService pedidoService) {
+//        this.singleton_cars = singleton_cars;
+//        this.context = context;
+//        this.activity = activity;
+//        inflater = LayoutInflater.from(context);
+//        this.activity = activity;
+//        this.pedidoService = pedidoService;
+//    }
+
+    @RootContext
+    Context context;
 
     @Override
     public int getCount() {
@@ -57,7 +62,7 @@ public class AdapterListViewCar extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
+        inflater = LayoutInflater.from(context);
         SingletonCar singleton_car = singleton_cars.get(position);
 
 
@@ -103,6 +108,12 @@ public class AdapterListViewCar extends BaseAdapter {
 });
 
         return convertView;
+    }
+
+    public void getDadosCar (List<SingletonCar> singleton_cars , Activity activity, PedidoService pedidoService){
+        this.singleton_cars = singleton_cars;
+        this.activity = activity;
+        this.pedidoService = pedidoService;
     }
 
 }
