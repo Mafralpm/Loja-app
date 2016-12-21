@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
+            super.finishAffinity();
             return;
         }
         this.doubleBackToExitPressedOnce = true;

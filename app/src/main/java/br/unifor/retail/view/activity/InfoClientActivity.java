@@ -181,7 +181,7 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
         try {
             if (user.getAniversario() == null || user.getSexo() == null ||
                     user.getTamanho_blusa() == null || user.getTamanho_calca() == null || user.getTamanho_calcado() == null) {
-                
+
                 info_cliente_nascimento.setText(" ");
                 sexoSpinner(" ");
                 blusaSpinner(" ");
