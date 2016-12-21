@@ -95,9 +95,9 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
 
         qrCode = new QrCode(this, getApplicationContext());
 
-        info_cliente_nome.setText(manager.pegaUsuario().getCliente().getNome_cliente());
-
-        info_cliente_email.setText(manager.pegaUsuario().getUser().getEmail());
+//        info_cliente_nome.setText(manager.pegaUsuario().getCliente().getNome_cliente());
+//
+//        info_cliente_email.setText(manager.pegaUsuario().getUser().getEmail());
 
         cliente_id = recordLogin.getCliente().getId();
 
@@ -179,12 +179,18 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
     public void montaActivity(User user) {
 
         try {
-            if (user.getSexo() == null || user.getTamanho_blusa() == null || user.getTamanho_calca() == null || user.getTamanho_calcado() == null) {
+            if (user.getAniversario() == null || user.getSexo() == null ||
+                    user.getTamanho_blusa() == null || user.getTamanho_calca() == null || user.getTamanho_calcado() == null) {
+
+                info_cliente_nascimento.setText(" ");
                 sexoSpinner(" ");
                 blusaSpinner(" ");
                 calcaSpinner(" ");
                 calcadoSpinner(" ");
             } else {
+                info_cliente_nome.setText(user.getNome_cliente().toString());
+//                info_cliente_email.setText(user.getEmail().toString());
+                info_cliente_nascimento.setText(user.getAniversario().toString());
                 sexoSpinner(user.getSexo().toString());
                 blusaSpinner(user.getTamanho_blusa().toString());
                 calcaSpinner(user.getTamanho_calca().toString());
@@ -293,18 +299,12 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
 
     @Background
     public void vaiPraMain(View v) {
+        Log.d("Saber Infos","QUERO ESSE: "+ info_cliente_nome.getText().toString() + " " + user.getNome_cliente().toString() + " " + user.getSexo().toString() + " " +
+                user.getTamanho_blusa().toString() + " " + user.getTamanho_calca().toString() + " " + user.getTamanho_calcado().toString());
 
-        user.setNome_cliente(manager.pegaUsuario().getCliente().getNome_cliente());
-        user.setEmail(info_cliente_email.toString().toLowerCase());
-        user.setSexo(info_cliente_sexo_spinner.getSelectedItem().toString());
-        user.setTamanho_blusa(info_cliente_blusa_spinner.getSelectedItem().toString());
-        user.setTamanho_calca(info_cliente_calca_spinner.getSelectedItem().toString());
-        user.setTamanho_calcado(info_cliente_calcado_spinner.getSelectedItem().toString());
-            Log.d("Saber Infos", user.getNome_cliente().toString() + " " + user.getSexo().toString() + " " +
-                    user.getTamanho_blusa().toString() + " " + user.getTamanho_calca().toString() + " " + user.getTamanho_calcado().toString());
-
-        if (user.getNome_cliente().toString().equals(" ") || user.getSexo().toString().equals(" ") || user.getTamanho_blusa().toString().equals(" ")
-                || user.getTamanho_calca().toString().equals(" ") || user.getTamanho_calcado().toString().equals(" ")) {
+        if (info_cliente_nome.getText().toString().isEmpty() || info_cliente_email.getText().toString().isEmpty() ||
+                info_cliente_nascimento.getText().toString().isEmpty() || user.getSexo() == null ||
+                user.getTamanho_blusa() == null || user.getTamanho_calca() == null || user.getTamanho_calcado() == null) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -313,6 +313,13 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
                 }
             });
         } else {
+            user.setNome_cliente(info_cliente_nome.getText().toString());
+            user.setEmail(info_cliente_email.getText().toString().toLowerCase());
+            user.setAniversario(info_cliente_nascimento.getText().toString());
+            user.setSexo(info_cliente_sexo_spinner.getSelectedItem().toString());
+            user.setTamanho_blusa(info_cliente_blusa_spinner.getSelectedItem().toString());
+            user.setTamanho_calca(info_cliente_calca_spinner.getSelectedItem().toString());
+            user.setTamanho_calcado(info_cliente_calcado_spinner.getSelectedItem().toString());
 
             try {
                 infoClienteService.updatInfoCliente(user, cliente_id);

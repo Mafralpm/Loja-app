@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
@@ -81,6 +82,8 @@ public class CarrinhoActivity extends BaseActivity {
 
     Handler handler = new Handler();
 
+    @Bean
+    AdapterListViewCar adapter_listView_car;
     @AfterViews
     public void begin() {
 
@@ -96,10 +99,6 @@ public class CarrinhoActivity extends BaseActivity {
         toolbarCart.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
         setSupportActionBar(toolbarCart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        AdapterListViewCar adapter_listView_car = new AdapterListViewCar(singleton_cars, getApplicationContext(), this, pedidoService);
-
-        car_activity_listView.setAdapter(adapter_listView_car);
 
         navegationDrawer = new NavegationDrawer(toolbarCart, this);
         navegationDrawer.getProfile();
@@ -169,8 +168,8 @@ public class CarrinhoActivity extends BaseActivity {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
                 singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
 
-                AdapterListViewCar adapterListViewCar = new AdapterListViewCar(singleton_cars, getApplicationContext(), this, pedidoService);
-                car_activity_listView.setAdapter(adapterListViewCar);
+                adapter_listView_car.getDadosCar(singleton_cars, this, pedidoService);
+                car_activity_listView.setAdapter(adapter_listView_car   );
             }
         } catch (Exception e) {
             Log.i("TETESRGFG222222", e.toString());
