@@ -40,7 +40,6 @@ import me.sudar.zxingorient.ZxingOrientResult;
 import static android.R.attr.format;
 
 
-@OptionsMenu(R.menu.menu_info_client)
 @EActivity(R.layout.activity_info_client)
 public class InfoClientActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
@@ -323,6 +322,12 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
 
             try {
                 infoClienteService.updatInfoCliente(user, cliente_id);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogHelper.showDialog("Sucesso", "Suas alterações foram salvas");
+                    }
+                });
 
             } catch (ResourceAccessException e) {
                 handler.post(new Runnable() {
@@ -340,13 +345,6 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
                     }
                 });
 
-            } finally {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialogHelper.showDialog("Sucesso", "Suas alterações foram salvas");
-                    }
-                });
             }
         }
     }
