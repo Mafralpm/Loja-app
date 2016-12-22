@@ -39,5 +39,5 @@ public interface HistoryService {
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    Collection<Product> searchProducts(@Path Long cliente_id);
+    Collection<Product> searchProducts(@Path Long idUser);
 }

@@ -158,6 +158,7 @@ public class NavegationDrawer {
                         @Override
                         public void onCompleted(JSONObject object, GraphResponse response) {
 
+                        try{
                             bFacebookData = getFacebookData(object);
                             first_name =  bFacebookData.getString("first_name");
                             last_name = bFacebookData.getString("last_name");
@@ -173,6 +174,9 @@ public class NavegationDrawer {
                             recordLogin.getUser().setFacebook_token(getCurrentAccessToken().getToken());
 
                             manager.addFacebook(recordLogin);
+                        }catch (Exception e){
+                            Log.d("Exception do facebook", "erro na criacao do manager do facebook");
+                        }
                         }
 
                     });

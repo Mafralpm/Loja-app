@@ -70,7 +70,7 @@ public class MyProductActivity extends BaseActivity {
     AdapterListViewMyProduct adapter;
 
     protected Intent intent;
-    protected Long cliente_id;
+    protected Long idUser;
 
     private RecordLogin recordLogin;
 
@@ -83,7 +83,7 @@ public class MyProductActivity extends BaseActivity {
 
         manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
-        cliente_id = recordLogin.getCliente().getId();
+        idUser = recordLogin.getUser().getUser_id();
 
         qrCode = new QrCode(this, getApplicationContext());
         handler = new Handler();
@@ -97,7 +97,7 @@ public class MyProductActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
-        busca(cliente_id);
+        busca(idUser);
     }
 
     @OptionsItem(R.id.menu_carinho)
@@ -113,9 +113,9 @@ public class MyProductActivity extends BaseActivity {
 
 
     @Background
-    public void busca(Long cliente_id) {
+    public void busca(Long idUser) {
         try {
-            pedidoHasProdutoCollection = pedidoHasProdutoService.searchPedidoHasProduct(cliente_id);
+            pedidoHasProdutoCollection = pedidoHasProdutoService.searchPedidoHasProduct(idUser);
             montaActivity(pedidoHasProdutoCollection);
         } catch (ResourceAccessException e) {
             handler.post(new Runnable() {
@@ -198,7 +198,7 @@ public class MyProductActivity extends BaseActivity {
     }
 
     public void setaDadosHistorico(){
-        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
+        history.setCliente_id(manager.pegaUsuario().getUser().getUser_id());
         history.setProduto_id(manager.getIdProduto());
     }
 

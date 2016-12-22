@@ -28,15 +28,15 @@ public class StaticsRest {
 
     public static final String CLIENTE_HISTORICO = "/cliente_historicos";
 
-    public static final String BUSCAR_PRODUTOS_NO_CLIENTE_HISTORICO_ = CLIENTE_HISTORICO + "/{cliente_id}.json";
+    public static final String BUSCAR_PRODUTOS_NO_CLIENTE_HISTORICO_ = CLIENTE_HISTORICO + "/{idUser}.json";
 
     public static final String CLIENTE = "/clientes";
 
-    public static final String BUSCA_CLIENTE = CLIENTE + "/{idCliente}.json";
+    public static final String BUSCA_CLIENTE = CLIENTE + "/{idUser}.json";
 
     public static final String PEDIDOS_FINALIZADOS = "/pedidos_finalizados";
 
-    public static final String BUSCA_PEDIDOS_FINALIZADOS = PEDIDOS_FINALIZADOS + "/{client_id}.json";
+    public static final String BUSCA_PEDIDOS_FINALIZADOS = PEDIDOS_FINALIZADOS + "/{idUser}.json";
 
     public static final String REVIEWS_PRODUTO = "/reviews_produto";
 
@@ -50,7 +50,7 @@ public class StaticsRest {
 
     public static final String PEDIDO_PRODUTO = "/pedido_produtos";
 
-    public static final String BUSCA_PEDIDO_PRODUTO_REVIEW = PEDIDO_PRODUTO + "/{pedido_id}.json";
+    public static final String BUSCA_PEDIDO_HAS_PRODUTO = PEDIDO_PRODUTO + "/{pedido_id}.json";
 
     public static final String PEDIDO = "/pedidos";
 
@@ -59,6 +59,10 @@ public class StaticsRest {
     public static final String FINALIZA_PEDIDO = PEDIDO + "/{pedido_id}.json";
 
     public static final String DELETA_PEDIDO = PEDIDO + "/{produto_id}.json";
+
+    public static final String PEDIDO_NAO_FINALIZADO = "/cliente_pedido_nao_finalizado";
+
+    public static final String BUSCA_PEDIDO_NAO_FINALIZADO = PEDIDO_NAO_FINALIZADO + "/{cliente_id}.json";
 
 }
 

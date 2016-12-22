@@ -86,7 +86,6 @@ public class MainActivity extends BaseActivity {
             Log.d("Permissões", AccessToken.getCurrentAccessToken().toString());
             Log.d("Token", AccessToken.getCurrentAccessToken().getToken());
             recordLogin = manager.pegaFacebook();
-
         }else{
             recordLogin = manager.pegaUsuario();
         }
@@ -160,7 +159,6 @@ public class MainActivity extends BaseActivity {
 
                 Long id = Long.valueOf(contents);
                 manager.setIdProduto(id);
-                Log.d("Id do produto", manager.getIdProduto()+"");
                 enviaProHistorico();
                 startActivity(intentResult);
             }
@@ -178,10 +176,8 @@ public class MainActivity extends BaseActivity {
     }
 
     public void setaDadosHistorico(){
-        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
-        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setCliente_id(manager.pegaUsuario().getUser().getUser_id());
         history.setProduto_id(manager.getIdProduto());
-        Log.d("PRODUTO ID", history.getProduto_id().toString());
     }
 
     @Override
@@ -215,23 +211,14 @@ public class MainActivity extends BaseActivity {
         recordLogin = manager.pegaFacebook();
         recordLogin.getUser().getEmail();
         recordLogin.getUser().getFacebook_token();
-
-        Log.d("CARALHO DE ERRO", "Ta prestando essa porra??????");
-
         try {
             user =  facebookService.pegaFacebook(recordLogin);
+            recordLogin.getUser().setUser_id(user.getUser_id());
             recordLogin.getCliente().setId(user.getId());
             manager.addUser(recordLogin);
             manager.pegaUsuario();
         }catch (Exception e){
-            Log.d("FDP do facebook", e.toString());
+            Log.d("erro do facebook", e.toString());
         }
     }
-
-    @Background
-    public void criaFacebook(){
-
-    }
-
-
 }

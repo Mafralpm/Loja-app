@@ -1,9 +1,11 @@
 package br.unifor.retail.rest;
 
+import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Header;
 import org.androidannotations.rest.spring.annotations.Headers;
 import org.androidannotations.rest.spring.annotations.Path;
+import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -16,6 +18,7 @@ import static br.unifor.retail.statics.StaticsAdmin.EMAIL_KEY;
 import static br.unifor.retail.statics.StaticsAdmin.TOKEN;
 import static br.unifor.retail.statics.StaticsAdmin.TOKEN_KEY;
 import static br.unifor.retail.statics.StaticsRest.BUSCA_PEDIDOS_FINALIZADOS;
+import static br.unifor.retail.statics.StaticsRest.PEDIDOS_HAS_PRODUTO;
 import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
 /**
@@ -29,6 +32,13 @@ public interface PedidoHasProdutoService {
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long client_id);
+    Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long idUser);
+
+
+    @Post(PEDIDOS_HAS_PRODUTO)
+    @Headers({
+            @Header(name = EMAIL_KEY, value = EMAIL),
+            @Header(name = TOKEN_KEY, value = TOKEN)})
+    void criaPedidoHasProduto(@Body PedidoHasProduto pedidoHasProduto);
 
 }

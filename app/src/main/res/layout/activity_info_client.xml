@@ -169,7 +169,7 @@
     </ScrollView>
 
     <Button
-        android:onClick="vaiPraMain"
+        android:onClick="alteraraDadosUsuario"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:background="@color/colorAccent"
