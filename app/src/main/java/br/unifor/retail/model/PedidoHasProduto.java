@@ -2,12 +2,14 @@ package br.unifor.retail.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 /**
  * Created by vania on 21/11/16.
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PedidoHasProduto {
+public class PedidoHasProduto implements Serializable {
 
     private Long id;
     private int quantidade;

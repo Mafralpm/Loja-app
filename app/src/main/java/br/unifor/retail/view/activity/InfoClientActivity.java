@@ -94,6 +94,7 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
         qrCode = new QrCode(this, getApplicationContext());
         idUser = recordLogin.getUser().getUser_id();
 
+
         busca(idUser);
     }
 
