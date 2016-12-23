@@ -214,7 +214,13 @@ public class MainActivity extends BaseActivity {
         try {
             user =  facebookService.pegaFacebook(recordLogin);
             recordLogin.getUser().setUser_id(user.getUser_id());
+            Log.d("1111111111111", user.getUser_id()+"");
+            Log.d("333333333333", recordLogin.getUser().getUser_id()+"");
+
             recordLogin.getCliente().setId(user.getId());
+            Log.d("222222222", user.getId()+"");
+            Log.d("4444444444444444", recordLogin.getCliente().getId()+"");
+
             manager.addUser(recordLogin);
             manager.pegaUsuario();
         }catch (Exception e){

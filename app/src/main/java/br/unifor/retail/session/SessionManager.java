@@ -54,6 +54,7 @@ public class SessionManager {
         editor.putString("nome", recordLogin.getCliente().getNome_cliente());
         editor.putString("foto", recordLogin.getCliente().getFoto());
         editor.putString("email", recordLogin.getUser().getEmail());
+
         editor.commit();
     }
 
