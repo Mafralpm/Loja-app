@@ -94,10 +94,6 @@ public class InfoClientActivity extends BaseActivity implements AdapterView.OnIt
 
         qrCode = new QrCode(this, getApplicationContext());
 
-//        info_cliente_nome.setText(manager.pegaUsuario().getCliente().getNome_cliente());
-//
-//        info_cliente_email.setText(manager.pegaUsuario().getUser().getEmail());
-
         cliente_id = recordLogin.getCliente().getId();
 
         busca(cliente_id);

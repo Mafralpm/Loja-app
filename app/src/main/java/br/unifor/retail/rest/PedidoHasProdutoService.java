@@ -15,6 +15,7 @@ import static br.unifor.retail.statics.StaticsAdmin.EMAIL;
 import static br.unifor.retail.statics.StaticsAdmin.EMAIL_KEY;
 import static br.unifor.retail.statics.StaticsAdmin.TOKEN;
 import static br.unifor.retail.statics.StaticsAdmin.TOKEN_KEY;
+import static br.unifor.retail.statics.StaticsRest.BUSCAR_PEDIDO_NAO_FINALIZADO;
 import static br.unifor.retail.statics.StaticsRest.BUSCA_PEDIDOS_FINALIZADOS;
 import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
@@ -30,5 +31,11 @@ public interface PedidoHasProdutoService {
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
     Collection<PedidoHasProduto> searchPedidoHasProduct(@Path Long client_id);
+
+    @Get(BUSCAR_PEDIDO_NAO_FINALIZADO)
+    @Headers({
+            @Header(name = EMAIL_KEY, value = EMAIL),
+            @Header(name = TOKEN_KEY, value = TOKEN)})
+    Collection<PedidoHasProduto> buscaPedidoNaoFinalizado(@Path Long client_id);
 
 }

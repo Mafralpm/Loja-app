@@ -8,6 +8,7 @@ import org.androidannotations.rest.spring.annotations.Headers;
 import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.Put;
+import org.androidannotations.rest.spring.annotations.RequiresAuthentication;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -23,10 +24,10 @@ import static br.unifor.retail.statics.StaticsAdmin.TOKEN;
 import static br.unifor.retail.statics.StaticsAdmin.TOKEN_KEY;
 import static br.unifor.retail.statics.StaticsRest.BUSCA_PEDIDO;
 import static br.unifor.retail.statics.StaticsRest.BUSCA_PEDIDO_PRODUTO_REVIEW;
-import static br.unifor.retail.statics.StaticsRest.DELETA_PEDIDO;
 import static br.unifor.retail.statics.StaticsRest.FINALIZA_PEDIDO;
 import static br.unifor.retail.statics.StaticsRest.PEDIDOS;
 import static br.unifor.retail.statics.StaticsRest.PEDIDOS_HAS_PRODUTO;
+import static br.unifor.retail.statics.StaticsRest.PEDIDO_DELETA_PRODUTO;
 import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
 /**
@@ -66,10 +67,11 @@ public interface PedidoService {
             @Header(name = TOKEN_KEY, value = TOKEN)})
     Pedido buscaPedido(@Path Long pedido_id);
 
-    @Delete(DELETA_PEDIDO)
+
+    @Delete(PEDIDO_DELETA_PRODUTO)
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    Pedido deletarPedido (@Path Long produto_id);
+    void deletarPedido (@Path Long pedido_id, @Path Long produto_id);
 
 }

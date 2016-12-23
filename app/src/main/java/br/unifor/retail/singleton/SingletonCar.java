@@ -7,13 +7,17 @@ package br.unifor.retail.singleton;
 public class SingletonCar {
     private String imageProduct;
     private String nome, preco;
+    private long produto_id, pedido_id;
 
     public SingletonCar() {
     }
-    public SingletonCar(String image, String nome, String preco) {
-        this.imageProduct = image;
+
+    public SingletonCar(String imageProduct, String nome, String preco, long pedido_id, long produto_id) {
+        this.imageProduct = imageProduct;
         this.nome = nome;
         this.preco = preco;
+        this.produto_id = produto_id;
+        this.pedido_id = pedido_id;
     }
 
     public String getImageProduct() {
@@ -40,5 +44,19 @@ public class SingletonCar {
         this.preco = preco;
     }
 
+    public long getproduto_id() {
+        return produto_id;
+    }
 
+    public void setproduto_id(long produto_id) {
+        this.produto_id = produto_id;
+    }
+
+    public long getPedido_id() {
+        return pedido_id;
+    }
+
+    public void setPedido_id(long pedido_id) {
+        this.pedido_id = pedido_id;
+    }
 }

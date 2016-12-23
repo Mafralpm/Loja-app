@@ -3,11 +3,13 @@ package br.unifor.retail.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -29,10 +31,12 @@ import br.unifor.retail.R;
 import br.unifor.retail.adapter.AdapterListViewCar;
 import br.unifor.retail.model.History;
 import br.unifor.retail.model.Pedido;
+import br.unifor.retail.model.PedidoHasProduto;
 import br.unifor.retail.model.Product;
 import br.unifor.retail.model.RecordLogin;
 import br.unifor.retail.navegation.drawer.NavegationDrawer;
 import br.unifor.retail.rest.HistoryService;
+import br.unifor.retail.rest.PedidoHasProdutoService;
 import br.unifor.retail.rest.PedidoService;
 import br.unifor.retail.rest.ProductService;
 import br.unifor.retail.session.SessionManager;
@@ -63,11 +67,17 @@ public class CarrinhoActivity extends BaseActivity {
     @ViewById
     protected Toolbar toolbarCart;
 
+    @ViewById
+    protected Button pedido_envia_pro_caixa;
+
     @RestService
     protected PedidoService pedidoService;
 
     @RestService
     protected ProductService productService;
+
+    @RestService
+    protected PedidoHasProdutoService pedidoHasProdutoService;
 
     protected Collection<Product> productCollection;
 
@@ -78,12 +88,17 @@ public class CarrinhoActivity extends BaseActivity {
 
     private Pedido pedido;
 
+    long pedido_id;
+
     private History history = new History();
 
     Handler handler = new Handler();
 
     @Bean
     AdapterListViewCar adapter_listView_car;
+
+    Collection<PedidoHasProduto> pedidoHasProdutoCollection = new ArrayList<>();
+
     @AfterViews
     public void begin() {
 
@@ -103,7 +118,10 @@ public class CarrinhoActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbarCart, this);
         navegationDrawer.getProfile();
 
-            buscaPedidoHasProdutos();
+        buscaPedidoHasProdutos();
+
+        buscaPedidoNaoFinalizado();
+        Log.d("IdDoCLIENTE", manager.pegaUsuario().getCliente().getId() + "");
     }
 
     @OptionsItem(R.id.carrinho_qr_code)
@@ -141,6 +159,7 @@ public class CarrinhoActivity extends BaseActivity {
             Log.d("IDCARRRINHo", manager.getIdCarrinho() + "");
             mostraNaTela(productCollection);
 
+
         } catch (ResourceAccessException e) {
             handler.post(new Runnable() {
                 @Override
@@ -156,6 +175,8 @@ public class CarrinhoActivity extends BaseActivity {
                     dialogHelper.showDialog("Algo deu errado", "Ocorreu algum erro no servidor, mas já estamos resolvendo");
                 }
             });
+
+            Log.d("DEU ERRO", e.toString());
         }
 
     }
@@ -166,13 +187,22 @@ public class CarrinhoActivity extends BaseActivity {
         try {
             for (Product product : productCollection) {
                 String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
-                singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString()));
+                singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString(), pedido_id, product.getId()));
 
-                adapter_listView_car.getDadosCar(singleton_cars, this, pedidoService);
-                car_activity_listView.setAdapter(adapter_listView_car   );
+                adapter_listView_car.getDadosCar(singleton_cars, this);
+                car_activity_listView.setAdapter(adapter_listView_car);
             }
+
+
         } catch (Exception e) {
             Log.i("TETESRGFG222222", e.toString());
+        }
+
+        if (singleton_cars.size() == 0) {
+            pedido_envia_pro_caixa.setEnabled(false);
+            pedido_envia_pro_caixa.setBackgroundColor(Color.GRAY);
+        } else {
+            pedido_envia_pro_caixa.setEnabled(true);
         }
 
         handler.postDelayed(new Runnable() {
@@ -191,6 +221,15 @@ public class CarrinhoActivity extends BaseActivity {
         manager.setIdCarrinho((long) 0);
     }
 
+    @Background
+    public void buscaPedidoNaoFinalizado() {
+        pedidoHasProdutoCollection = pedidoHasProdutoService.buscaPedidoNaoFinalizado(manager.pegaUsuario().getCliente().getId());
+
+        for (PedidoHasProduto pedidoHasProduto : pedidoHasProdutoCollection) {
+            pedido_id = pedidoHasProduto.getPedido_id();
+        }
+    }
+
     @Click
     public void pedido_envia_pro_caixa() {
         Log.d("Entrou?", "Entrou aqui?");
@@ -200,7 +239,7 @@ public class CarrinhoActivity extends BaseActivity {
 
             Intent itent = new Intent(this, MyProductActivity_.class);
             startActivity(itent);
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("IHNHJJJKJ", e.toString());
         }
     }
@@ -220,7 +259,7 @@ public class CarrinhoActivity extends BaseActivity {
                 Log.d("èo id ?", contents);
                 Long id = Long.valueOf(contents);
                 manager.setIdProduto(id);
-                Log.d("Id do produto", manager.getIdProduto()+"");
+                Log.d("Id do produto", manager.getIdProduto() + "");
                 enviaProHistorico();
                 startActivity(intentResult);
             }
@@ -233,12 +272,12 @@ public class CarrinhoActivity extends BaseActivity {
     }
 
     @Background
-    public void enviaProHistorico(){
+    public void enviaProHistorico() {
         setaDadosHistorico();
         historyService.cria(history);
     }
 
-    public void setaDadosHistorico(){
+    public void setaDadosHistorico() {
         history.setCliente_id(manager.pegaUsuario().getCliente().getId());
         Log.d("CLIENTE ID", history.getCliente_id().toString());
         history.setProduto_id(manager.getIdProduto());
