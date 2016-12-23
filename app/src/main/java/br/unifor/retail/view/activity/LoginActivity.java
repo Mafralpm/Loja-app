@@ -120,6 +120,7 @@ public class LoginActivity extends BaseActivity {
                 recordLogin.getUser().setEmail(email.getText().toString().toLowerCase());
                 recordLogin.getUser().setPassword(password.getText().toString());
                 user = clientService.login(recordLogin);
+                recordLogin.getUser().setUser_id(user.getUser_id());
                 recordLogin.getCliente().setId(user.getId());
                 recordLogin.getCliente().setNome_cliente(user.getNome_cliente());
                 recordLogin.getCliente().setFoto(user.getFoto());
@@ -165,9 +166,7 @@ public class LoginActivity extends BaseActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Esqueci minha senha");
         alertDialogBuilder.setMessage("Digite o endereço de email cadastrado: ");
-        // this is set the view from XML inside AlertDialog
         alertDialogBuilder.setView(alertDialogLayout);
-        // disallow cancel of AlertDialog on click of back button and outside touch
         alertDialogBuilder.setCancelable(false);
 
         alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

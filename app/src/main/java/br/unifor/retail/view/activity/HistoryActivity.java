@@ -59,7 +59,7 @@ public class HistoryActivity extends BaseActivity {
 
 
     protected Intent intent;
-    protected Long cliente_id;
+    protected Long idUser;
     private SessionManager manager;
     private RecordLogin recordLogin;
 
@@ -94,8 +94,8 @@ public class HistoryActivity extends BaseActivity {
         navegationDrawer = new NavegationDrawer(toolbar, this);
         navegationDrawer.getProfile();
 
-        cliente_id = recordLogin.getCliente().getId();
-        buscaProdutos(cliente_id);
+        idUser = recordLogin.getUser().getUser_id() ;
+        buscaProdutos(idUser);
     }
 
     @OptionsItem(R.id.menu_carinho)
@@ -111,9 +111,9 @@ public class HistoryActivity extends BaseActivity {
 
 
     @Background
-    public void buscaProdutos(Long cliente_id) {
+    public void buscaProdutos(Long idUser) {
         try {
-            productCollection = historyService.searchProducts(cliente_id);
+            productCollection = historyService.searchProducts(idUser);
             montaActivity(productCollection);
         } catch (ResourceAccessException e) {
             handler.post(new Runnable() {
@@ -191,9 +191,7 @@ public class HistoryActivity extends BaseActivity {
     }
 
     public void setaDadosHistorico(){
-        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
-        Log.d("CLIENTE ID", history.getCliente_id().toString());
+        history.setCliente_id(manager.pegaUsuario().getUser().getUser_id());
         history.setProduto_id(manager.getIdProduto());
-        Log.d("PRODUTO ID", history.getProduto_id().toString());
     }
 }

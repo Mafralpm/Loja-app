@@ -47,14 +47,15 @@ import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
 import static android.R.attr.format;
+import static br.unifor.retail.statics.StaticsRest.ROOT_URL;
 
 @OptionsMenu(R.menu.menu_carrinho)
 @EActivity(R.layout.activity_cart)
 public class CarrinhoActivity extends BaseActivity {
 
-    NavegationDrawer navegationDrawer;
+    private NavegationDrawer navegationDrawer;
     protected Intent intent;
-    protected String contents;
+//    protected String contents;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
@@ -81,10 +82,10 @@ public class CarrinhoActivity extends BaseActivity {
 
     protected Collection<Product> productCollection;
 
-    ArrayList<SingletonCar> singleton_cars = new ArrayList<>();
+    private ArrayList<SingletonCar> singleton_cars = new ArrayList<>();
 
     private SessionManager manager;
-    private RecordLogin recordLogin;
+    RecordLogin recordLogin;
 
     private Pedido pedido;
 
@@ -92,7 +93,7 @@ public class CarrinhoActivity extends BaseActivity {
 
     private History history = new History();
 
-    Handler handler = new Handler();
+    private Handler handler = new Handler();
 
     @Bean
     AdapterListViewCar adapter_listView_car;
@@ -106,9 +107,9 @@ public class CarrinhoActivity extends BaseActivity {
 
         manager = new SessionManager(this);
         recordLogin = manager.pegaUsuario();
-
-        intent = getIntent();
-        contents = intent.getStringExtra("id");
+//
+//        intent = getIntent();
+//        contents = intent.getStringExtra("contents");
 
         toolbarCart.setTitle("Carrinho");
         toolbarCart.setBackground(getResources().getDrawable(R.drawable.canto_superior_da_tela));
@@ -155,7 +156,7 @@ public class CarrinhoActivity extends BaseActivity {
     @Background
     public void buscaPedidoHasProdutos() {
         try {
-            productCollection = pedidoService.searchProductReview(manager.getIdCarrinho());
+            productCollection = pedidoService.searchPedidoHasProduto(manager.getIdCarrinho());
             Log.d("IDCARRRINHo", manager.getIdCarrinho() + "");
             mostraNaTela(productCollection);
 
@@ -178,7 +179,6 @@ public class CarrinhoActivity extends BaseActivity {
 
             Log.d("DEU ERRO", e.toString());
         }
-
     }
 
     @UiThread
@@ -186,7 +186,8 @@ public class CarrinhoActivity extends BaseActivity {
     public void mostraNaTela(Collection<Product> productCollection) {
         try {
             for (Product product : productCollection) {
-                String uri = "http://bluelab.herokuapp.com" + product.getFoto().toString();
+
+                String uri = ROOT_URL + product.getFoto().toString();
                 singleton_cars.add(new SingletonCar(uri, product.getNome(), product.getPreco().toString(), pedido_id, product.getId()));
 
                 adapter_listView_car.getDadosCar(singleton_cars, this);
@@ -214,11 +215,10 @@ public class CarrinhoActivity extends BaseActivity {
     }
 
     @Background
-    public void buscaPedido() {
+    public void finalizaPedido() {
         pedido = pedidoService.buscaPedido(manager.getIdCarrinho());
         pedido.setFinalizado(true);
         pedidoService.finalizaPedido(manager.getIdCarrinho(), pedido);
-        manager.setIdCarrinho((long) 0);
     }
 
     @Background
@@ -235,7 +235,7 @@ public class CarrinhoActivity extends BaseActivity {
         Log.d("Entrou?", "Entrou aqui?");
         try {
             Log.d("Entrou2222?", "Entrou aqui2222?");
-            buscaPedido();
+            finalizaPedido();
 
             Intent itent = new Intent(this, MyProductActivity_.class);
             startActivity(itent);
@@ -256,17 +256,16 @@ public class CarrinhoActivity extends BaseActivity {
                         .putExtra("contents", contents)
                         .putExtra("format", format);
 
-                Log.d("èo id ?", contents);
                 Long id = Long.valueOf(contents);
                 manager.setIdProduto(id);
-                Log.d("Id do produto", manager.getIdProduto() + "");
+
                 enviaProHistorico();
                 startActivity(intentResult);
             }
         } catch (RuntimeException e) {
-            Log.d("Deu nessa xibata", e.toString());
+            Log.d("Deu erro", e.toString());
         } catch (Exception e) {
-            Log.d("DEU ERRO AQUI CARALHO", e.toString());
+            Log.d("DEU ERRO AQUI", e.toString());
         }
 
     }
@@ -277,10 +276,9 @@ public class CarrinhoActivity extends BaseActivity {
         historyService.cria(history);
     }
 
-    public void setaDadosHistorico() {
-        history.setCliente_id(manager.pegaUsuario().getCliente().getId());
-        Log.d("CLIENTE ID", history.getCliente_id().toString());
+
+    public void setaDadosHistorico(){
+        history.setCliente_id(manager.pegaUsuario().getUser().getUser_id());
         history.setProduto_id(manager.getIdProduto());
-        Log.d("PRODUTO ID", history.getProduto_id().toString());
     }
 }

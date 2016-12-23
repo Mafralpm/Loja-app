@@ -49,7 +49,8 @@ public class SessionManager {
     }
 
     public void addUser(RecordLogin recordLogin){
-        editor.putLong("id", recordLogin.getCliente().getId());
+        editor.putLong("id", recordLogin.getUser().getUser_id());
+        editor.putLong("idCliente", recordLogin.getCliente().getId());
         editor.putString("nome", recordLogin.getCliente().getNome_cliente());
         editor.putString("foto", recordLogin.getCliente().getFoto());
         editor.putString("email", recordLogin.getUser().getEmail());
@@ -58,15 +59,16 @@ public class SessionManager {
 
     public RecordLogin pegaUsuario(){
         RecordLogin recordLogin = new RecordLogin();
-        recordLogin.getCliente().setId(preferences.getLong("id", 0));
+        recordLogin.getUser().setUser_id(preferences.getLong("id", 0));
+        recordLogin.getCliente().setId(preferences.getLong("idCliente", 0));
         recordLogin.getCliente().setNome_cliente(preferences.getString("nome", ""));
         recordLogin.getCliente().setFoto(preferences.getString("foto", ""));
         recordLogin.getUser().setEmail(preferences.getString("email", ""));
         Log.d("NOME", recordLogin.getCliente().getNome_cliente());
         Log.d("FOTO", recordLogin.getCliente().getFoto());
         Log.d("EMAIL", recordLogin.getUser().getEmail());
-        Log.d("ID", recordLogin.getCliente().getId().toString());
-
+        Log.d("ID do USER", recordLogin.getUser().getUser_id().toString());
+        Log.d("ID DO CLIENTE", recordLogin.getCliente().getId().toString());
         return  recordLogin;
     }
 
@@ -85,15 +87,6 @@ public class SessionManager {
 
     public void setIdCarrinho(Long idCarrinho){
         editor.putLong("idCarrinho", idCarrinho);
-        editor.commit();
-    }
-
-    public Boolean getFinalizado(){
-        return preferences.getBoolean("finalizado", false);
-    }
-
-    public void setFinalizado(){
-        editor.putBoolean("finalizado", true);
         editor.commit();
     }
 

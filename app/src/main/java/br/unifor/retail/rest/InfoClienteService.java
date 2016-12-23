@@ -31,12 +31,12 @@ public interface InfoClienteService {
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    User searchClient(@Path Long idCliente);
+    User searchClient(@Path Long idUser);
 
     @Put(BUSCA_CLIENTE)
     @Headers({
             @Header(name = EMAIL_KEY, value = EMAIL),
             @Header(name = TOKEN_KEY, value = TOKEN)})
-    User updatInfoCliente(@Body User user, @Path Long idCliente);
+    User updatInfoCliente(@Body User user, @Path Long idUser);
 
 }
